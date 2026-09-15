@@ -249,6 +249,48 @@ input.err{border-color:var(--wine)}
 .pk.cur .pick button{background:var(--pine);color:var(--cream)}
 .pk .now{position:absolute;top:-10px;right:12px;font-size:10px;letter-spacing:.16em;text-transform:uppercase;font-weight:700;background:var(--gold);color:var(--ink);padding:3px 9px;border-radius:2px}
 
+/* ---------- calendario de disponibilidad ---------- */
+.cal-status{display:flex;align-items:center;gap:8px;font-size:12.5px;color:var(--muted);margin-bottom:12px;flex-wrap:wrap}
+.cal-status .dot{width:9px;height:9px;border-radius:50%;background:var(--gold);animation:blink 1s infinite}
+.cal-status.ok .dot{background:var(--ok);animation:none}
+.cal-status.demo .dot{background:var(--gold);animation:none}
+.cal-status .badge{font-size:10px;letter-spacing:.14em;text-transform:uppercase;font-weight:700;padding:2px 8px;border-radius:2px;background:var(--gold);color:var(--ink)}
+.cal-status.ok .badge{background:var(--pine);color:var(--cream)}
+@keyframes blink{50%{opacity:.3}}
+.dcal{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+@media (max-width:560px){.dcal{grid-template-columns:1fr}}
+.month{background:#FBF4E7;border:1.5px solid var(--line);border-radius:6px;padding:12px}
+.month h4{margin:0 0 8px;font-family:var(--cond);font-weight:400;font-size:22px;letter-spacing:.06em;color:var(--pine-deep);line-height:1;text-align:center}
+.month .g{display:grid;grid-template-columns:repeat(7,1fr);gap:4px}
+.month .dow{font-size:9.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);text-align:center;font-weight:600;padding-bottom:2px}
+.day{aspect-ratio:1;border:1.5px solid var(--line);border-radius:4px;background:transparent;font-family:var(--cond);font-size:17px;line-height:1;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2px;color:var(--ink);padding:0;position:relative;transition:transform .12s,box-shadow .12s}
+.day:hover:not(:disabled){transform:translateY(-1px);box-shadow:0 4px 12px rgba(42,28,23,.12)}
+.day:disabled{cursor:not-allowed}
+.day.blank{border:0;background:transparent}
+.day.past{opacity:.3}
+.day i{display:block;width:6px;height:6px;border-radius:50%}
+.day.d0 i{background:var(--pine)}.day.d1 i{background:var(--gold)}.day.d2 i{background:var(--wine)}
+.day.d0{border-color:rgba(31,74,58,.45)}
+.day.full{background:repeating-linear-gradient(135deg,transparent 0 4px,rgba(125,106,92,.18) 4px 6px);color:var(--muted);opacity:.7}
+.day.full i{background:var(--muted)}
+.day.sel{background:var(--wine);color:var(--cream);border-color:var(--wine)}
+.day.sel i{background:var(--cream)}
+.day.d0::after{content:"%";position:absolute;top:2px;right:3px;font-family:var(--sans);font-size:7.5px;font-weight:700;color:var(--pine)}
+.day.sel::after{color:var(--cream)}
+.day.full::after{content:""}
+.dleg{display:flex;flex-wrap:wrap;gap:6px 14px;margin-top:10px;font-size:12px;color:var(--muted)}
+.dleg i{display:inline-block;width:8px;height:8px;border-radius:50%;margin-right:5px;vertical-align:0}
+.hora-wrap{margin-top:16px}
+.hora-wrap .chips{justify-content:flex-start}
+.chip.libre::after{content:" ✓";color:var(--ok)}
+.chip.busy{text-decoration:line-through;opacity:.5;cursor:not-allowed}
+.stamp-in .dispo{margin-top:14px;padding:10px 12px;border-radius:4px;background:rgba(246,236,217,.08);border:1px solid rgba(246,236,217,.18);font-size:13px;color:var(--cream);display:flex;gap:8px;align-items:flex-start}
+.stamp-in .dispo b{color:var(--gold);font-weight:600}
+.stamp-in .dispo .ok{color:#7FD6A0;font-weight:700}
+.stamp-in .dispo .no{color:#F0A6A6;font-weight:700}
+.tot .row.inc span:first-child{color:var(--pine)}
+.tot .row.inc span:last-child{color:var(--pine)}
+.inc-tag{display:inline-block;font-size:10px;letter-spacing:.12em;text-transform:uppercase;font-weight:700;padding:2px 7px;border-radius:2px;background:var(--pine);color:var(--cream);margin-left:6px;vertical-align:1px}
 .toast{position:fixed;left:50%;bottom:30px;transform:translateX(-50%) translateY(16px);z-index:90;background:var(--pine-deep);color:var(--cream);
   font-weight:600;font-size:14.5px;padding:12px 20px;border-radius:4px;box-shadow:0 10px 40px rgba(0,0,0,.28);opacity:0;pointer-events:none;transition:.28s;max-width:88vw;text-align:center}
 .toast.on{opacity:1;transform:translateX(-50%) translateY(0)}
@@ -319,9 +361,12 @@ footer .s{font-family:var(--cond);letter-spacing:.1em;font-size:15px;color:var(-
 
 <!-- ===== 5 · FECHA ===== -->
 <section class="step" data-step="fecha">
-  <div class="qh"><span class="qn">Paso 5 · La fecha</span><h2>¿Cuándo sería la <em>fiesta</em>?</h2><p>Diciembre se llena rápido. Con una fecha tentativa confirmamos disponibilidad de una vez.</p></div>
-  <div class="field"><label class="lbl" for="fecha">Fecha tentativa</label><input type="date" id="fecha"></div>
-  <label class="check"><input type="checkbox" id="sinFecha"> Aún no tenemos fecha definida</label>
+  <div class="qh"><span class="qn">Paso 5 · La fecha</span><h2>¿Cuándo sería la <em>fiesta</em>?</h2><p id="fechaIntro">Diciembre se llena rápido. Elige el día: te mostramos la disponibilidad real de la sede y los días con incentivo.</p></div>
+  <div class="cal-status" id="calStatus"><span class="dot"></span><span>Consultando el calendario…</span></div>
+  <div class="dcal" id="dcal"></div>
+  <div class="dleg"><span><i style="background:var(--pine)"></i>Baja afluencia · con incentivo</span><span><i style="background:var(--gold)"></i>Demanda media</span><span><i style="background:var(--wine)"></i>Alta demanda</span><span><i style="background:var(--muted)"></i>Sede ocupada en ese horario</span></div>
+  <div class="hora-wrap" id="horaWrap" style="display:none"><label class="lbl">Hora de inicio</label><div class="chips" id="horaChips"></div><div class="hint" id="horaHint"></div></div>
+  <label class="check" style="margin-top:16px"><input type="checkbox" id="sinFecha"> Aún no tenemos fecha definida</label>
   <div class="rowbtns"><button class="cta block" id="goPastel" type="button">Continuar →</button></div>
 </section>
 
@@ -377,6 +422,120 @@ footer .s{font-family:var(--cond);letter-spacing:.1em;font-size:15px;color:var(-
    ========================================================= */
 const ITBMS = 0.07;
 const WA_NUM = '50763158888';
+
+/* =========================================================
+   CALENDARIO EN VIVO · Google Calendar vía Apps Script
+   mode: 'demo' (ocupación simulada) | 'apps-script' (calendarios reales)
+   scriptUrl: URL del web app desplegado desde integracion/Code.gs
+   ========================================================= */
+const CAL = {
+  mode: 'demo',
+  scriptUrl: '',
+  desde: '2026-11-01', hasta: '2027-01-01',
+  tz: 5   /* Panamá es UTC-5 todo el año */
+};
+/* =========================================================
+   INCENTIVOS DE OCUPACIÓN · VALORES DE EJEMPLO
+   Ajustar con The Lounge antes de publicar. pct = fracción del paquete.
+   ========================================================= */
+const INCENTIVOS = {
+  activo: true,
+  tope: 0.15,
+  reglas: [
+    { id:'baja',    pct:0.10, label:'Fecha de baja afluencia',            aplica:(f,h,sede)=>f && demanda(sede,f)===0 },
+    { id:'valle',   pct:0.05, label:'Horario de día (desayuno, brunch o almuerzo)', aplica:(f,h,sede)=>f && ['desayuno','brunch','almuerzo'].includes(S.momento) },
+    { id:'temprana',pct:0.05, label:'Reserva antes del 31 de octubre',     aplica:(f,h,sede)=>f && hoyISO()<='2026-10-31' }
+  ]
+};
+const MOMENTO_HORAS = { desayuno:[7,8,9], brunch:[10,11], almuerzo:[12,13], cena:[18,19,20] };
+const PICO = { desde:'2026-12-10', hasta:'2026-12-19' };   /* concentración de fiestas registrada en 2025 */
+let BUSY = { obarrio:[], marbella:[], sf:[] }, calReady=false, calLive=false;
+
+function hoyISO(){ const d=new Date(); return d.getFullYear()+'-'+String(d.getMonth()+1).padStart(2,'0')+'-'+String(d.getDate()).padStart(2,'0'); }
+function utcMs(iso,h){ const [y,m,d]=iso.split('-').map(Number); return Date.UTC(y,m-1,d,h+CAL.tz); }
+function dow(iso){ const [y,m,d]=iso.split('-').map(Number); return new Date(Date.UTC(y,m-1,d)).getUTCDay(); } /* 0 dom … 6 sáb */
+function horaTxt(h){ const ap=h<12?'a.m.':'p.m.'; const hh=h%12===0?12:h%12; return hh+':00 '+ap; }
+function jsonp(url,ok,fail){ const cb='cb'+Date.now()+Math.floor(Math.random()*1e4); const sc=document.createElement('script'); let done=false;
+  window[cb]=d=>{ done=true; ok(d); cleanup(); }; const cleanup=()=>{ delete window[cb]; sc.remove(); };
+  sc.onerror=()=>{ if(!done){ fail(); cleanup(); } }; setTimeout(()=>{ if(!done){ fail(); cleanup(); } },9000);
+  sc.src=url+(url.includes('?')?'&':'?')+'callback='+cb; document.head.appendChild(sc); }
+
+function cargarCalendario(cb){
+  if(calReady) return cb();
+  if(CAL.mode==='apps-script' && CAL.scriptUrl){
+    jsonp(CAL.scriptUrl+'?action=freebusy&sede=all&from='+CAL.desde+'&to='+CAL.hasta, data=>{
+      if(data && data.busy){ Object.keys(BUSY).forEach(k=>{ BUSY[k]=(data.busy[k]||[]).map(b=>({s:Date.parse(b.s),e:Date.parse(b.e)})); }); calLive=true; }
+      else demoBusy();
+      calReady=true; cb();
+    }, ()=>{ demoBusy(); calReady=true; cb(); });
+  } else { demoBusy(); calReady=true; cb(); }
+}
+/* Ocupación simulada y determinista: jueves a sábado y del 10 al 19 de diciembre se llenan más. */
+function demoBusy(){
+  const seed=(str)=>{ let h=2166136261; for(const c of str){ h^=c.charCodeAt(0); h=Math.imul(h,16777619); } return ((h>>>0)%1000)/1000; };
+  Object.keys(BUSY).forEach(sede=>{ BUSY[sede]=[]; });
+  for(let t=Date.parse(CAL.desde+'T00:00:00Z'); t<Date.parse(CAL.hasta+'T00:00:00Z'); t+=86400e3){
+    const iso=new Date(t).toISOString().slice(0,10); const wd=dow(iso); const pico=iso>=PICO.desde&&iso<=PICO.hasta;
+    Object.keys(BUSY).forEach(sede=>{
+      let pNoche=(wd>=4&&wd<=6)?0.55:(wd===3?0.3:0.12); if(pico) pNoche+=0.3; if(sede==='sf') pNoche-=0.15;
+      let pDia=(wd===5)?0.35:(wd>=1&&wd<=4?0.15:0.05); if(pico) pDia+=0.15;
+      if(seed(sede+iso+'n')<pNoche) BUSY[sede].push({s:utcMs(iso,19),e:utcMs(iso,23)});
+      if(seed(sede+iso+'d')<pDia) BUSY[sede].push({s:utcMs(iso,12),e:utcMs(iso,15)});
+    });
+  }
+}
+function libre(sede,iso,h){ const s=utcMs(iso,h), e=s+SEDES[sede].horas*3600e3; return !BUSY[sede].some(b=>b.s<e&&b.e>s); }
+function horasLibres(sede,iso){ return (MOMENTO_HORAS[S.momento]||[19]).filter(h=>libre(sede,iso,h)); }
+function eventosDia(sede,iso){ return BUSY[sede].filter(b=>b.s<utcMs(iso,24)&&b.e>utcMs(iso,0)).length; }
+/* 0 baja · 1 media · 2 alta */
+function demanda(sede,iso){
+  const wd=dow(iso); let n=(wd>=4&&wd<=6)?2:(wd===3||wd===0)?1:0;
+  if(iso>=PICO.desde&&iso<=PICO.hasta) n+=1; if(iso<'2026-11-16') n-=1;
+  n+=Math.min(1,eventosDia(sede,iso)); return Math.max(0,Math.min(2,n));
+}
+function incentivosDe(sede){
+  if(!INCENTIVOS.activo || !S.fecha || S.sinFecha) return { lista:[], pct:0 };
+  const lista=INCENTIVOS.reglas.filter(r=>{ try{ return r.aplica(S.fecha,S.hora,sede); }catch(e){ return false; } });
+  const pct=Math.min(INCENTIVOS.tope, lista.reduce((a,r)=>a+r.pct,0));
+  return { lista, pct };
+}
+
+/* ---------- render del paso fecha ---------- */
+const MESES=['enero','febrero','marzo','abril','mayo','junio','julio','agosto','septiembre','octubre','noviembre','diciembre'];
+function renderFecha(){
+  const sede=sedeFinal(); const st=$('calStatus');
+  st.className='cal-status'; st.innerHTML='<span class="dot"></span><span>Consultando el calendario de '+SEDES[sede].nombre+'…</span>';
+  $('fechaIntro').textContent='Elige el día para '+SEDES[sede].nombre+'. Verificamos la disponibilidad de la sede y marcamos los días de baja afluencia, que tienen incentivo.';
+  cargarCalendario(()=>{
+    st.className='cal-status '+(calLive?'ok':'demo');
+    st.innerHTML='<span class="dot"></span><span>'+(calLive?'Disponibilidad en vivo · calendario de '+SEDES[sede].nombre:'Ocupación simulada para demostración · el calendario real se conecta en la configuración')+'</span><span class="badge">'+(calLive?'En vivo':'Demo')+'</span>';
+    pintarCalendario(sede); pintarHoras(sede);
+  });
+}
+function pintarCalendario(sede){
+  const hoy=hoyISO(); let html='';
+  [[2026,11],[2026,12]].forEach(([y,m])=>{
+    const first=new Date(Date.UTC(y,m-1,1)); const off=(first.getUTCDay()+6)%7; const days=new Date(Date.UTC(y,m,0)).getUTCDate();
+    html+='<div class="month"><h4>'+cap(MESES[m-1])+' '+y+'</h4><div class="g">'+['L','M','M','J','V','S','D'].map(d=>'<div class="dow">'+d+'</div>').join('');
+    for(let i=0;i<off;i++) html+='<button type="button" class="day blank" disabled></button>';
+    for(let d=1;d<=days;d++){ const iso=y+'-'+String(m).padStart(2,'0')+'-'+String(d).padStart(2,'0'); const past=iso<hoy; const full=horasLibres(sede,iso).length===0; const dm=demanda(sede,iso);
+      html+='<button type="button" class="day'+(past?' past':'')+(full?' full':' d'+dm)+(S.fecha===iso?' sel':'')+'" data-iso="'+iso+'"'+(past||full?' disabled':'')+' aria-label="'+iso+'">'+d+'<i></i></button>'; }
+    html+='</div></div>';
+  });
+  $('dcal').innerHTML=html;
+  $('dcal').querySelectorAll('.day:not(:disabled)').forEach(b=>b.onclick=()=>{ S.fecha=b.dataset.iso; S.sinFecha=false; $('sinFecha').checked=false; S.hora=null; pintarCalendario(sede); pintarHoras(sede); });
+}
+function pintarHoras(sede){
+  const w=$('horaWrap'); if(!S.fecha){ w.style.display='none'; return; }
+  w.style.display='block'; const hs=MOMENTO_HORAS[S.momento]||[19]; const libres=hs.filter(h=>libre(sede,S.fecha,h));
+  if(!S.hora || !libres.includes(S.hora)) S.hora=libres[0]||null;
+  $('horaChips').innerHTML=hs.map(h=>{ const ok=libres.includes(h); return '<button type="button" class="chip'+(ok?' libre':' busy')+(S.hora===h?' sel':'')+'" data-h="'+h+'"'+(ok?'':' disabled')+'>'+horaTxt(h)+'</button>'; }).join('');
+  $('horaChips').querySelectorAll('.chip:not(:disabled)').forEach(b=>b.onclick=()=>{ S.hora=+b.dataset.h; pintarHoras(sede); });
+  const dur=SEDES[sede].horas, inc=incentivosDe(sede), h=$('horaHint'); h.classList.remove('warn');
+  if(S.hora==null){ h.classList.add('warn'); h.innerHTML='Ese día no hay horario libre para '+cap(S.momento)+' en '+SEDES[sede].nombre+'. Prueba otro día o consulta otra sede en el resultado.'; return; }
+  const fin=S.hora+dur; h.innerHTML='<b>'+SEDES[sede].nombre+' está libre</b> el '+cap(fechaBonita(S.fecha))+' de '+horaTxt(S.hora)+' a '+horaTxt(fin)+' ('+dur+' horas).'+(inc.pct>0?' <b>Incentivo de ocupación: '+Math.round(inc.pct*100)+'%</b> sobre el paquete ('+inc.lista.map(r=>r.label.toLowerCase()).join(' + ')+'), sujeto a confirmación.':'');
+}
+
 
 const SEDES = {
   obarrio:{ id:'obarrio', nombre:'Obarrio', lugar:'Plaza Downtown, Av. Samuel Lewis con Calle 59 Este', estilo:'Diseño industrial, energizante. Nuestra sede más accesible.', horas:3, min:15, max:25, grupo:'mo',
@@ -441,7 +600,7 @@ const MENU_OPCIONES = [
 ];
 
 /* ========================= ESTADO ========================= */
-const S = { ppl:25, momento:null, menu:null, tier:null, sede:null, sedeAuto:null, fecha:'', sinFecha:false, pastel:'none', nombre:'', empresa:'', pick:null };
+const S = { ppl:25, momento:null, menu:null, tier:null, sede:null, sedeAuto:null, fecha:'', hora:null, sinFecha:false, pastel:'none', nombre:'', empresa:'', pick:null };
 const STEPS = ['intro','personas','momento','menu','sede','fecha','pastel','datos','resultado'];
 const NUM = { personas:1, momento:2, menu:3, sede:4, fecha:5, pastel:6, datos:7 };
 let hist = ['intro'];
@@ -482,8 +641,9 @@ function sedeFinal(){ return (S.sede && S.sede!=='auto') ? S.sede : sedeAuto(S.p
 function cotizar(sede,tier,n){
   const b = banda(sede,tier,n); if(!b) return null;
   const pastel = S.pastel!=='none' ? pastelPrecio(sede,n) : null;
-  const sub = b.total + (pastel?pastel.precio:0);
-  return { sede, tier, n, b, pastel, sub, itbms:sub*ITBMS, total:sub*(1+ITBMS), pp:b.total/Math.max(n,b.p) };
+  const inc = incentivosDe(sede); const desc = b.total*inc.pct;
+  const sub = b.total - desc + (pastel?pastel.precio:0);
+  return { sede, tier, n, b, pastel, inc, desc, sub, itbms:sub*ITBMS, total:sub*(1+ITBMS), pp:(b.total-desc)/Math.max(n,b.p) };
 }
 
 /* ========================= NAVEGACIÓN ========================= */
@@ -497,6 +657,7 @@ function show(step,push=true){
   if(step==='resultado'){ $('progTxt').textContent='Tu paquete'; $('progBar').style.width='100%'; }
   window.scrollTo({top:0,behavior:'smooth'});
   if(step==='sede') renderSede();
+  if(step==='fecha') renderFecha();
   if(step==='pastel') renderPastel();
   if(step==='datos') renderMini();
   if(step==='resultado') renderResultado();
@@ -563,7 +724,7 @@ function renderPastel(){
 function renderMini(){
   const sede=sedeFinal(), tier=tierSugerido();
   const parts=[ '<span><b>'+S.ppl+'</b> personas</span>', '<span><b>'+cap(S.momento||'')+'</b></span>', '<span>Sede <b>'+SEDES[sede].nombre+'</b></span>', '<span>Paquete <b>'+TIERS[tier].nombre+'</b></span>' ];
-  if(S.fecha && !S.sinFecha) parts.push('<span><b>'+cap(fechaBonita(S.fecha))+'</b></span>');
+  if(S.fecha && !S.sinFecha) parts.push('<span><b>'+cap(fechaBonita(S.fecha))+(S.hora!=null?' · '+horaTxt(S.hora):'')+'</b></span>');
   $('miniSum').innerHTML = parts.join('');
 }
 
@@ -584,6 +745,14 @@ function porQue(q){
   if(b.extraN>0) out.push('Tu grupo supera la banda de 150: se suman '+b.extraN+' personas a '+money(b.extraPP)+' cada una.');
   return out;
 }
+function dispoHTML(q){
+  const s=SEDES[q.sede];
+  if(!S.fecha || S.sinFecha) return '<div class="dispo"><span>📅</span><span>Sin fecha todavía. Cuando la tengan, el cotizador verifica la disponibilidad de '+esc(s.nombre)+' al instante.</span></div>';
+  const hs=MOMENTO_HORAS[S.momento]||[19]; const h=(S.hora!=null&&libre(q.sede,S.fecha,S.hora))?S.hora:hs.find(x=>libre(q.sede,S.fecha,x));
+  const tag=calLive?'':' <b>(demo)</b>';
+  if(h==null) return '<div class="dispo"><span class="no">✕</span><span>'+esc(s.nombre)+' está ocupado el '+cap(fechaBonita(S.fecha))+' en horario de '+S.momento+'.'+tag+' Elige otra sede abajo o vuelve a la fecha.</span></div>';
+  return '<div class="dispo"><span class="ok">✓</span><span><b>Disponible:</b> '+esc(s.nombre)+' el '+cap(fechaBonita(S.fecha))+', de '+horaTxt(h)+' a '+horaTxt(h+s.horas)+tag+(q.inc&&q.inc.pct>0?' <b>Incentivo de ocupación '+Math.round(q.inc.pct*100)+'%</b> aplicado.':'')+'</span></div>';
+}
 function renderResultado(){
   const a=actual(), q=cotizar(a.sede,a.tier,S.ppl);
   if(!q){ S.pick=null; return renderResultado(); }
@@ -598,6 +767,7 @@ function renderResultado(){
    +'<div class="top"><div class="sello"><div class="lockup dark"><span class="eyebrow">Paquete corporativo</span><span class="l1">Navideño</span><span class="l2"><span class="y">y</span><span class="fin">Fin de</span><span class="ano">Año</span></span></div></div>'
    +'<div class="sede">'+esc(s.nombre)+'</div><div class="meal">'+esc(momento)+' · '+S.ppl+' personas</div>'
    +'<span class="tier '+q.tier+'">'+t.nombre+'</span></div>'
+   +dispoHTML(q)
    +'<div class="price"><div><div class="big">'+money(q.b.precio)+'<small>+ ITBMS</small></div><span class="band">Banda de '+q.b.p+' personas</span></div>'
    +'<div class="pp"><b>'+money2(q.pp)+'</b>por persona<br>mínimo '+q.b.p+' personas</div></div>'
    +'<ul class="why">'+porQue(q).map(x=>'<li>'+esc(x)+'</li>').join('')+'</ul>'
@@ -612,15 +782,17 @@ function renderResultado(){
    +'<div class="row"><span>Paquete '+t.nombre+' · '+s.nombre+' · banda de '+q.b.p+'</span><span>'+money2(q.b.precio)+'</span></div>'
    +(q.b.extraN>0?'<div class="row"><span>'+q.b.extraN+' personas adicionales × '+money(q.b.extraPP)+'</span><span>'+money2(q.b.extra)+'</span></div>':'')
    +(q.pastel?'<div class="row"><span>Pastel de '+(S.pastel==='vainilla'?'vainilla con manjar':'chocolate')+' · '+q.pastel.p+' porciones</span><span>'+money2(q.pastel.precio)+'</span></div>':'')
+   +(q.desc>0?'<div class="row inc"><span>Incentivo de ocupación '+Math.round(q.inc.pct*100)+'%<span class="inc-tag">'+q.inc.lista.map(r=>r.label).join(' · ')+'</span></span><span>− '+money2(q.desc)+'</span></div>':'')
    +'<div class="row sub"><span>Subtotal</span><span>'+money2(q.sub)+'</span></div>'
    +'<div class="row"><span>ITBMS 7%</span><span>'+money2(q.itbms)+'</span></div>'
    +'<div class="row total"><span>Total estimado</span><span>'+money2(q.total)+'</span></div>'
-   +'<p class="note">Cotización estimada según los paquetes 2026. Sujeto a disponibilidad; el equipo de The Lounge confirma fecha, menú y detalles finales.'+(q.pastel&&q.pastel.mas?' El pastel máximo es de '+q.pastel.p+' porciones; para '+S.ppl+' personas coordinamos porciones adicionales.':'')+'</p></div>';
+   +'<p class="note">Cotización estimada según los paquetes 2026. Sujeto a disponibilidad; el equipo de The Lounge confirma fecha, menú y detalles finales.'+(q.desc>0?' El incentivo de ocupación se confirma al reservar.':'')+(q.pastel&&q.pastel.mas?' El pastel máximo es de '+q.pastel.p+' porciones; para '+S.ppl+' personas coordinamos porciones adicionales.':'')+'</p></div>';
   $('resPanels').innerHTML = panels;
   const paintMenu=i=>{ $('menuList').innerHTML = menus[i].items.map(x=>'<li>'+esc(x)+'</li>').join(''); $('menuTabs').querySelectorAll('.tab').forEach((b,j)=>b.classList.toggle('sel',j===i)); };
   $('menuTabs').querySelectorAll('.tab').forEach(b=>b.onclick=()=>paintMenu(+b.dataset.i)); paintMenu(0);
 
   $('waBtn').href = 'https://wa.me/'+WA_NUM+'?text='+encodeURIComponent(mensajeWA(q));
+  $('waBtn').onclick=()=>{ if(CAL.mode==='apps-script'&&CAL.scriptUrl){ const img=new Image(); img.src=CAL.scriptUrl+'?action=lead&'+new URLSearchParams({nombre:S.nombre,empresa:S.empresa,personas:S.ppl,momento:S.momento||'',sede:SEDES[q.sede].nombre,paquete:TIERS[q.tier].nombre,fecha:S.fecha||'',hora:S.hora!=null?horaTxt(S.hora):'',estimado:q.sub.toFixed(2),incentivo:q.inc.pct}).toString(); } };
   renderOtros(q);
 }
 
@@ -633,7 +805,7 @@ function renderOtros(q){
     const cur = q.sede===sid && q.tier===tid, isSug = sug.sede===sid && sug.tier===tid;
     let body;
     if(!b) body='<div class="p" style="color:var(--muted);font-size:22px">No disponible</div><div class="d">'+s.nombre+' recibe hasta '+s.max+' personas. Con '+S.ppl+' tu grupo va a San Francisco.</div>';
-    else body='<div class="p">'+money(b.total)+'<small>+ ITBMS</small></div><div class="d">Banda de '+b.p+' personas · '+money2(b.total/Math.max(S.ppl,b.p))+' por persona'+(b.extraN>0?' · incluye '+b.extraN+' adicionales':'')+'<br>'+s.horas+' horas · '+(tid==='premium'?'menú clásico (3 opciones)':'menú navideño de gala')+'</div>';
+    else { const okS=(!S.fecha||S.sinFecha)?null:horasLibres(sid,S.fecha).length>0; body='<div class="p">'+money(b.total)+'<small>+ ITBMS</small></div><div class="d">'+(okS===null?'':okS?'<span style="color:var(--ok);font-weight:600">✓ Libre ese día</span> · ':'<span style="color:var(--wine);font-weight:600">✕ Ocupado ese día</span> · ')+'Banda de '+b.p+' personas · '+money2(b.total/Math.max(S.ppl,b.p))+' por persona'+(b.extraN>0?' · incluye '+b.extraN+' adicionales':'')+'<br>'+s.horas+' horas · '+(tid==='premium'?'menú clásico (3 opciones)':'menú navideño de gala')+'</div>'; }
     cards.push('<div class="pk'+(cur?' cur':'')+(!b?' na':'')+'" data-s="'+sid+'" data-t="'+tid+'">'+(isSug?'<span class="now">Sugerido</span>':'')+'<div class="sede">'+esc(s.nombre)+'</div><span class="tag '+tid+'">'+t.nombre+'</span>'+body+(b?'<div class="pick"><button type="button">'+(cur?'Es tu cotización':'Cotizar este')+'</button></div>':'')+'</div>');
   }));
   $('pkGrid').innerHTML = cards.join('');
@@ -651,7 +823,9 @@ function mensajeWA(q){
   L.push('');
   L.push('• Sede: '+s.nombre+' · Paquete '+t.nombre);
   L.push('• '+S.ppl+' personas · '+(S.momento?cap(S.momento):'momento por definir'));
-  L.push('• Fecha tentativa: '+((S.fecha&&!S.sinFecha)?cap(fechaBonita(S.fecha)):'por definir'));
+  L.push('• Fecha tentativa: '+((S.fecha&&!S.sinFecha)?cap(fechaBonita(S.fecha))+(S.hora!=null?' · '+horaTxt(S.hora)+' a '+horaTxt(S.hora+s.horas):''):'por definir'));
+  if(S.fecha&&!S.sinFecha) L.push('• Disponibilidad: '+(horasLibres(q.sede,S.fecha).length>0?'libre en el calendario de '+s.nombre:'ocupado, revisar alternativa')+(calLive?'':' (verificación demo)'));
+  if(q.desc>0) L.push('• Incentivo de ocupación: '+Math.round(q.inc.pct*100)+'% ('+q.inc.lista.map(r=>r.label).join(', ')+') por confirmar');
   L.push('• Menú: '+(S.menu==='clasico'?'clásico':S.menu==='gala'?'navideño de gala':'abiertos a sugerencia')+' (opción por confirmar)');
   L.push('• Pastel: '+(S.pastel==='none'?'sin pastel':(S.pastel==='vainilla'?'vainilla con manjar':'chocolate')+' · '+q.pastel.p+' porciones'));
   L.push('• Estimado: '+money2(q.sub)+' + ITBMS (≈ '+money2(q.total)+')');
@@ -669,9 +843,8 @@ function init(){
   $('ppl').oninput=e=>{ const v=parseInt(e.target.value,10); if(v>0){ S.ppl=Math.min(400,v); const keep=$('ppl'); renderPersonas(); keep.value=v; } };
   $('ppl').onblur=renderPersonas;
   $('goMomento').onclick=()=>show('momento');
-  $('fecha').onchange=e=>{ S.fecha=e.target.value; if(S.fecha){ S.sinFecha=false; $('sinFecha').checked=false; } };
-  $('sinFecha').onchange=e=>{ S.sinFecha=e.target.checked; if(S.sinFecha){ S.fecha=''; $('fecha').value=''; } };
-  $('goPastel').onclick=()=>{ if(!S.fecha && !S.sinFecha){ S.sinFecha=true; $('sinFecha').checked=true; } show('pastel'); };
+  $('sinFecha').onchange=e=>{ S.sinFecha=e.target.checked; if(S.sinFecha){ S.fecha=''; S.hora=null; pintarCalendario(sedeFinal()); pintarHoras(sedeFinal()); } };
+  $('goPastel').onclick=()=>{ if(!S.fecha && !S.sinFecha){ S.sinFecha=true; $('sinFecha').checked=true; } if(S.fecha && S.hora==null){ toast('Ese día no hay horario libre. Elige otro día o marca que aún no tienen fecha.'); return; } show('pastel'); };
   $('goResultado').onclick=()=>{
     S.nombre=$('nombre').value.trim(); S.empresa=$('empresa').value.trim();
     const bad=!S.nombre; $('nombre').classList.toggle('err',bad); $('nombreErr').classList.toggle('on',bad);
@@ -681,8 +854,7 @@ function init(){
   $('nombre').oninput=()=>{ $('nombre').classList.remove('err'); $('nombreErr').classList.remove('on'); };
   $('verOtros').onclick=()=>{ const o=$('others'); o.hidden=!o.hidden; $('verOtros').textContent=o.hidden?'Ver los demás paquetes':'Ocultar paquetes'; if(!o.hidden) o.scrollIntoView({behavior:'smooth',block:'start'}); };
   $('copiar').onclick=async()=>{ const a=actual(), q=cotizar(a.sede,a.tier,S.ppl); try{ await navigator.clipboard.writeText(mensajeWA(q)); toast('Resumen copiado'); }catch(e){ toast('No se pudo copiar en este navegador'); } };
-  $('restart').onclick=()=>{ Object.assign(S,{ppl:25,momento:null,menu:null,sede:null,fecha:'',sinFecha:false,pastel:'none',nombre:'',empresa:'',pick:null}); $('nombre').value=''; $('empresa').value=''; $('fecha').value=''; $('sinFecha').checked=false; $('others').hidden=true; $('verOtros').textContent='Ver los demás paquetes'; hist=['intro']; renderPersonas(); renderMomento(); renderMenu(); show('intro',false); };
-  const today=new Date(); $('fecha').min=today.toISOString().slice(0,10);
+  $('restart').onclick=()=>{ Object.assign(S,{ppl:25,momento:null,menu:null,sede:null,fecha:'',hora:null,sinFecha:false,pastel:'none',nombre:'',empresa:'',pick:null}); $('nombre').value=''; $('empresa').value=''; $('sinFecha').checked=false; $('others').hidden=true; $('verOtros').textContent='Ver los demás paquetes'; hist=['intro']; renderPersonas(); renderMomento(); renderMenu(); show('intro',false); };
   renderPersonas(); renderMomento(); renderMenu();
 }
 init();
