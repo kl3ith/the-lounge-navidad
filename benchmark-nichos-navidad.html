@@ -1,0 +1,222 @@
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Benchmark de Nichos Navideños The Lounge</title>
+<meta name="description" content="Qué sectores de Ciudad de Panamá celebran Navidad y fin de año en equipo, cuánto miden sus grupos y a qué paquete de The Lounge le quedan.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Alex+Brush&family=Bebas+Neue&family=Poppins:wght@400;500;600;700&display=swap">
+<style>
+:root{
+  --paper:#F4EADA;--paper-2:#EDE0C9;--paper-3:#E4D5B8;--ink:#2A1C17;--muted:#7D6A5C;--line:#D9C9AC;
+  --pine:#1F4A3A;--pine-deep:#163529;--wine:#6D1B1B;--wine-deep:#4F1212;--gold:#C8A15B;--cream:#F6ECD9;--cream-muted:#CFC0A6;
+  --script:'Alex Brush',cursive;--cond:'Bebas Neue','Oswald','Arial Narrow',sans-serif;--sans:'Poppins',-apple-system,BlinkMacSystemFont,'Segoe UI',Helvetica,Arial,sans-serif;
+  color-scheme:light}
+*{box-sizing:border-box}
+body{margin:0;background:var(--paper);color:var(--ink);font-family:var(--sans);font-size:15.5px;line-height:1.6;padding-inline:20px;padding-block:0 60px;
+  background-image:radial-gradient(ellipse at 100% 0%,rgba(200,161,91,.16),transparent 42%),radial-gradient(ellipse at 0% 100%,rgba(31,74,58,.10),transparent 46%);background-attachment:fixed}
+.top{position:sticky;top:0;height:5px;background:linear-gradient(90deg,var(--pine) 0 50%,var(--wine) 50% 100%);margin-inline:-20px;z-index:5}
+.wrap{max-width:900px;margin:0 auto}
+header{text-align:center;padding:40px 0 26px;border-bottom:1px solid var(--line)}
+.eyebrow{font-size:12px;letter-spacing:.22em;text-transform:uppercase;color:var(--wine);font-weight:600}
+h1{font-family:var(--cond);font-weight:400;font-size:clamp(40px,7vw,64px);line-height:.95;margin:8px 0 6px;color:var(--pine-deep);text-wrap:balance}
+h1 em{font-family:var(--script);font-style:normal;color:var(--wine);font-size:1.25em;line-height:.8}
+header p{max-width:62ch;margin:10px auto 0;color:var(--muted)}
+.meta{margin-top:14px;font-size:12.5px;color:var(--muted);letter-spacing:.04em}
+h2{font-family:var(--cond);font-weight:400;font-size:34px;letter-spacing:.03em;line-height:1;color:var(--pine-deep);margin:44px 0 6px}
+h2 + p.sub{margin:0 0 18px;color:var(--muted);max-width:70ch}
+h3{font-family:var(--cond);font-weight:400;font-size:24px;letter-spacing:.04em;line-height:1;margin:0 0 6px;color:var(--pine-deep)}
+p{max-width:72ch}
+.kpis{display:grid;gap:12px;grid-template-columns:repeat(4,1fr);margin-top:18px}
+@media (max-width:760px){.kpis{grid-template-columns:repeat(2,1fr)}}
+.kpi{background:#FBF4E7;border:1.5px solid var(--line);border-radius:6px;padding:14px 16px}
+.kpi b{display:block;font-family:var(--cond);font-size:36px;line-height:1;color:var(--wine);font-variant-numeric:tabular-nums}
+.kpi span{font-size:12.5px;color:var(--muted);line-height:1.4;display:block;margin-top:4px}
+.kpi small{display:block;font-size:11px;color:var(--cream-muted);margin-top:6px;color:#A8987F}
+.tablewrap{overflow-x:auto;margin-top:14px;border:1.5px solid var(--line);border-radius:6px;background:#FBF4E7}
+table{border-collapse:collapse;width:100%;min-width:760px;font-size:13.5px}
+th{text-align:left;font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--cream);background:var(--pine);padding:10px 12px;font-weight:600;white-space:nowrap}
+td{padding:10px 12px;border-top:1px solid var(--line);vertical-align:top}
+td.n{font-variant-numeric:tabular-nums;text-align:center;font-weight:600}
+td.tot{font-family:var(--cond);font-size:24px;color:var(--wine);text-align:center;line-height:1}
+tr.top td{background:rgba(31,74,58,.07)}
+td .nm{font-weight:600;color:var(--pine-deep)}
+td .fit{display:inline-block;font-size:10.5px;letter-spacing:.12em;text-transform:uppercase;font-weight:700;padding:2px 8px;border-radius:2px;margin-top:4px}
+.fit.mo{background:var(--wine);color:var(--cream)}
+.fit.sf{background:var(--pine);color:var(--cream)}
+.fit.both{background:var(--gold);color:var(--ink)}
+.legend{font-size:12.5px;color:var(--muted);margin-top:8px}
+.grid{display:grid;gap:14px;grid-template-columns:1fr 1fr;margin-top:16px}
+@media (max-width:720px){.grid{grid-template-columns:1fr}}
+.card{background:#FBF4E7;border:1.5px solid var(--line);border-radius:6px;padding:20px;position:relative;display:flex;flex-direction:column;gap:8px}
+.card.pick{border-color:var(--pine);box-shadow:0 0 0 2px var(--pine) inset}
+.card .rank{position:absolute;top:-11px;left:16px;font-size:10.5px;letter-spacing:.16em;text-transform:uppercase;font-weight:700;padding:3px 9px;border-radius:2px;background:var(--gold);color:var(--ink)}
+.card .score{position:absolute;top:14px;right:16px;font-family:var(--cond);font-size:30px;line-height:1;color:var(--wine)}
+.card .score small{font-family:var(--sans);font-size:10px;color:var(--muted);letter-spacing:.1em;margin-left:3px}
+.card h3{padding-right:70px}
+.card .tags{display:flex;flex-wrap:wrap;gap:6px}
+.tag{font-size:11px;letter-spacing:.1em;text-transform:uppercase;font-weight:600;padding:3px 9px;border-radius:2px;background:var(--paper-2);color:var(--pine-deep);border:1px solid var(--line)}
+.tag.w{background:var(--wine);color:var(--cream);border-color:var(--wine)}
+.tag.p{background:var(--pine);color:var(--cream);border-color:var(--pine)}
+.card dl{margin:4px 0 0;display:grid;grid-template-columns:110px 1fr;gap:5px 12px;font-size:13.5px}
+.card dt{font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);font-weight:600;padding-top:3px}
+.card dd{margin:0}
+.card .hook{margin-top:6px;padding:10px 12px;border-left:3px solid var(--wine);background:rgba(109,27,27,.06);font-size:13.5px;font-style:italic}
+.card .ev{font-size:12.5px;color:var(--muted);margin-top:4px}
+.card .ev a{color:var(--pine);text-decoration:underline;text-underline-offset:2px}
+.stamp{margin-top:18px;padding:11px;border-radius:4px;background:radial-gradient(circle,var(--paper) 5.5px,transparent 6px) 0 0/22px 22px,var(--wine)}
+.stamp-in{background:var(--pine-deep);color:var(--cream);border-radius:2px;padding:24px 22px;background-image:radial-gradient(ellipse at 90% 10%,rgba(200,161,91,.16),transparent 45%),repeating-linear-gradient(135deg,rgba(255,255,255,.025) 0 2px,transparent 2px 14px)}
+.stamp-in h2{color:var(--cream);margin:0 0 10px}
+.stamp-in ol{margin:0;padding-left:22px;display:grid;gap:10px}
+.stamp-in li b{color:var(--gold)}
+.stamp-in p{color:var(--cream-muted);font-size:14px;margin:14px 0 0}
+.cal{display:grid;gap:10px;grid-template-columns:repeat(3,1fr);margin-top:14px}
+@media (max-width:640px){.cal{grid-template-columns:1fr}}
+.cal div{background:#FBF4E7;border:1.5px solid var(--line);border-radius:6px;padding:14px 16px;font-size:13.5px}
+.cal b{display:block;font-family:var(--cond);font-size:22px;letter-spacing:.04em;color:var(--wine);line-height:1;margin-bottom:6px}
+ul.src{font-size:12.5px;color:var(--muted);padding-left:18px;margin:10px 0 0;display:grid;gap:4px;max-width:none}
+ul.src a{color:var(--pine);text-decoration:underline;text-underline-offset:2px;word-break:break-word}
+footer{text-align:center;margin-top:50px;padding-top:20px;border-top:1px solid var(--line);color:var(--muted);font-size:12.5px}
+footer .s{font-family:var(--cond);letter-spacing:.1em;font-size:15px;color:var(--wine);margin-top:6px}
+</style>
+<div class="top"></div>
+<div class="wrap">
+<header>
+  <span class="eyebrow">The Lounge Panamá · Paquetes corporativos 2026</span>
+  <h1>Benchmark de nichos <em>navideños</em></h1>
+  <p>Qué sectores de Ciudad de Panamá celebran Navidad y fin de año con su equipo, cuánto miden esos grupos y a qué paquete de The Lounge le quedan. Insumo para elegir las micro-campañas de nicho.</p>
+  <div class="meta">Elaborado 14 sep 2026 · Fuentes públicas: MEF, MICI, ACOBIR, ABP, LinkedIn y prensa (dic 2025)</div>
+</header>
+
+<h2>El terreno</h2>
+<p class="sub">Cuatro cifras que definen dónde está el volumen de equipos que celebran, y por qué la zona bancaria es la cancha natural de The Lounge.</p>
+<div class="kpis">
+  <div class="kpi"><b>192</b><span>multinacionales bajo régimen SEM en Panamá, ~10,000 empleos acumulados. Promedio ≈ 52 personas por sede.</span><small>MICI, sep 2026</small></div>
+  <div class="kpi"><b>40</b><span>bancos miembros de la Asociación Bancaria; el Centro Bancario Internacional concentra oficinas en Obarrio, Marbella y Calle 50.</span><small>ABP, 2025</small></div>
+  <div class="kpi"><b>+400</b><span>agentes en el MLS de ACOBIR y más de 350 miembros entre corredoras, promotoras y avaluadoras.</span><small>ACOBIR, 2025</small></div>
+  <div class="kpi"><b>311</b><span>firmas de abogados registradas como agentes residentes, más 3,905 abogados persona natural: el gremio boutique por excelencia.</span><small>Informe agentes residentes citado por INED</small></div>
+</div>
+<p style="margin-top:16px">Los sectores que más crecieron en 2025 fueron transporte y logística (14.5%), hoteles y restaurantes (5.9%), finanzas y seguros (5.2%) y actividades inmobiliarias, profesionales y administrativas (4.3%), según el Informe Económico y Social del MEF. Tres de esos cuatro tienen su oficina a menos de diez minutos de cualquier sede de The Lounge.</p>
+
+<h2>Matriz de nichos</h2>
+<p class="sub">Doce nichos puntuados de 1 a 5 en seis criterios. El encaje indica a qué sede va el grupo típico: Marbella y Obarrio (15 a 40 personas) o San Francisco (80 a 150).</p>
+<div class="tablewrap"><table>
+<thead><tr><th>Nicho</th><th>Celebra en equipo</th><th>Tamaño encaja</th><th>Cercanía a sedes</th><th>Presupuesto y decisión</th><th>Segmentable en pauta</th><th>Poca competencia hotelera</th><th>Total /30</th></tr></thead>
+<tbody>
+<tr class="top"><td><span class="nm">Brokers y agencias inmobiliarias</span><br><span class="fit mo">Marbella · Obarrio</span></td><td class="n">5</td><td class="n">5</td><td class="n">5</td><td class="n">4</td><td class="n">5</td><td class="n">4</td><td class="tot">28</td></tr>
+<tr class="top"><td><span class="nm">Firmas de abogados boutique</span><br><span class="fit mo">Marbella · Obarrio</span></td><td class="n">5</td><td class="n">5</td><td class="n">5</td><td class="n">5</td><td class="n">4</td><td class="n">4</td><td class="tot">28</td></tr>
+<tr class="top"><td><span class="nm">Multinacionales SEM y equipos regionales</span><br><span class="fit sf">San Francisco</span></td><td class="n">5</td><td class="n">4</td><td class="n">4</td><td class="n">5</td><td class="n">4</td><td class="n">3</td><td class="tot">25</td></tr>
+<tr><td><span class="nm">Corredores de seguros y aseguradoras</span><br><span class="fit both">Ambos</span></td><td class="n">5</td><td class="n">4</td><td class="n">5</td><td class="n">4</td><td class="n">4</td><td class="n">3</td><td class="tot">25</td></tr>
+<tr><td><span class="nm">Firmas contables, auditoría y consultoría</span><br><span class="fit mo">Marbella · Obarrio</span></td><td class="n">4</td><td class="n">5</td><td class="n">5</td><td class="n">4</td><td class="n">3</td><td class="n">4</td><td class="tot">25</td></tr>
+<tr><td><span class="nm">Áreas y sucursales de bancos</span><br><span class="fit both">Ambos</span></td><td class="n">5</td><td class="n">4</td><td class="n">5</td><td class="n">4</td><td class="n">3</td><td class="n">2</td><td class="tot">23</td></tr>
+<tr><td><span class="nm">Gremios y cámaras (brindis anual)</span><br><span class="fit sf">San Francisco</span></td><td class="n">5</td><td class="n">4</td><td class="n">4</td><td class="n">3</td><td class="n">2</td><td class="n">3</td><td class="tot">21</td></tr>
+<tr><td><span class="nm">Agencias creativas, tech y startups</span><br><span class="fit mo">Obarrio</span></td><td class="n">4</td><td class="n">5</td><td class="n">4</td><td class="n">2</td><td class="n">3</td><td class="n">5</td><td class="tot">23</td></tr>
+<tr><td><span class="nm">Equipos de ventas: autos, telecom, retail</span><br><span class="fit both">Ambos</span></td><td class="n">4</td><td class="n">4</td><td class="n">3</td><td class="n">4</td><td class="n">3</td><td class="n">3</td><td class="tot">21</td></tr>
+<tr><td><span class="nm">Clínicas, consultorios y farmacéuticas</span><br><span class="fit mo">Marbella · SF</span></td><td class="n">4</td><td class="n">4</td><td class="n">4</td><td class="n">3</td><td class="n">3</td><td class="n">3</td><td class="tot">21</td></tr>
+<tr><td><span class="nm">Logística, navieras y freight forwarders</span><br><span class="fit both">Ambos</span></td><td class="n">4</td><td class="n">3</td><td class="n">3</td><td class="n">4</td><td class="n">3</td><td class="n">3</td><td class="tot">20</td></tr>
+<tr><td><span class="nm">Colegios privados y universidades</span><br><span class="fit sf">San Francisco</span></td><td class="n">3</td><td class="n">3</td><td class="n">2</td><td class="n">2</td><td class="n">3</td><td class="n">3</td><td class="tot">16</td></tr>
+</tbody></table></div>
+<p class="legend">Puntuación editorial a partir de la evidencia recogida. "Poca competencia hotelera" premia a los nichos que hoy no tienen un salón de hotel vendiéndoles el paquete de fin de año.</p>
+
+<h2>Los cinco nichos con más fuerza</h2>
+<p class="sub">Cada ficha dice quién decide, cuánto mide el grupo, qué paquete le calza y el ángulo creativo con el que se le habla.</p>
+<div class="grid">
+
+<div class="card pick"><span class="rank">Nicho 1</span><span class="score">28<small>/30</small></span>
+  <h3>Brokers y agencias inmobiliarias</h3>
+  <div class="tags"><span class="tag w">Premium o Diamond</span><span class="tag">Obarrio · Marbella</span><span class="tag">Cena o brunch</span></div>
+  <dl><dt>Quién decide</dt><dd>El broker dueño o el team leader de la oficina. Decisión rápida, sin comité.</dd>
+  <dt>Grupo típico</dt><dd>10 a 40 agentes independientes por oficina. Celebran resultados, reconocen top producers y cierran el año con premios.</dd>
+  <dt>Dónde están</dt><dd>Obarrio, San Francisco, Costa del Este y Calle 50. KW Obarrio, Panamigos, Century 21, RE/MAX, Coldwell Banker.</dd>
+  <dt>Momento</dt><dd>Segunda quincena de diciembre, entre semana, en la noche. Karaoke, billar y terraza pesan mucho.</dd></dl>
+  <div class="hook">"Cerraron ventas todo el año. Ahora cierren el año en un espacio que también vende: privado, con LED para el ranking de top producers y sin descorche."</div>
+  <div class="ev">Evidencia: <a href="https://es.linkedin.com/posts/kwpanama_kwpanam%C3%A1-gratitud-cierredea%C3%B1o-activity-7410380946371289089-IaJq" target="_blank" rel="noopener">KW Obarrio cierre 2025</a> · <a href="https://www.linkedin.com/posts/oliver-lean-964502101_thepanamigosmovement-activity-7406386772852768769-f54Q" target="_blank" rel="noopener">Panamigos Realty reconocimiento</a> · ACOBIR +400 agentes MLS.</div>
+</div>
+
+<div class="card pick"><span class="rank">Nicho 2</span><span class="score">28<small>/30</small></span>
+  <h3>Firmas de abogados boutique</h3>
+  <div class="tags"><span class="tag w">Diamond</span><span class="tag">Marbella · Obarrio</span><span class="tag">Almuerzo o cena</span></div>
+  <dl><dt>Quién decide</dt><dd>El socio director o la administradora de la firma. Valoran discreción, elegancia y que nadie los esté mirando.</dd>
+  <dt>Grupo típico</dt><dd>8 a 35 personas. Panamá tiene 311 firmas registradas como agentes residentes, la mayoría con equipos de ese tamaño.</dd>
+  <dt>Dónde están</dt><dd>Zona bancaria y Obarrio: torres de Calle 50, Samuel Lewis, Aquilino de la Guardia.</dd>
+  <dt>Momento</dt><dd>Almuerzo navideño en viernes, o cena elegante. Es el nicho natural del menú Diamond con pavo y jamón.</dd></dl>
+  <div class="hook">"Un almuerzo de fin de año con la privacidad que su firma exige: una sola puerta, sin cámaras adentro, menú navideño de gala y tres horas solo para ustedes."</div>
+  <div class="ev">Evidencia: <a href="https://es.linkedin.com/posts/arias-abrego-lopez_aaln-activity-7406722843419373568-1I02" target="_blank" rel="noopener">Arias, Abrego, López & Noriega Navidad 2025</a> · Ancori, ARAMO y PGS con mensajes de cierre a colaboradores.</div>
+</div>
+
+<div class="card pick"><span class="rank">Nicho 3</span><span class="score">25<small>/30</small></span>
+  <h3>Multinacionales SEM y equipos regionales</h3>
+  <div class="tags"><span class="tag p">Diamond</span><span class="tag">San Francisco</span><span class="tag">Cena</span></div>
+  <dl><dt>Quién decide</dt><dd>HR o People &amp; Culture, con presupuesto regional aprobado. Cotizan formalmente y comparan contra hoteles.</dd>
+  <dt>Grupo típico</dt><dd>192 sedes con promedio de 52 personas; las medianas y grandes suman 80 a 150. Muchas celebran en inglés y con colaboradores de varios países.</dd>
+  <dt>Dónde están</dt><dd>Costa del Este, Punta Pacífica, Santa María y zona bancaria. A San Francisco llegan en diez minutos.</dd>
+  <dt>Momento</dt><dd>Cena de fin de año con show, reconocimiento y after. San Francisco Diamond con LED, terraza y valet es la propuesta.</dd></dl>
+  <div class="hook">"Una sala de alto nivel con LED de 15 m², terraza y servicio completo, sin el protocolo de hotel: su equipo celebra a su manera y ustedes entregan un evento memorable."</div>
+  <div class="ev">Evidencia: <a href="https://mici.gob.pa/2026/09/02/192-multinacionales-amplian-oportunidades-de-desarrollo-profesional-para-los-panamenos/" target="_blank" rel="noopener">MICI 192 SEM</a> · <a href="https://www.infobae.com/panama/2026/09/03/multinacionales-que-operan-en-panama-registran-un-acumulado-historico-que-alcanza-los-10-mil-empleos/" target="_blank" rel="noopener">10 mil empleos acumulados</a>.</div>
+</div>
+
+<div class="card"><span class="rank">Nicho 4</span><span class="score">25<small>/30</small></span>
+  <h3>Corredores de seguros y aseguradoras</h3>
+  <div class="tags"><span class="tag w">Premium</span><span class="tag p">Diamond SF</span><span class="tag">After office o cena</span></div>
+  <dl><dt>Quién decide</dt><dd>Dos capas: la agencia de corredores (dueño, 5 a 30 personas) y la aseguradora (mercadeo o canales, que agasaja a sus corredores).</dd>
+  <dt>Grupo típico</dt><dd>Agencias de 10 a 30 en Marbella u Obarrio; aseguradoras como Internacional de Seguros (150 a 200 empleados) o Sagicor para San Francisco.</dd>
+  <dt>Dónde están</dt><dd>Calle 50, Obarrio y San Francisco. Capecose agrupa al gremio y hace su brindis navideño la primera semana de diciembre.</dd>
+  <dt>Momento</dt><dd>After office y cena. Las aseguradoras ya hacen eventos con corredores en lounges de la ciudad: es demanda probada.</dd></dl>
+  <div class="hook">"Su brindis con corredores merece un lugar propio: privado, con barra iluminada y pantalla para la tómbola en vivo."</div>
+  <div class="ev">Evidencia: <a href="https://es.linkedin.com/posts/marelissa-luciani_anoche-en-el-brindis-navide%C3%B1o-de-capecose-activity-7402380575031967744--qYV" target="_blank" rel="noopener">Brindis navideño Capecose 2025</a> · <a href="https://es.linkedin.com/posts/intdeseguros_int-de-seguros-activity-7419508533311746048-Pouz" target="_blank" rel="noopener">Internacional de Seguros after office con corredores</a>.</div>
+</div>
+
+<div class="card"><span class="rank">Nicho 5</span><span class="score">25<small>/30</small></span>
+  <h3>Firmas contables, auditoría y consultoría</h3>
+  <div class="tags"><span class="tag w">Premium</span><span class="tag">Marbella · Obarrio</span><span class="tag">Almuerzo</span></div>
+  <dl><dt>Quién decide</dt><dd>Socio administrador u oficina de talento humano. Cotizan con orden y comparan precio por persona.</dd>
+  <dt>Grupo típico</dt><dd>10 a 40 personas en firmas medianas (redes como Nexia, Baker Tilly, Grant Thornton, Moore) y equipos por área en las grandes.</dd>
+  <dt>Dónde están</dt><dd>Zona bancaria y Obarrio, junto a sus clientes bancarios.</dd>
+  <dt>Momento</dt><dd>Almuerzo de fin de año antes del cierre fiscal de diciembre. Premium con menú clásico y precio por persona claro les habla bien.</dd></dl>
+  <div class="hook">"Cierre de año para el equipo que cierra los números de todos: tres horas privadas, catering incluido y un precio por persona que cuadra."</div>
+  <div class="ev">Evidencia: <a href="https://es.linkedin.com/posts/nexiapanama_en-nexia-panam%C3%A1-vivimos-una-hermosa-celebraci%C3%B3n-activity-7411404653218664448-xqpi" target="_blank" rel="noopener">Nexia Panamá celebración navideña 2025</a>.</div>
+</div>
+
+<div class="card"><span class="rank">Canal aliado</span><span class="score">21<small>/30</small></span>
+  <h3>Gremios y cámaras</h3>
+  <div class="tags"><span class="tag p">Diamond SF</span><span class="tag">80 a 150</span><span class="tag">Cóctel de cierre</span></div>
+  <dl><dt>Quién decide</dt><dd>Junta directiva o gerencia del gremio. Buscan sede para su cóctel de cierre y patrocinios.</dd>
+  <dt>Por qué importa</dt><dd>Un gremio reúne en una noche a decenas de empresas del nicho. Hospedar el brindis de ACOBIR, Capecose o una cámara es vender el paquete a todo el sector de una vez.</dd>
+  <dt>Ejemplos</dt><dd>Panamcham (cóctel de fin de año, 5 dic 2025), ACOVIPA (cierre 18 dic 2025), Capecose (brindis 3 dic 2025), ACOBIR (cena de gala anual).</dd></dl>
+  <div class="hook">Jugada: ofrecer San Francisco como sede del brindis del gremio a cambio de presencia de marca y un descuento de temporada para sus miembros.</div>
+  <div class="ev">Evidencia: <a href="https://panamcham.com/es/gallery/end-year-cocktail-members-recognition-networking-event-2025" target="_blank" rel="noopener">Panamcham End of Year Cocktail 2025</a> · <a href="https://www.acovipagremio.org/eventos/evento-cierre-2025" target="_blank" rel="noopener">ACOVIPA cierre 2025</a>.</div>
+</div>
+</div>
+
+<h2>Calendario real de la temporada</h2>
+<p class="sub">Fechas de celebraciones corporativas 2025 encontradas en fuentes públicas. Marcan cuándo se decide y cuándo se celebra.</p>
+<div class="cal">
+  <div><b>Octubre</b>Los hoteles lanzan sus paquetes de fin de año y las multinacionales piden cotizaciones. La campaña debe estar al aire la primera semana.</div>
+  <div><b>27 nov a 5 dic</b>Primeras fiestas: Davivienda (27 nov), Mercantil encendido del árbol (2 dic), brindis Capecose (3 dic), Panamcham (5 dic).</div>
+  <div><b>15 a 19 dic</b>Pico: el décimo se paga el 15 y las oficinas celebran antes de vacaciones. Panamigos (15 dic), AALN (16 dic), ACOVIPA y Hotel El Panamá (18 dic).</div>
+</div>
+<p style="margin-top:14px">Dato de contexto: el 41% de los panameños destina el décimo de diciembre a compras navideñas (Konzerta 2025). El ánimo de celebrar está en su punto más alto justo cuando las empresas cierran sus fiestas: la ventana de venta fuerte es del 1 de octubre al 30 de noviembre.</p>
+
+<div class="stamp"><div class="stamp-in">
+  <h2>Recomendación para decidir</h2>
+  <ol>
+    <li><b>Brokers inmobiliarios</b> como primera micro-campaña: decisión unipersonal, grupos que calzan exacto en Obarrio y Marbella, cultura de celebrar resultados y ya viven en Obarrio y San Francisco. Es el nicho que propuso el cliente y los datos lo respaldan.</li>
+    <li><b>Firmas de abogados boutique</b> como segunda: el mismo encaje de tamaño, más presupuesto, y el menú Diamond les habla directo. Comparten territorio con la primera campaña, así que la pauta geográfica se aprovecha dos veces.</li>
+    <li><b>Multinacionales SEM</b> como campaña de San Francisco: es el único nicho con volumen probado de grupos de 80 a 150 y presupuesto de HR. Aquí se compite con hoteles, así que el mensaje es privacidad, tecnología y cero protocolo.</li>
+  </ol>
+  <p>Seguros y firmas contables quedan como segunda ola si la primera convierte. Los gremios se trabajan por relación directa, no por pauta.</p>
+</div></div>
+
+<h2>Fuentes consultadas</h2>
+<ul class="src">
+  <li>MEF, Informe Económico y Social Anual 2025: crecimiento por actividad económica. <a href="https://www.mef.gob.pa/wp-content/uploads/2026/05/Informe-Economico-y-Social-Anual-2025.pdf" target="_blank" rel="noopener">mef.gob.pa</a></li>
+  <li>MICI, 192 multinacionales bajo régimen SEM y 8,359 empleos directos en 2024. <a href="https://mici.gob.pa/2026/09/02/192-multinacionales-amplian-oportunidades-de-desarrollo-profesional-para-los-panamenos/" target="_blank" rel="noopener">mici.gob.pa</a></li>
+  <li>ACOBIR, más de 350 miembros y +400 agentes MLS. <a href="https://libresolpanama.com/acobir/" target="_blank" rel="noopener">libresolpanama.com</a> · <a href="https://www.acobir.com/" target="_blank" rel="noopener">acobir.com</a></li>
+  <li>Asociación Bancaria de Panamá, 40 bancos miembros. <a href="https://pacificbank.pa/blog/colaborador-distinguido/" target="_blank" rel="noopener">pacificbank.pa</a></li>
+  <li>Registro de agentes residentes: 311 firmas y 3,905 abogados. <a href="https://revistas.ined.ac.pa/index.php/rl/article/download/74/55/57" target="_blank" rel="noopener">revistas.ined.ac.pa</a></li>
+  <li>Konzerta, encuesta Décimo Tercer Mes 2025. <a href="https://www.laestrella.com.pa/economia/panamenos-priorizan-compras-navidenas-con-el-decimo-de-diciembre-segun-encuesta-BN18042201" target="_blank" rel="noopener">laestrella.com.pa</a></li>
+  <li>Celebraciones 2025 en LinkedIn: Davivienda Panamá, Mercantil Panamá, Nexia Panamá, KW Obarrio, Panamigos Realty, AALN, Capecose, Internacional de Seguros, Porsche Center Panamá, PGT Logistics.</li>
+  <li>Prensa: Hospital Paitilla fiesta de Navidad (La Prensa), Policlínica de Betania (Crítica), Medcom (Telemetro), Hotel El Panamá paquete Secret Santa (LinkedIn).</li>
+</ul>
+
+<footer><b>The Lounge Panamá</b> · Benchmark interno para la estrategia de paquetes navideños 2026 · Preparado por Lego Marketing<div class="s">Este año, celebra arriba.</div></footer>
+</div>

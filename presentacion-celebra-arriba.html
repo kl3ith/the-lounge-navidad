@@ -1,0 +1,817 @@
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Celebra Arriba</title>
+<meta name="description" content="Presentación creativa interactiva de la campaña navideña 2026 de The Lounge Panamá: un mensaje madre, doce dialectos y el cotizador al centro.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Alex+Brush&family=Bebas+Neue&family=Poppins:wght@400;500;600;700&display=swap">
+<style>
+/* =====================================================================
+   TOKENS
+   ===================================================================== */
+:root{
+  --paper:#F4EADA;--paper-2:#EDE0C9;--paper-3:#E4D5B8;--ink:#2A1C17;--muted:#7D6A5C;--line:#D9C9AC;
+  --pine:#1F4A3A;--pine-deep:#163529;--pine-soft:#2E5D4B;--wine:#6D1B1B;--wine-deep:#4F1212;--gold:#C8A15B;
+  --cream:#F6ECD9;--cream-muted:#CFC0A6;--wa:#1FA855;
+  --script:'Alex Brush',cursive;--cond:'Bebas Neue','Oswald','Arial Narrow',sans-serif;--sans:'Poppins',-apple-system,BlinkMacSystemFont,'Segoe UI',Helvetica,Arial,sans-serif;
+  --ribbon:40px;--bar:56px;--ease:cubic-bezier(.22,.8,.2,1);
+  color-scheme:light}
+*{box-sizing:border-box}
+html,body{height:100%}
+body{margin:0;background:var(--paper);color:var(--ink);font-family:var(--sans);font-size:16px;line-height:1.55;overflow:hidden}
+button{font:inherit;color:inherit;cursor:pointer}
+:focus-visible{outline:3px solid var(--gold);outline-offset:3px}
+@media (prefers-reduced-motion:reduce){*,*::before,*::after{animation-duration:.01ms!important;transition-duration:.01ms!important}}
+
+/* =====================================================================
+   ESCENARIO
+   ===================================================================== */
+.ribbon{position:fixed;left:0;top:0;bottom:0;width:var(--ribbon);z-index:30;pointer-events:none;
+  background:linear-gradient(90deg,transparent 0 6px,var(--pine) 6px 18px,transparent 18px 23px,var(--wine) 23px 34px,transparent 34px)}
+.ribbon::after{content:"";position:absolute;left:6px;top:0;width:12px;height:100%;background:repeating-linear-gradient(180deg,rgba(255,255,255,.07) 0 3px,transparent 3px 9px)}
+@media (max-width:760px){.ribbon{width:14px;background:linear-gradient(90deg,var(--pine) 0 7px,var(--wine) 7px 14px)}.ribbon::after{display:none}}
+.stage{position:fixed;inset:0;padding-left:var(--ribbon);padding-bottom:var(--bar)}
+@media (max-width:760px){.stage{padding-left:14px}}
+.slide{position:absolute;inset:0;padding:clamp(28px,5vh,64px) clamp(20px,5vw,72px) calc(var(--bar) + 20px) calc(var(--ribbon) + clamp(20px,4vw,64px));
+  opacity:0;visibility:hidden;transform:translateY(14px);transition:opacity .55s var(--ease),transform .55s var(--ease),visibility 0s .55s;overflow:auto}
+.slide.active{opacity:1;visibility:visible;transform:none;transition:opacity .55s var(--ease) .1s,transform .55s var(--ease) .1s,visibility 0s}
+.slide.dark{background:var(--pine-deep);color:var(--cream);
+  background-image:radial-gradient(ellipse at 85% 15%,rgba(200,161,91,.18),transparent 45%),repeating-linear-gradient(135deg,rgba(255,255,255,.025) 0 2px,transparent 2px 16px)}
+.slide.light{background:var(--paper);background-image:radial-gradient(ellipse at 100% 0%,rgba(200,161,91,.16),transparent 42%),radial-gradient(ellipse at 0% 100%,rgba(31,74,58,.10),transparent 46%)}
+@media (max-width:760px){.slide{padding-left:calc(14px + 18px)}}
+.inner{max-width:1100px;margin:0 auto;min-height:100%;display:flex;flex-direction:column;justify-content:center}
+
+/* entradas secuenciales */
+[data-a]{opacity:0;transform:translateY(18px);transition:opacity .6s var(--ease),transform .6s var(--ease);transition-delay:calc(var(--i,0) * 120ms + 150ms)}
+.slide.active [data-a]{opacity:1;transform:none}
+[data-a="left"]{transform:translateX(-24px)}
+[data-a="scale"]{transform:scale(.92)}
+
+/* tipografía */
+.eyebrow{font-size:12px;letter-spacing:.24em;text-transform:uppercase;font-weight:600;color:var(--wine)}
+.dark .eyebrow{color:var(--gold)}
+h1,h2{font-family:var(--cond);font-weight:400;line-height:.95;letter-spacing:.01em;margin:0;text-wrap:balance}
+h2{font-size:clamp(44px,6.5vw,84px);color:var(--pine-deep);margin:8px 0 14px}
+.dark h2{color:var(--cream)}
+h2 em,.big em{font-family:var(--script);font-style:normal;color:var(--wine);font-size:1.28em;line-height:.8}
+.dark h2 em,.dark .big em{color:var(--gold)}
+p.lead{font-size:clamp(16px,1.6vw,20px);max-width:52ch;margin:0;color:var(--ink)}
+.dark p.lead{color:var(--cream)}
+p.note{font-size:14px;color:var(--muted);max-width:56ch;margin:10px 0 0}
+.dark p.note{color:var(--cream-muted)}
+.lbl{font-size:11px;letter-spacing:.18em;text-transform:uppercase;font-weight:700;color:var(--wine)}
+.dark .lbl{color:var(--gold)}
+
+/* lockup */
+.lockup{display:flex;flex-direction:column;align-items:center;text-align:center;line-height:1}
+.lockup .ey{font-size:12px;letter-spacing:.22em;text-transform:uppercase;font-weight:600}
+.lockup .l1{font-family:var(--script);line-height:.9}
+.lockup .l2{display:flex;align-items:baseline;gap:.18em;margin-top:-.08em}
+.lockup .y{font-weight:500}.lockup .fin{font-weight:700;letter-spacing:-.01em}.lockup .ano{font-family:var(--script);line-height:.8;margin-left:.05em}
+
+/* sello y estampilla */
+.sello{display:inline-block;transform:rotate(-2.5deg);background:var(--wine);padding:.6em 1.2em .8em;border-radius:3px;box-shadow:0 18px 50px rgba(0,0,0,.35);color:var(--cream)}
+.sello .lockup .ey{color:var(--cream)}.sello .lockup .l1,.sello .lockup .ano{color:var(--cream)}.sello .lockup .y,.sello .lockup .fin{color:#E6A6A6}
+.stamp{padding:11px;border-radius:4px;background:radial-gradient(circle,var(--paper) 5.5px,transparent 6px) 0 0/22px 22px,var(--wine)}
+.dark .stamp{background:radial-gradient(circle,var(--pine-deep) 5.5px,transparent 6px) 0 0/22px 22px,var(--wine)}
+.stamp-in{background:var(--pine-deep);color:var(--cream);border-radius:2px;padding:22px}
+.stamp.cream .stamp-in{background:#FBF4E7;color:var(--ink)}
+
+/* =====================================================================
+   01 PORTADA
+   ===================================================================== */
+#s1 .inner{align-items:center;text-align:center}
+#s1 .logo{height:52px;filter:none;margin-bottom:18px}
+#s1 .sello{margin:8px 0 22px;opacity:0;transform:rotate(8deg) scale(1.15) translateY(-30px);transition:transform .8s var(--ease) .5s,opacity .5s .5s}
+#s1.active .sello{opacity:1;transform:rotate(-2.5deg) scale(1)}
+#s1 .lockup .ey{font-size:clamp(11px,1.3vw,14px)}
+#s1 .lockup .l1{font-size:clamp(64px,11vw,132px)}
+#s1 .lockup .y{font-size:clamp(20px,2.6vw,30px)}#s1 .lockup .fin{font-size:clamp(22px,3vw,36px)}#s1 .lockup .ano{font-size:clamp(56px,9.6vw,112px)}
+#s1 .l1 span{display:inline-block;opacity:0;transform:translateY(.3em);transition:opacity .35s,transform .5s var(--ease)}
+#s1.active .l1 span{opacity:1;transform:none}
+#s1 .title{font-family:var(--cond);font-size:clamp(44px,8vw,110px);line-height:.9;color:var(--cream)}
+#s1 .title em{font-family:var(--script);font-style:normal;color:var(--gold);font-size:1.25em}
+#s1 .sub{margin-top:14px;font-size:clamp(12px,1.3vw,15px);letter-spacing:.22em;text-transform:uppercase;color:var(--cream-muted);font-weight:600}
+#s1 .foot{margin-top:30px;font-size:13px;color:var(--cream-muted)}
+#s1 .foot b{color:var(--cream);font-weight:600}
+
+/* =====================================================================
+   02 CONTEXTO · calendario
+   ===================================================================== */
+.split{display:grid;grid-template-columns:1fr 1fr;gap:clamp(24px,5vw,72px);align-items:center}
+@media (max-width:860px){.split{grid-template-columns:1fr}}
+.cal{display:grid;grid-template-columns:repeat(7,1fr);gap:6px;max-width:460px}
+.cal .dow{font-size:10.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);text-align:center;font-weight:600;padding-bottom:4px}
+.cal .d{aspect-ratio:1;border:1.5px solid var(--line);border-radius:4px;display:grid;place-items:center;font-family:var(--cond);font-size:clamp(16px,2vw,24px);color:var(--muted);background:#FBF4E7;transition:background .35s,color .35s,transform .35s,border-color .35s}
+.cal .d.nov{opacity:.55}
+.cal .d.hot{background:var(--wine);color:var(--cream);border-color:var(--wine);transform:scale(1.04)}
+.cal .d.peak{background:var(--pine-deep);border-color:var(--pine-deep);color:var(--gold)}
+.cal .d.dec15::after{content:"décimo";font-family:var(--sans);font-size:8px;letter-spacing:.1em;text-transform:uppercase;margin-top:-4px}
+.cal .d.dec15{grid-template-rows:auto auto;padding-top:6px}
+.cal-key{display:flex;gap:16px;margin-top:12px;font-size:12.5px;color:var(--muted);flex-wrap:wrap}
+.cal-key i{display:inline-block;width:12px;height:12px;border-radius:2px;vertical-align:-1px;margin-right:6px}
+.facts{display:grid;gap:14px;margin-top:22px}
+.fact{display:grid;grid-template-columns:14px 1fr;gap:12px;align-items:start;font-size:clamp(15px,1.4vw,18px)}
+.fact::before{content:"";width:10px;height:10px;margin-top:9px;background:var(--wine);transform:skewX(-12deg)}
+.fact b{font-weight:600;color:var(--pine-deep)}
+
+/* =====================================================================
+   03 OPORTUNIDAD · cifras
+   ===================================================================== */
+.nums{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;margin-top:26px}
+@media (max-width:860px){.nums{grid-template-columns:repeat(2,1fr)}}
+.num{background:#FBF4E7;border:1.5px solid var(--line);border-radius:6px;padding:20px 18px 16px;position:relative;transition:transform .25s var(--ease),box-shadow .25s}
+.num:hover{transform:translateY(-4px);box-shadow:0 16px 40px rgba(42,28,23,.12)}
+.num b{display:block;font-family:var(--cond);font-size:clamp(48px,6vw,84px);line-height:.9;color:var(--wine);font-variant-numeric:tabular-nums}
+.num b small{font-size:.55em;color:var(--gold)}
+.num span{display:block;font-size:14px;color:var(--ink);margin-top:8px;line-height:1.4}
+.num i{display:block;font-style:normal;font-size:11.5px;color:var(--muted);margin-top:10px;opacity:0;transition:opacity .3s}
+.num:hover i,.num:focus-within i{opacity:1}
+
+/* =====================================================================
+   04 OBJETIVO
+   ===================================================================== */
+.line3{display:grid;grid-template-columns:1fr auto 1fr auto 1fr;align-items:center;gap:14px;margin-top:30px}
+@media (max-width:860px){.line3{grid-template-columns:1fr;gap:10px}.line3 .arrow{transform:rotate(90deg);justify-self:center}}
+.st{background:var(--pine-deep);color:var(--cream);border-radius:6px;padding:22px 20px;min-height:150px;display:flex;flex-direction:column;gap:6px;position:relative;overflow:hidden}
+.st::after{content:"";position:absolute;right:-30px;top:-30px;width:110px;height:110px;border-radius:50%;background:rgba(200,161,91,.14)}
+.st .k{font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:var(--gold);font-weight:700}
+.st .v{font-family:var(--cond);font-size:clamp(30px,3.4vw,44px);line-height:.95}
+.st .d{font-size:13.5px;color:var(--cream-muted)}
+.arrow{font-family:var(--cond);font-size:44px;color:var(--wine);line-height:1}
+.objs{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-top:22px}
+@media (max-width:760px){.objs{grid-template-columns:1fr}}
+.obj{border-left:3px solid var(--gold);padding:4px 0 4px 16px;font-size:15px}
+.obj b{display:block;font-family:var(--cond);font-size:22px;letter-spacing:.04em;color:var(--pine-deep);line-height:1;margin-bottom:4px}
+
+/* =====================================================================
+   05 BIG IDEA
+   ===================================================================== */
+#s5 .inner{align-items:center;text-align:center;position:relative}
+#s5 .big{font-family:var(--cond);font-size:clamp(56px,10vw,150px);line-height:.9;color:var(--cream)}
+#s5 .big em{font-size:1.2em}
+#s5 .idea{max-width:60ch;font-size:clamp(16px,1.7vw,21px);color:var(--cream);margin:22px auto 0}
+#s5 .idea b{color:var(--gold);font-weight:600}
+
+/* =====================================================================
+   06 RACIONAL · estampillas
+   ===================================================================== */
+.rac{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-top:26px}
+@media (max-width:960px){.rac{grid-template-columns:repeat(2,1fr)}}
+@media (max-width:520px){.rac{grid-template-columns:1fr}}
+.rac .stamp{transition:transform .3s var(--ease)}
+.rac .stamp:hover{transform:translateY(-6px) rotate(-1deg)}
+.rac .stamp-in{min-height:220px;display:flex;flex-direction:column;gap:8px}
+.rac .k{font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:var(--gold);font-weight:700}
+.rac .t{font-family:var(--cond);font-size:clamp(26px,2.6vw,34px);line-height:.95}
+.rac .d{font-size:13.5px;color:var(--cream-muted);line-height:1.5}
+.rac .x{font-size:12.5px;color:var(--gold);margin-top:auto;max-height:0;overflow:hidden;opacity:0;transition:max-height .4s var(--ease),opacity .3s}
+.rac .stamp:hover .x{max-height:80px;opacity:1}
+
+/* =====================================================================
+   07 KEY VISUAL
+   ===================================================================== */
+#s7 .inner{max-width:1200px}
+.kv-wrap{display:grid;grid-template-columns:1.25fr .75fr;gap:clamp(20px,4vw,56px);align-items:center}
+@media (max-width:900px){.kv-wrap{grid-template-columns:1fr}}
+.kv{position:relative;aspect-ratio:4/5;max-height:72vh;width:100%;max-width:560px;margin:0 auto;border-radius:6px;overflow:hidden;background:var(--paper);box-shadow:0 30px 80px rgba(0,0,0,.35);perspective:900px}
+.kv .layer{position:absolute;inset:0;will-change:transform;transition:transform .12s linear}
+.kv .l-bg{background:radial-gradient(ellipse at 80% 0%,rgba(200,161,91,.22),transparent 45%),var(--paper);
+  background-image:radial-gradient(ellipse at 80% 0%,rgba(200,161,91,.22),transparent 45%),repeating-linear-gradient(0deg,rgba(42,28,23,.03) 0 1px,transparent 1px 7px)}
+.kv .l-ribbon{left:8%;width:14%;background:linear-gradient(90deg,var(--pine) 0 45%,transparent 45% 55%,var(--wine) 55% 100%)}
+.kv .l-ribbon::after{content:"";position:absolute;inset:0;background:repeating-linear-gradient(180deg,rgba(255,255,255,.08) 0 4px,transparent 4px 12px)}
+.kv .l-stamp{display:flex;align-items:flex-start;justify-content:center;padding-top:9%}
+.kv .l-stamp .sello{transform:rotate(-3deg);padding:.5em 1em .7em}
+.kv .l-stamp .lockup .ey{font-size:clamp(8px,1.1vw,12px)}
+.kv .l-stamp .lockup .l1{font-size:clamp(40px,6.4vw,78px)}
+.kv .l-stamp .lockup .y{font-size:clamp(12px,1.6vw,18px)}.kv .l-stamp .lockup .fin{font-size:clamp(13px,1.8vw,22px)}.kv .l-stamp .lockup .ano{font-size:clamp(34px,5.6vw,70px)}
+.kv .l-key{display:grid;place-items:center;padding-top:22%}
+.kv .l-key svg{width:66%;height:auto;filter:drop-shadow(0 18px 30px rgba(0,0,0,.28))}
+.kv .l-text{display:flex;flex-direction:column;align-items:center;justify-content:flex-end;padding-bottom:7%;text-align:center}
+.kv .l-text .t{font-family:var(--cond);font-size:clamp(28px,4.6vw,56px);line-height:.9;color:var(--pine-deep)}
+.kv .l-text .t em{font-family:var(--script);font-style:normal;color:var(--wine);font-size:1.25em}
+.kv .l-text .s{font-size:clamp(8px,1vw,11px);letter-spacing:.26em;text-transform:uppercase;color:var(--ink);font-weight:600;margin-top:6px}
+.kv .l-text .sedes{font-family:var(--cond);font-size:clamp(11px,1.5vw,17px);letter-spacing:.12em;color:var(--wine);margin-top:8px}
+.kv .tagx{position:absolute;font-size:10px;letter-spacing:.16em;text-transform:uppercase;font-weight:700;background:var(--gold);color:var(--ink);padding:3px 8px;border-radius:2px;opacity:0;transition:opacity .25s;pointer-events:none;white-space:nowrap}
+.kv .layer:hover ~ .tagx[data-for]{opacity:0}
+.kv.show-tags .tagx{opacity:1}
+.kv-notes{display:grid;gap:12px}
+.kv-notes .n{border-left:3px solid var(--gold);padding:2px 0 2px 14px;font-size:14px}
+.kv-notes .n b{display:block;font-family:var(--cond);font-size:20px;letter-spacing:.06em;color:var(--pine-deep);line-height:1}
+.kv-notes .toggle{margin-top:6px;align-self:flex-start;background:none;border:1.5px solid var(--pine);color:var(--pine);border-radius:3px;padding:8px 14px;font-size:12px;letter-spacing:.14em;text-transform:uppercase;font-weight:600}
+
+/* =====================================================================
+   09 ÓRBITA
+   ===================================================================== */
+#s9{padding-right:0}
+#s9 .inner{max-width:none;display:grid;grid-template-columns:1fr;align-items:center}
+.orbit-head{position:absolute;top:clamp(20px,4vh,40px);left:calc(var(--ribbon) + clamp(20px,4vw,64px));right:clamp(20px,4vw,64px);z-index:3;pointer-events:none}
+.orbit-head h2{font-size:clamp(32px,4.6vw,56px);margin:4px 0 4px}
+.orbit-head p{margin:0;font-size:13.5px;color:var(--cream-muted);max-width:52ch}
+.orbit-wrap{position:relative;width:min(88vh,92vw);height:min(88vh,92vw);margin:auto;margin-top:clamp(40px,7vh,80px)}
+@media (max-width:760px){.orbit-wrap{width:min(92vw,80vh);height:min(92vw,80vh);margin-top:120px}}
+.ring{position:absolute;inset:8%;border:1px dashed rgba(246,236,217,.22);border-radius:50%}
+.ring.r2{inset:22%;border-color:rgba(200,161,91,.22)}
+.center{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);z-index:2}
+.phone{width:240px;height:490px;border-radius:32px;background:#1a1a1a;padding:10px;box-shadow:0 30px 70px rgba(0,0,0,.5),0 0 0 2px rgba(200,161,91,.3);position:relative;transform-origin:center;transform:scale(var(--ps,.72))}
+.phone::before{content:"";position:absolute;top:16px;left:50%;transform:translateX(-50%);width:74px;height:20px;border-radius:12px;background:#000;z-index:3}
+.phone .screen{width:100%;height:100%;border-radius:24px;background:var(--pine-deep);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:14px;background-image:radial-gradient(ellipse at 50% 20%,rgba(200,161,91,.22),transparent 55%)}
+.phone .screen img{width:120px;height:auto}
+.phone .screen .k{font-size:10px;letter-spacing:.24em;text-transform:uppercase;color:var(--gold);font-weight:700}
+.phone .screen .b{margin-top:6px;background:var(--wine);color:var(--cream);font-size:10px;letter-spacing:.14em;text-transform:uppercase;font-weight:600;padding:9px 14px;border-radius:3px}
+.center::before{content:"";position:absolute;left:50%;top:50%;width:150%;height:150%;transform:translate(-50%,-50%);border-radius:50%;background:radial-gradient(circle,rgba(200,161,91,.22),transparent 60%);animation:halo 3.2s ease-in-out infinite;pointer-events:none}
+@keyframes halo{0%,100%{opacity:.5;transform:translate(-50%,-50%) scale(.9)}50%{opacity:1;transform:translate(-50%,-50%) scale(1.08)}}
+.nodes{position:absolute;inset:0;width:100%;height:100%;pointer-events:none;z-index:1;overflow:visible}
+.nodes line{stroke:rgba(200,161,91,.55);stroke-width:1.5}
+.nodes line.hi{stroke:var(--gold);stroke-width:2.5}
+.nodes circle.mid{fill:var(--pine-deep);stroke:var(--gold);stroke-width:1.5}
+.nodes circle.pulse{fill:var(--cream)}
+.center .cap{position:absolute;left:50%;transform:translateX(-50%);bottom:-8px;white-space:nowrap;font-size:10.5px;letter-spacing:.18em;text-transform:uppercase;color:var(--gold);font-weight:700;text-align:center}
+.center .cap a{color:var(--cream);text-decoration:underline;text-underline-offset:3px}
+.chip{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);background:var(--paper);color:var(--pine-deep);border:0;border-radius:3px;padding:8px 12px 7px;font-family:var(--cond);font-size:clamp(14px,1.7vw,22px);letter-spacing:.08em;line-height:1;box-shadow:0 8px 24px rgba(0,0,0,.35);white-space:nowrap;z-index:2;transition:background .2s,color .2s,box-shadow .2s;
+  background-image:radial-gradient(circle at 0 0,transparent 0 5px,var(--paper) 5.5px),radial-gradient(circle at 100% 0,transparent 0 5px,var(--paper) 5.5px)}
+.chip small{display:block;font-family:var(--sans);font-size:9px;letter-spacing:.14em;text-transform:uppercase;color:var(--wine);font-weight:700;margin-bottom:2px}
+.chip:hover,.chip.on{background:var(--gold);color:var(--ink);box-shadow:0 0 0 4px rgba(200,161,91,.35),0 8px 24px rgba(0,0,0,.35)}
+.chip:hover small,.chip.on small{color:var(--wine-deep)}
+.orbit-wrap.paused .chip{transition:background .2s,color .2s,box-shadow .2s}
+
+/* ventana de nicho */
+.win{position:fixed;top:0;right:0;bottom:0;width:min(560px,100vw);background:var(--paper);color:var(--ink);z-index:60;transform:translateX(104%);transition:transform .55s var(--ease);overflow:auto;box-shadow:-30px 0 80px rgba(0,0,0,.4);
+  background-image:radial-gradient(ellipse at 100% 0%,rgba(200,161,91,.18),transparent 42%)}
+.win.on{transform:none}
+.win .close{position:sticky;top:14px;float:right;margin:14px 16px 0 0;background:var(--pine-deep);color:var(--cream);border:0;border-radius:50%;width:38px;height:38px;font-size:18px;z-index:2}
+.win .body{padding:26px 30px 40px;clear:both}
+@media (max-width:600px){.win .body{padding:20px 20px 40px}}
+.win .num{background:none;border:0;padding:0;font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:var(--wine);font-weight:700}
+.win .num:hover{transform:none;box-shadow:none}
+.win h3{font-family:var(--cond);font-weight:400;font-size:clamp(34px,5vw,48px);line-height:.95;margin:6px 0 2px;color:var(--pine-deep);letter-spacing:.02em}
+.win .nicho{font-size:13px;color:var(--muted);margin-bottom:16px}
+.win .msg{background:var(--pine-deep);color:var(--cream);padding:20px 22px;border-left:4px solid var(--gold);font-family:var(--cond);font-size:clamp(26px,3.6vw,36px);line-height:1.02;border-radius:3px;text-wrap:balance}
+.win .msg em{font-family:var(--script);font-style:normal;color:var(--gold);font-size:1.25em}
+.win dl{margin:18px 0 0;display:grid;grid-template-columns:96px 1fr;gap:9px 12px;font-size:14px}
+.win dt{font-size:10.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--wine);font-weight:700;padding-top:3px}
+.win dd{margin:0}
+.win .pil{display:inline-block;background:var(--gold);color:var(--ink);font-size:10.5px;letter-spacing:.14em;text-transform:uppercase;font-weight:700;padding:3px 9px;border-radius:2px;margin-right:6px}
+.win .tags span{display:inline-block;font-size:10.5px;letter-spacing:.1em;text-transform:uppercase;font-weight:600;padding:3px 9px;border-radius:2px;background:var(--paper-2);border:1px solid var(--line);margin:0 6px 6px 0}
+.win h4{font-family:var(--cond);font-weight:400;font-size:22px;letter-spacing:.05em;margin:24px 0 10px;color:var(--pine-deep);line-height:1}
+.mocks{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+@media (max-width:520px){.mocks{grid-template-columns:1fr}}
+.ig{background:#fff;border:1px solid #E6DED0;border-radius:6px;overflow:hidden;font-family:var(--sans)}
+.ig .hd{display:flex;align-items:center;gap:8px;padding:8px 10px;font-size:11px;font-weight:600}
+.ig .hd i{width:24px;height:24px;border-radius:50%;background:var(--pine-deep);display:inline-block}
+.ig .art{aspect-ratio:1;background:var(--pine-deep);color:var(--cream);display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:14px;gap:6px;position:relative;overflow:hidden;
+  background-image:radial-gradient(ellipse at 85% 15%,rgba(200,161,91,.18),transparent 45%),repeating-linear-gradient(135deg,rgba(255,255,255,.03) 0 2px,transparent 2px 14px)}
+.ig .art::before{content:"";position:absolute;left:10px;top:0;bottom:0;width:8px;background:linear-gradient(90deg,var(--pine) 0 45%,transparent 45% 55%,var(--wine) 55%)}
+.ig .art .s{font-family:var(--script);font-size:30px;color:var(--gold);line-height:.9}
+.ig .art .m{font-family:var(--cond);font-size:17px;line-height:1;letter-spacing:.03em;text-wrap:balance}
+.ig .art .m em{font-family:var(--script);font-style:normal;color:var(--gold);font-size:1.25em}
+.ig .art .c{font-size:8.5px;letter-spacing:.16em;text-transform:uppercase;color:var(--cream-muted);margin-top:4px}
+.ig .cap{padding:8px 10px;font-size:11px;line-height:1.45;color:#333}
+.ig .cap b{font-weight:600}
+.wa{background:#EFE7DB;border-radius:6px;padding:12px;display:flex;flex-direction:column;gap:8px;font-family:var(--sans)}
+.wa .b{max-width:92%;background:#fff;border-radius:8px;padding:8px 10px;font-size:11.5px;line-height:1.45;color:#222;box-shadow:0 1px 1px rgba(0,0,0,.08);white-space:pre-line}
+.wa .b.me{align-self:flex-end;background:#DCF8C6}
+.wa .t{font-size:9px;color:#888;text-align:right;margin-top:2px}
+
+/* =====================================================================
+   10 ECOSISTEMA
+   ===================================================================== */
+.eco{display:grid;grid-template-columns:1.15fr .85fr;gap:clamp(20px,4vw,56px);align-items:center;margin-top:10px}
+@media (max-width:900px){.eco{grid-template-columns:1fr}}
+.eco-stamp .stamp-in{padding:10px;background-image:radial-gradient(ellipse at 50% 50%,rgba(200,161,91,.12),transparent 60%),repeating-linear-gradient(135deg,rgba(255,255,255,.025) 0 2px,transparent 2px 16px)}
+.eco svg{width:100%;height:auto;max-height:62vh;display:block}
+.eco .node{cursor:pointer;transition:transform .25s var(--ease)}
+.eco .node circle:first-child{fill:#FBF4E7;stroke:#C8A15B;stroke-width:2;transition:stroke-width .2s,fill .2s}
+.eco .node:hover circle:first-child,.eco .node.on circle:first-child{stroke-width:5;fill:#fff}
+.eco .node .lab{font-family:var(--cond);font-size:17px;letter-spacing:1.2px;fill:#F6ECD9}
+.eco .node .sub{font-family:var(--sans);font-size:8.5px;letter-spacing:1.5px;fill:#C8A15B;text-transform:uppercase}
+.eco path.base{fill:none;stroke:rgba(200,161,91,.45);stroke-width:2;stroke-dasharray:400;stroke-dashoffset:400;transition:stroke-dashoffset 1.3s var(--ease),stroke .2s}
+.eco path.base.on{stroke:#C8A15B}
+.slide.active .eco path.base{stroke-dashoffset:0}
+.eco path.flow{fill:none;stroke:#F6ECD9;stroke-width:2;stroke-dasharray:4 16;stroke-linecap:round;animation:flow 1.6s linear infinite;opacity:0;transition:opacity .4s 1.2s}
+.slide.active .eco path.flow{opacity:.9}
+@keyframes flow{to{stroke-dashoffset:-40}}
+.eco .core circle:nth-child(2){animation:corepulse 3s ease-in-out infinite;transform-origin:380px 280px}
+@keyframes corepulse{0%,100%{transform:scale(1)}50%{transform:scale(1.05)}}
+.eco-txt .item{border-left:3px solid var(--gold);padding:6px 0 6px 14px;margin-bottom:12px;font-size:14px;transition:background .2s;border-radius:0 4px 4px 0;cursor:default}
+.eco-txt .item.on{background:rgba(200,161,91,.16)}
+.eco-txt .item b{display:block;font-family:var(--cond);font-size:20px;letter-spacing:.05em;color:var(--pine-deep);line-height:1;margin-bottom:2px}
+
+/* =====================================================================
+   11 CIERRE
+   ===================================================================== */
+#s11 .inner{align-items:center;text-align:center;position:relative}
+#s11 .sello{transform:rotate(-2.5deg) scale(.9)}
+#s11 .lockup .ey{font-size:clamp(10px,1.2vw,13px)}
+#s11 .lockup .l1{font-size:clamp(54px,9vw,104px)}
+#s11 .lockup .y{font-size:clamp(18px,2.4vw,26px)}#s11 .lockup .fin{font-size:clamp(20px,2.8vw,30px)}#s11 .lockup .ano{font-size:clamp(48px,8vw,90px)}
+#s11 .title{font-family:var(--cond);font-size:clamp(44px,8vw,110px);line-height:.9;color:var(--cream);margin-top:22px}
+#s11 .title em{font-family:var(--script);font-style:normal;color:var(--gold);font-size:1.25em}
+#s11 .last{margin-top:18px;font-size:clamp(15px,1.6vw,19px);color:var(--cream-muted);max-width:44ch}
+#s11 .last b{color:var(--cream);font-weight:600}
+#s11 .ctas{display:flex;gap:12px;margin-top:26px;flex-wrap:wrap;justify-content:center}
+.btn{display:inline-flex;align-items:center;gap:8px;border:0;border-radius:3px;padding:13px 22px;background:var(--wine);color:var(--cream);font-weight:600;font-size:13px;letter-spacing:.12em;text-transform:uppercase;text-decoration:none;transition:transform .15s,background .15s}
+.btn:hover{background:var(--wine-deep);transform:translateY(-1px)}
+.btn.ghost{background:transparent;border:1.5px solid var(--cream-muted);color:var(--cream)}
+.btn.ghost:hover{background:rgba(246,236,217,.08)}
+
+/* =====================================================================
+   NAVEGACIÓN
+   ===================================================================== */
+.bar{position:fixed;left:0;right:0;bottom:0;height:var(--bar);z-index:40;display:grid;grid-template-columns:auto 1fr auto;align-items:center;gap:14px;padding:0 18px 0 calc(var(--ribbon) + 18px);
+  background:rgba(22,53,41,.96);color:var(--cream);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);border-top:1px solid rgba(200,161,91,.25)}
+@media (max-width:760px){.bar{padding-left:calc(14px + 12px);gap:8px}}
+.bar .ctr{font-family:var(--cond);font-size:18px;letter-spacing:.08em;font-variant-numeric:tabular-nums;color:var(--gold);min-width:64px}
+.bar .ctr small{color:var(--cream-muted);font-size:14px}
+.prog{display:flex;gap:4px;align-items:center;height:100%}
+.prog button{flex:1;height:6px;border:0;border-radius:3px;background:rgba(246,236,217,.18);padding:0;position:relative;transition:background .3s}
+.prog button.done{background:var(--gold)}
+.prog button.cur{background:var(--cream)}
+.prog button::after{content:attr(data-name);position:absolute;bottom:14px;left:50%;transform:translateX(-50%);font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--cream);background:var(--pine-deep);padding:4px 8px;border-radius:2px;white-space:nowrap;opacity:0;pointer-events:none;transition:opacity .2s;border:1px solid rgba(200,161,91,.4)}
+.prog button:hover::after{opacity:1}
+.bar .ctl{display:flex;gap:6px;align-items:center}
+.bar .ctl button{width:36px;height:36px;border-radius:50%;border:1.5px solid rgba(246,236,217,.35);background:transparent;color:var(--cream);font-size:16px;display:grid;place-items:center;transition:background .2s,border-color .2s}
+.bar .ctl button:hover{background:rgba(246,236,217,.12);border-color:var(--gold)}
+.bar .ctl button:disabled{opacity:.3;cursor:default}
+.bar .ctl .idx{width:auto;padding:0 12px;border-radius:18px;font-family:var(--cond);font-size:15px;letter-spacing:.1em}
+.sec{position:fixed;top:14px;right:18px;z-index:40;font-size:10.5px;letter-spacing:.2em;text-transform:uppercase;color:var(--cream);background:rgba(22,53,41,.85);padding:6px 12px;border-radius:2px;border:1px solid rgba(200,161,91,.4);font-weight:600}
+.light .sec{color:var(--cream)}
+.menu{position:fixed;right:18px;bottom:calc(var(--bar) + 12px);z-index:45;background:var(--pine-deep);color:var(--cream);border:1px solid rgba(200,161,91,.4);border-radius:6px;padding:10px;display:grid;gap:2px;min-width:250px;transform:translateY(10px);opacity:0;pointer-events:none;transition:.25s;box-shadow:0 20px 50px rgba(0,0,0,.4)}
+.menu.on{opacity:1;transform:none;pointer-events:auto}
+.menu button{background:none;border:0;text-align:left;padding:8px 10px;border-radius:3px;font-size:13px;color:var(--cream);display:grid;grid-template-columns:28px 1fr;gap:6px;align-items:center}
+.menu button b{font-family:var(--cond);color:var(--gold);letter-spacing:.08em;font-weight:400;font-size:15px}
+.menu button:hover,.menu button.cur{background:rgba(246,236,217,.1)}
+.shade{position:fixed;inset:0;background:rgba(22,53,41,.55);z-index:55;opacity:0;pointer-events:none;transition:opacity .4s}
+.shade.on{opacity:1;pointer-events:auto}
+</style>
+
+<div class="ribbon" aria-hidden="true"></div>
+<div class="sec" id="secName">Portada</div>
+
+<div class="stage" id="stage">
+
+<!-- ============================ 01 PORTADA ============================ -->
+<section class="slide dark active" id="s1" data-name="Portada" data-sec="Portada">
+  <div class="inner">
+    <img class="logo" src="data:image/png;base64,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" alt="The Lounge" data-a style="--i:0">
+    <div class="sello"><div class="lockup">
+      <span class="ey">Paquete corporativo</span>
+      <span class="l1" id="l1"></span>
+      <span class="l2"><span class="y">y</span><span class="fin">Fin de</span><span class="ano">Año</span></span>
+    </div></div>
+    <div class="title" data-a style="--i:6">Este año, celebra <em>arriba.</em></div>
+    <div class="sub" data-a style="--i:7">Campaña de temporada · Navidad y Fin de Año 2026</div>
+    <div class="foot" data-a style="--i:8"><b>The Lounge Panamá</b> · Marbella · Obarrio · San Francisco<br>Propuesta creativa · Lego Marketing</div>
+  </div>
+</section>
+
+<!-- ============================ 02 CONTEXTO ============================ -->
+<section class="slide light" id="s2" data-name="Contexto" data-sec="Contexto">
+  <div class="inner"><div class="split">
+    <div>
+      <span class="eyebrow" data-a style="--i:0">Contexto</span>
+      <h2 data-a style="--i:1">Diciembre en la <em>zona bancaria</em></h2>
+      <p class="lead" data-a style="--i:2">Casi todas las oficinas de la ciudad celebran en las mismas tres semanas.</p>
+      <div class="facts">
+        <div class="fact" data-a style="--i:3"><span><b>Dónde lo hacen hoy:</b> en un restaurante compartido, en el salón de un hotel o en la propia oficina.</span></div>
+        <div class="fact" data-a style="--i:4"><span><b>Lo que les cuesta:</b> protocolo, descorche, horario ajeno y cero privacidad.</span></div>
+        <div class="fact" data-a style="--i:5"><span><b>Lo que ya tiene The Lounge:</b> paquetes Premium y Diamond en tres sedes, para grupos de 15 a 150.</span></div>
+      </div>
+    </div>
+    <div data-a="scale" style="--i:2">
+      <div class="cal" id="cal"></div>
+      <div class="cal-key"><span><i style="background:var(--wine)"></i>Fiestas corporativas registradas 2025</span><span><i style="background:var(--pine-deep)"></i>Pico tras el pago del décimo</span></div>
+    </div>
+  </div></div>
+</section>
+
+<!-- ============================ 03 OPORTUNIDAD ============================ -->
+<section class="slide light" id="s3" data-name="Oportunidad" data-sec="Oportunidad">
+  <div class="inner">
+    <span class="eyebrow" data-a style="--i:0">Oportunidad</span>
+    <h2 data-a style="--i:1">Nadie les habla en <em>su idioma</em></h2>
+    <p class="lead" data-a style="--i:2">Los hoteles venden la misma "fiesta de fin de año corporativa" a todos por igual. Panamá tiene gremios enteros que celebran igual entre sí y distinto de los demás.</p>
+    <div class="nums">
+      <div class="num" data-a style="--i:3" tabindex="0"><b data-count="400"><small>+</small>0</b><span>agentes inmobiliarios en el MLS de ACOBIR</span><i>Fuente: ACOBIR, 2025</i></div>
+      <div class="num" data-a style="--i:4" tabindex="0"><b data-count="311">0</b><span>firmas de abogados registradas como agentes residentes</span><i>Fuente: registro de agentes residentes</i></div>
+      <div class="num" data-a style="--i:5" tabindex="0"><b data-count="192">0</b><span>sedes de empresas multinacionales, unas 52 personas por sede</span><i>Fuente: MICI, 2026</i></div>
+      <div class="num" data-a style="--i:6" tabindex="0"><b data-count="40">0</b><span>bancos en la Asociación Bancaria, a dos cuadras de cada Lounge</span><i>Fuente: ABP, 2025</i></div>
+    </div>
+    <p class="note" data-a style="--i:7">Cada uno tiene su propio vocabulario, su propio decisor y su propio tamaño de fiesta.</p>
+  </div>
+</section>
+
+<!-- ============================ 04 OBJETIVO ============================ -->
+<section class="slide light" id="s4" data-name="Objetivo" data-sec="Objetivo">
+  <div class="inner">
+    <span class="eyebrow" data-a style="--i:0">Objetivo de comunicación</span>
+    <h2 data-a style="--i:1">Que cada equipo cotice <em>el suyo</em></h2>
+    <p class="lead" data-a style="--i:2">Principal: generar cotizaciones y reservas de los paquetes navideños a través del cotizador y WhatsApp.</p>
+    <div class="line3">
+      <div class="st" data-a style="--i:3"><span class="k">Sede</span><span class="v">Marbella · Obarrio · San Francisco</span><span class="d">Cada nicho llega a la sede que le corresponde por tamaño.</span></div>
+      <div class="arrow" data-a style="--i:4">→</div>
+      <div class="st" data-a style="--i:5"><span class="k">Personas</span><span class="v">15 a 40 · 80 a 150</span><span class="d">Grupos medianos en Marbella y Obarrio; grandes en San Francisco.</span></div>
+      <div class="arrow" data-a style="--i:6">→</div>
+      <div class="st" data-a style="--i:7"><span class="k">Paquete</span><span class="v">Premium · Diamond</span><span class="d">La diferencia es la mesa: clásica o de gala.</span></div>
+    </div>
+    <div class="objs">
+      <div class="obj" data-a style="--i:8"><b>Secundario 1</b>Llenar Marbella y Obarrio con equipos de 15 a 40 personas entre semana.</div>
+      <div class="obj" data-a style="--i:9"><b>Secundario 2</b>Posicionar San Francisco como la sala de alto nivel para grupos de 80 a 150.</div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================ 05 BIG IDEA ============================ -->
+<section class="slide dark" id="s5" data-name="Big Idea" data-sec="Idea creativa">
+    <div class="inner">
+    <span class="eyebrow" data-a style="--i:0">Big Idea</span>
+    <div class="big" data-a style="--i:1">Un mensaje madre,<br>doce <em>dialectos.</em></div>
+    <p class="idea" data-a style="--i:2">The Lounge no le habla "a las empresas". Le habla al broker, al socio, al gerente de área, <b>en su propio idioma</b>. Y todos terminan en el mismo lugar: el cotizador.</p>
+    <p class="idea" data-a style="--i:3" style="--i:3;margin-top:14px"><span class="lbl">Mensaje madre</span><br><span style="font-family:var(--cond);font-size:1.6em;letter-spacing:.02em">Este año, celebra arriba.</span></p>
+  </div>
+</section>
+
+<!-- ============================ 06 RACIONAL ============================ -->
+<section class="slide dark" id="s6" data-name="Racional" data-sec="Racional">
+  <div class="inner">
+    <span class="eyebrow" data-a style="--i:0">Racional creativo</span>
+    <h2 data-a style="--i:1">Por qué <em>funciona</em></h2>
+    <div class="rac">
+      <div class="stamp" data-a style="--i:2"><div class="stamp-in"><span class="k">Insight</span><span class="t">Celebran en lugares que no son suyos</span><span class="d">Restaurante compartido, salón con protocolo, la oficina de siempre.</span><span class="x">Dato: las fiestas corporativas de 2025 se concentraron entre el 27 de noviembre y el 19 de diciembre.</span></div></div>
+      <div class="stamp" data-a style="--i:3"><div class="stamp-in"><span class="k">Marca</span><span class="t">A tu hora, a tu manera, sin nadie encima</span><span class="d">Un pin por reserva, sin cámaras adentro, sin descorche, todo incluido.</span><span class="x">Los cuatro pilares se vuelven cuatro maneras de decir lo mismo: la llave, la privacidad, el todo incluido y el 24/7.</span></div></div>
+      <div class="stamp" data-a style="--i:4"><div class="stamp-in"><span class="k">Audiencia</span><span class="t">Quien decide la fiesta de su equipo</span><span class="d">Broker dueño, socio director, gerente de área, HR regional.</span><span class="x">Decide rápido, en su vocabulario, y compara contra el hotel.</span></div></div>
+      <div class="stamp" data-a style="--i:5"><div class="stamp-in"><span class="k">Momento</span><span class="t">Se decide en octubre y noviembre</span><span class="d">Se celebra en tres semanas de diciembre. La ventana es corta.</span><span class="x">La campaña sale la primera semana de octubre y aprieta hasta el 30 de noviembre.</span></div></div>
+    </div>
+    <p class="note" data-a style="--i:6">Pasa el cursor por cada estampilla.</p>
+  </div>
+</section>
+
+<!-- ============================ 07 KEY VISUAL ============================ -->
+<section class="slide light" id="s7" data-name="Key Visual" data-sec="Key Visual">
+  <div class="inner"><div class="kv-wrap">
+    <div class="kv" id="kv" data-a="scale" style="--i:0">
+      <div class="layer l-bg" data-depth="4"></div>
+      <div class="layer l-ribbon" data-depth="10"></div>
+      <div class="layer l-stamp" data-depth="18"><div class="sello"><div class="lockup"><span class="ey">Paquete corporativo</span><span class="l1">Navideño</span><span class="l2"><span class="y">y</span><span class="fin">Fin de</span><span class="ano">Año</span></span></div></div></div>
+      <div class="layer l-key" data-depth="30">
+        <svg viewBox="0 0 320 150" aria-label="Llave con etiqueta navideña">
+          <g fill="#C8A15B">
+            <path fill-rule="evenodd" d="M62 75a44 44 0 1 1 88 0a44 44 0 1 1-88 0zm26 0a18 18 0 1 0 36 0a18 18 0 1 0-36 0z"/>
+            <rect x="146" y="66" width="150" height="18" rx="4"/>
+            <rect x="262" y="84" width="12" height="26" rx="2"/><rect x="284" y="84" width="12" height="34" rx="2"/><rect x="240" y="84" width="10" height="18" rx="2"/>
+          </g>
+          <g transform="translate(150 20) rotate(14)">
+            <path d="M0 0h74a6 6 0 0 1 6 6v36a6 6 0 0 1-6 6H0z" fill="#F6ECD9" stroke="#6D1B1B" stroke-width="2"/>
+            <circle cx="12" cy="24" r="4" fill="none" stroke="#6D1B1B" stroke-width="2"/>
+            <text x="26" y="20" font-family="Bebas Neue, Arial Narrow, sans-serif" font-size="13" fill="#1F4A3A" letter-spacing="1">CELEBRA</text>
+            <text x="26" y="36" font-family="Bebas Neue, Arial Narrow, sans-serif" font-size="13" fill="#6D1B1B" letter-spacing="1">ARRIBA</text>
+          </g>
+          <path d="M112 44c14-18 30-24 42-24" fill="none" stroke="#6D1B1B" stroke-width="2" stroke-linecap="round"/>
+        </svg>
+      </div>
+      <div class="layer l-text" data-depth="8"><div class="t">Este año, celebra <em>arriba.</em></div><div class="s">Desayuno · Brunch · Almuerzo · Cena</div><div class="sedes">Marbella | Obarrio | San Francisco</div></div>
+      <span class="tagx" style="left:6%;top:50%">Cinta pino y vino</span>
+      <span class="tagx" style="right:6%;top:12%">Sello con lockup</span>
+      <span class="tagx" style="right:6%;top:52%">La llave: el pin de acceso</span>
+      <span class="tagx" style="left:30%;bottom:5%">Mensaje madre</span>
+    </div>
+    <div class="kv-notes">
+      <span class="eyebrow" data-a style="--i:1">Key Visual</span>
+      <h2 data-a style="--i:2" style="font-size:clamp(38px,4.8vw,64px)">La <em>llave</em></h2>
+      <div class="n" data-a style="--i:3"><b>La idea</b>Todo el año, cada equipo trabaja para otros. Esta Navidad, The Lounge les entrega la llave: un espacio que es suyo por unas horas, a su manera.</div>
+      <div class="n" data-a style="--i:4"><b>Por qué una llave</b>Es literal: cada reserva recibe un pin de acceso. Nadie más entra, nadie los apura. La llave es la promesa de la marca hecha objeto.</div>
+      <div class="n" data-a style="--i:5"><b>Cómo se ve</b>La llave dorada al centro, sobre el sello y la cinta que ya conocen de los paquetes. Abajo, la frase que lo resume: Este año, celebra arriba.</div>
+      <div class="n" data-a style="--i:6"><b>Cómo cambia por nicho</b>La etiqueta de la llave dice algo distinto para cada sector: Confidencial para la firma, Meta cumplida para ventas, Sin guardia para la clínica.</div>
+      <button class="toggle" id="kvTags" data-a style="--i:7">Ver anatomía</button>
+    </div>
+  </div></div>
+</section>
+
+<!-- ============================ 09 ÓRBITA ============================ -->
+<section class="slide dark" id="s9" data-name="Sistema en órbita" data-sec="Mensajes y piezas">
+  <div class="orbit-head">
+    <span class="eyebrow">Mensajería y aplicaciones</span>
+    <h2>Todo gira alrededor del <em>cotizador</em></h2>
+    <p>El cotizador al centro. Doce nichos conectados a él. Toca uno para ver su mensaje, el porqué y sus piezas.</p>
+  </div>
+  <div class="inner">
+    <div class="orbit-wrap" id="orbit">
+      <div class="ring"></div><div class="ring r2"></div>
+      <svg class="nodes" id="nodes" aria-hidden="true"></svg>
+      <div class="center">
+        <div class="phone"><div class="screen"><img src="data:image/png;base64,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" alt="The Lounge"><span class="k">Cotizador navideño</span><span class="b">Cotiza tu evento →</span></div></div>
+        <div class="cap"><a href="the-lounge-cotizador-navidad.html" target="_blank" rel="noopener">Abrir el cotizador</a></div>
+      </div>
+      <div id="chips"></div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================ 10 ECOSISTEMA ============================ -->
+<section class="slide light" id="s10" data-name="Ecosistema" data-sec="Ecosistema">
+  <div class="inner">
+    <span class="eyebrow" data-a style="--i:0">Ecosistema de campaña</span>
+    <h2 data-a style="--i:1">Todo termina en el <em>cotizador</em></h2>
+    <div class="eco">
+      <div class="stamp eco-stamp" data-a="scale" style="--i:2"><div class="stamp-in">
+      <svg viewBox="0 0 760 560" id="ecoSvg" role="img" aria-label="Canales que llevan al cotizador">
+        <defs>
+          <radialGradient id="glow" cx="50%" cy="50%" r="50%"><stop offset="0" stop-color="#C8A15B" stop-opacity=".45"/><stop offset="1" stop-color="#C8A15B" stop-opacity="0"/></radialGradient>
+          <filter id="soft"><feGaussianBlur stdDeviation="6"/></filter>
+        </defs>
+        <circle cx="380" cy="280" r="250" fill="url(#glow)"/>
+        <circle cx="380" cy="280" r="150" fill="none" stroke="rgba(246,236,217,.12)" stroke-dasharray="3 9"/>
+        <circle cx="380" cy="280" r="215" fill="none" stroke="rgba(246,236,217,.08)" stroke-dasharray="3 9"/>
+        <g class="links">
+          <path class="base" data-k="ig" d="M150 118 C 230 150, 300 200, 336 246"/><path class="flow" d="M150 118 C 230 150, 300 200, 336 246"/>
+          <path class="base" data-k="li" d="M610 118 C 530 150, 460 200, 424 246"/><path class="flow" d="M610 118 C 530 150, 460 200, 424 246"/>
+          <path class="base" data-k="em" d="M92 330 C 180 320, 260 300, 322 286"/><path class="flow" d="M92 330 C 180 320, 260 300, 322 286"/>
+          <path class="base" data-k="gr" d="M668 330 C 580 320, 500 300, 438 286"/><path class="flow" d="M668 330 C 580 320, 500 300, 438 286"/>
+          <path class="base" data-k="wa" d="M380 470 C 380 420, 380 370, 380 336"/><path class="flow" d="M380 470 C 380 420, 380 370, 380 336"/>
+        </g>
+        <g class="core"><circle cx="380" cy="280" r="74" fill="#C8A15B" opacity=".25" filter="url(#soft)"/><circle cx="380" cy="280" r="60" fill="#163529" stroke="#C8A15B" stroke-width="2.5"/><circle cx="380" cy="280" r="52" fill="none" stroke="#F6ECD9" stroke-width="1" stroke-dasharray="2 5"/>
+          <text x="380" y="272" text-anchor="middle" font-family="Bebas Neue, Arial Narrow, sans-serif" font-size="20" fill="#F6ECD9" letter-spacing="1.5">COTIZADOR</text>
+          <text x="380" y="292" text-anchor="middle" font-family="Bebas Neue, Arial Narrow, sans-serif" font-size="20" fill="#F6ECD9" letter-spacing="1.5">NAVIDEÑO</text>
+          <text x="380" y="308" text-anchor="middle" font-family="Poppins, sans-serif" font-size="7.5" fill="#C8A15B" letter-spacing="2">EN DOS MINUTOS</text></g>
+        <g class="node" data-k="ig" transform="translate(150 118)"><circle r="40"/><rect x="-13" y="-13" width="26" height="26" rx="7" fill="none" stroke="#6D1B1B" stroke-width="2.5"/><circle r="6" fill="none" stroke="#6D1B1B" stroke-width="2.5"/><circle cx="8" cy="-8" r="1.8" fill="#6D1B1B"/><text y="60" text-anchor="middle" class="lab">Instagram · Meta</text><text y="74" text-anchor="middle" class="sub">Orgánico y pauta por radio</text></g>
+        <g class="node" data-k="li" transform="translate(610 118)"><circle r="40"/><text y="8" text-anchor="middle" font-family="Poppins, sans-serif" font-weight="700" font-size="22" fill="#6D1B1B">in</text><text y="60" text-anchor="middle" class="lab">LinkedIn</text><text y="74" text-anchor="middle" class="sub">A quien decide, por nicho</text></g>
+        <g class="node" data-k="em" transform="translate(92 330)"><circle r="40"/><rect x="-15" y="-10" width="30" height="20" rx="3" fill="none" stroke="#6D1B1B" stroke-width="2.5"/><path d="M-15 -8 L0 3 L15 -8" fill="none" stroke="#6D1B1B" stroke-width="2.5"/><text y="60" text-anchor="middle" class="lab">Email de temporada</text><text y="74" text-anchor="middle" class="sub">La pieza del cliente</text></g>
+        <g class="node" data-k="gr" transform="translate(668 330)"><circle r="40"/><path d="M-14 -12 h10 l-2 12 a3 3 0 0 1 -6 0 z M4 -12 h10 l-2 12 a3 3 0 0 1 -6 0 z M-9 2 v10 M9 2 v10 M-13 12 h8 M5 12 h8" fill="none" stroke="#6D1B1B" stroke-width="2.2" stroke-linejoin="round"/><text y="60" text-anchor="middle" class="lab">Gremios y cámaras</text><text y="74" text-anchor="middle" class="sub">Hospedar su brindis</text></g>
+        <g class="node" data-k="wa" transform="translate(380 470)"><circle r="40"/><path d="M-14 -4 a14 12 0 1 1 6 10 l-9 4 l2 -7 a12 12 0 0 1 1 -7 z" fill="none" stroke="#1FA855" stroke-width="2.5" stroke-linejoin="round"/><text y="60" text-anchor="middle" class="lab">WhatsApp</text><text y="74" text-anchor="middle" class="sub">Donde se cierra</text></g>
+      </svg>
+      </div></div>
+      <div class="eco-txt">
+        <div class="item" data-k="ig" data-a style="--i:3"><b>Instagram y Meta</b>Reels y posts con el sistema de nicho; pauta con radio cerrado en Marbella, Obarrio, San Francisco, Costa del Este y Punta Pacífica.</div>
+        <div class="item" data-k="li" data-a style="--i:4"><b>LinkedIn</b>El mensaje de cada nicho directo a su decisor: brokers, socios, HR regional, gerentes de área.</div>
+        <div class="item" data-k="em" data-a style="--i:5"><b>Email de temporada</b>La pieza que el cliente ya tiene, con el botón "Cotiza tu evento" apuntando al cotizador.</div>
+        <div class="item" data-k="gr" data-a style="--i:6"><b>Gremios y cámaras</b>San Francisco como sede del brindis del gremio, a cambio de presencia y beneficio para sus miembros. Relación, no pauta.</div>
+        <div class="item" data-k="wa" data-a style="--i:7"><b>WhatsApp</b>El cotizador arma el mensaje con sede, paquete, personas y estimado. El equipo solo confirma.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================ 11 CIERRE ============================ -->
+<section class="slide dark" id="s11" data-name="Cierre" data-sec="Cierre">
+  <div class="inner">
+    <div class="sello" data-a="scale" style="--i:0"><div class="lockup"><span class="ey">Paquete corporativo</span><span class="l1">Navideño</span><span class="l2"><span class="y">y</span><span class="fin">Fin de</span><span class="ano">Año</span></span></div></div>
+    <div class="title" data-a style="--i:2">Este año, celebra <em>arriba.</em></div>
+    <p class="last" data-a style="--i:3"><b>Doce campañas listas, un solo destino.</b><br>La decisión de cuáles salen es de ustedes.</p>
+    <div class="ctas" data-a style="--i:4">
+      <a class="btn" href="the-lounge-cotizador-navidad.html" target="_blank" rel="noopener">Probar el cotizador</a>
+      <button class="btn ghost" id="goOrbit" type="button">Volver a la órbita</button>
+    </div>
+  </div>
+</section>
+
+</div>
+
+<!-- ventana de nicho -->
+<div class="shade" id="shade"></div>
+<aside class="win" id="win" aria-hidden="true">
+  <button class="close" id="winClose" aria-label="Cerrar">✕</button>
+  <div class="body" id="winBody"></div>
+</aside>
+
+<!-- navegación -->
+<div class="bar">
+  <div class="ctr"><span id="ctrCur">01</span><small> / <span id="ctrTot">11</span></small></div>
+  <div class="prog" id="prog"></div>
+  <div class="ctl">
+    <button class="idx" id="idxBtn" type="button" aria-label="Índice">Índice</button>
+    <button id="prevBtn" type="button" aria-label="Anterior">←</button>
+    <button id="nextBtn" type="button" aria-label="Siguiente">→</button>
+  </div>
+</div>
+<div class="menu" id="menu"></div>
+
+<script>
+/* =====================================================================
+   DATOS · doce campañas aprobadas
+   ===================================================================== */
+const CAMPS = [
+ {n:'01',nombre:'La llave es tuya',key:'Llave',nicho:'Brokers y agencias inmobiliarias',pilar:'La llave',msg:'Todo el año entregaste llaves. Esta Navidad, <em>la llave</em> es tuya.',
+  insight:'El broker vive de entregar llaves a otros. Diciembre es temporada de cierres y de reconocer a los top producers, pero la fiesta suele terminar en un restaurante compartido.',
+  porque:'Por una noche, la llave (el pin de acceso) es del equipo: espacio privado, LED para proyectar el ranking del año y karaoke para celebrarlo.',
+  ancla:'Obarrio Premium (15 a 25) · Marbella Diamond (30 a 40) · cena',registro:'Enérgico y de resultados. Cierres, exclusivas, top producers.',visual:'Una llave de latón con etiqueta navideña colgando de la puerta del Lounge; adentro, el ranking en pantalla.',
+  ig:{s:'La llave',m:'Todo el año entregaste llaves. Esta Navidad, <em>la llave</em> es tuya.',cap:'Cierra el año como cierras ventas: en privado, con tu equipo y el ranking en pantalla. Cotiza el cierre de tu oficina en dos minutos.'},
+  wa:'Hola The Lounge 👋 Soy Andrea, de KW Obarrio. Somos 22 agentes y queremos el cierre de año el jueves 11 de diciembre en la noche.'},
+ {n:'02',nombre:'Estrictamente confidencial',key:'Confidencial',nicho:'Firmas de abogados boutique',pilar:'Privacidad',msg:'Su cierre de año, bajo <em>estricta</em> confidencialidad.',
+  insight:'Una firma no celebra en cualquier lado: hay socios, clientes y una reputación que cuidar. Los salones y restaurantes exponen; la firma quiere puerta cerrada.',
+  porque:'Un solo acceso, sin cámaras ni micrófonos adentro, menú Diamond de gala y tres horas que le pertenecen solo a la firma.',
+  ancla:'Marbella Diamond (30 a 40) · Obarrio Diamond (15 a 25) · almuerzo o cena',registro:'Elegante y sobrio, de usted. Confidencial, bajo reserva, sin terceros.',visual:'Sobre de manila con sello CONFIDENCIAL en vino que al abrirse muestra la mesa Diamond servida.',
+  ig:{s:'Confidencial',m:'Su cierre de año, bajo <em>estricta</em> confidencialidad.',cap:'Una sola puerta, sin cámaras adentro, menú de gala y tres horas solo para la firma. Reserve el almuerzo de fin de año de su equipo.'},
+  wa:'Buenas tardes, The Lounge. Le escribo de Arias & Asociados. Somos 32 personas y buscamos un almuerzo navideño privado el viernes 12 de diciembre.'},
+ {n:'03',nombre:'A la altura de su sede',key:'Sede',nicho:'Multinacionales SEM y equipos regionales',pilar:'Todo incluido',msg:'Su equipo regional merece una sede <em>a la altura.</em>',
+  insight:'Las 192 sedes de empresas multinacionales celebran con presupuesto de HR y comparan contra hoteles. Lo que les pesa del hotel es el protocolo y sentirse un evento más de la noche.',
+  porque:'La sala de alto nivel de Panamá para ustedes solos: LED de 15 m², terraza, dos bares, valet, host y operador AV incluidos, cinco horas sin descorche.',
+  ancla:'San Francisco Diamond (80 a 150) · cena',registro:'Elevado, bilingüe donde haga falta. Juega con sede de empresa y sede San Francisco.',visual:'El LED de San Francisco con el nombre de la empresa y las banderas del equipo; el brindis en la terraza.',
+  ig:{s:'Headquarters',m:'Su equipo regional merece una sede <em>a la altura.</em>',cap:'A headquarters-level celebration, for your team only: LED wall, terrace, full service. Request a quote for your year-end party.'},
+  wa:'Hi The Lounge! This is Laura from People & Culture at a regional HQ in Costa del Este. We are about 110 people and want a year-end dinner on December 5.'},
+ {n:'04',nombre:'Cobertura total',key:'Cobertura',nicho:'Corredores de seguros y aseguradoras',pilar:'Todo incluido',msg:'Fin de año con <em>cobertura</em> total: espacio, catering, servicio y privacidad incluidos.',
+  insight:'El sector vive de cubrir riesgos. Organizar una fiesta es puro riesgo logístico, y las aseguradoras ya agasajan a sus corredores en lounges de la ciudad.',
+  porque:'Un paquete que cubre todo: espacio, catering, servicio y privacidad. Cero siniestros de logística.',
+  ancla:'Agencias: Obarrio o Marbella Premium (15 a 40) · Aseguradoras con corredores: San Francisco Diamond (80 a 150)',registro:'Profesional con humor de gremio: póliza, cobertura, prima, siniestro.',visual:'Una póliza de celebración diagramada como documento oficial con la lista de coberturas y sello de The Lounge.',
+  ig:{s:'Póliza',m:'Fin de año con <em>cobertura</em> total.',cap:'Espacio, catering, servicio y privacidad incluidos. Cero siniestros de logística. Cotiza tu póliza de fin de año.'},
+  wa:'Hola The Lounge, soy Ricardo de una corredora de seguros en Calle 50. Somos 18 y queremos un after office navideño el jueves 4 de diciembre.'},
+ {n:'05',nombre:'Cuadra solo',key:'Cuadra',nicho:'Firmas contables, auditoría y consultoría',pilar:'Todo incluido',msg:'El único cierre de diciembre que <em>cuadra</em> solo.',
+  insight:'Diciembre es cierre fiscal: el equipo que cuadra los números de todos no tiene tiempo para cuadrar una fiesta. Comparan precio por persona y quieren cero sorpresas.',
+  porque:'Precio por persona claro, todo adentro, tres horas privadas antes del cierre. Sin descorche ni cargos escondidos.',
+  ancla:'Obarrio Premium (15 a 25) · Marbella Premium (30 a 40) · almuerzo de viernes',registro:'Profesional, preciso, con guiño numérico: cuadrar, conciliar, cerrar.',visual:'Una hoja de cálculo navideña donde cada línea es un beneficio y el total dice Cuadra.',
+  ig:{s:'Cuadra',m:'El único cierre de diciembre que <em>cuadra</em> solo.',cap:'Precio por persona claro, todo incluido, tres horas privadas. Cotiza y compruébalo por persona.'},
+  wa:'Hola The Lounge. Soy Patricia, de una firma de auditoría en Obarrio. Somos 24 y queremos un almuerzo navideño el viernes 5 de diciembre.'},
+ {n:'06',nombre:'La de tu equipo',key:'Equipo',nicho:'Áreas y sucursales de bancos',pilar:'La llave',msg:'La fiesta del banco es de todos. <em>Esta</em> es la de tu equipo.',
+  insight:'El banco hace su fiesta grande en un hotel, pero cada área quiere su propio momento con su gente y lo termina pagando de bolsillo en un bar. Las sedes están a dos cuadras.',
+  porque:'La celebración del equipo, privada, a pasos de la oficina, con la llave en manos del jefe de área. Un jueves después de las cinco.',
+  ancla:'Obarrio Premium (15 a 25) · Marbella Premium (30 a 40) · after office de jueves',registro:'Cercano y práctico. Habla al gerente de área, no al banco.',visual:'Mapa de la zona bancaria con la distancia a pie desde cada torre hasta el Lounge: a cuatro minutos de tu escritorio.',
+  ig:{s:'A 4 minutos',m:'La fiesta del banco es de todos. <em>Esta</em> es la de tu equipo.',cap:'A cuatro minutos de tu escritorio, privada y con la llave en tu mano. Cotiza la de tu equipo en dos minutos.'},
+  wa:'Hola The Lounge, soy Jorge, gerente de un área de banca en Calle 50. Somos 20 y queremos un after office navideño el jueves 11 de diciembre.'},
+ {n:'07',nombre:'Sin cambios',key:'Sin cambios',nicho:'Agencias creativas, tech y startups',pilar:'La llave',msg:'La única entrega de diciembre <em>sin</em> cambios.',
+  insight:'Agencias y equipos tech cierran el año agotados de revisiones y clientes encima. Quieren una noche donde nadie pida cambios, con música alta, billar y karaoke.',
+  porque:'Un espacio privado que es de ellos toda la noche: sin cliente, sin revisiones, sin descorche. Traen su playlist y su bebida, o lo delegan todo.',
+  ancla:'Obarrio Premium (15 a 25) · Marbella (30 a 40) · cena de noche',registro:'Divertido, con jerga de oficio: brief, entrega, deploy, versión final.',visual:'Un comentario de revisión tachado en vino y, debajo, el Lounge con luces y karaoke. Cierre: Aprobado sin cambios.',
+  ig:{s:'Aprobado',m:'La única entrega de diciembre <em>sin</em> cambios.',cap:'Sin cliente, sin revisiones, sin descorche. Aprueba tu fiesta sin cambios.'},
+  wa:'Hola The Lounge! Somos una agencia de 16 personas en San Francisco. Queremos la fiesta de fin de año el viernes 12 de diciembre en la noche, con karaoke.'},
+ {n:'08',nombre:'Meta cumplida',key:'Meta',nicho:'Equipos de ventas: autos, telecom, retail, farma',pilar:'Todo incluido',msg:'Llegaron al número. Ahora, la celebración que <em>se ganaron.</em>',
+  insight:'Las fuerzas de ventas viven por la cuota y diciembre es cuando se cuenta. La celebración es también la premiación: quieren pantalla, escenario y un espacio a la altura.',
+  porque:'La cena de premiación con LED para el ranking, micrófono para el gerente y mesa de gala, sin producir nada.',
+  ancla:'Marbella Diamond (30 a 40) · San Francisco Diamond (80 a 150) · cena de reconocimiento',registro:'Motivador y competitivo, sin sonar a convención.',visual:'El LED de San Francisco mostrando Vendedor del año; el trofeo sobre la barra.',
+  ig:{s:'Meta',m:'Llegaron al número. Ahora, la celebración que <em>se ganaron.</em>',cap:'La premiación de tu equipo con el ranking en pantalla y la mesa de gala servida. Cotiza la celebración que se ganaron.'},
+  wa:'Hola The Lounge, soy Marcela, gerente comercial de un concesionario. Somos 38 y queremos la cena de premiación el jueves 18 de diciembre.'},
+ {n:'09',nombre:'Sin guardia',key:'Sin guardia',nicho:'Clínicas, consultorios y farmacéuticas',pilar:'24/7',msg:'Por una noche, <em>nadie</em> está de guardia.',
+  insight:'Los equipos de salud trabajan por turnos y nunca coinciden: la fiesta cae cuando la mitad está de guardia. Un salón con horario fijo no les sirve; un espacio 24/7 sí.',
+  porque:'La celebración a la hora en que el equipo puede: brunch de domingo, cena a las diez o desayuno después del turno. Mismo paquete, el horario lo ponen ellos.',
+  ancla:'Marbella Premium (30 a 40) · Obarrio Premium (15 a 25) · San Francisco para hospitales y farma',registro:'Cálido y agradecido, con guiño a la bata y al turno.',visual:'Un tablero de turnos de diciembre donde todos los cuadros dicen LIBRE y uno en vino dice The Lounge, 9 p.m.',
+  ig:{s:'Libre',m:'Por una noche, <em>nadie</em> está de guardia.',cap:'Brunch de domingo, cena a las diez o desayuno después del turno. Cotiza a la hora que el equipo pueda.'},
+  wa:'Hola The Lounge, soy la Dra. Núñez, de una clínica en Paitilla. Somos 30 y queremos celebrar el sábado 13 de diciembre a las 9 p.m., después del turno.'},
+ {n:'10',nombre:'Sin escalas',key:'Sin escalas',nicho:'Logística, navieras y freight forwarders',pilar:'Todo incluido',msg:'Fin de año entregado puerta a puerta, <em>sin</em> escalas.',
+  insight:'Es el sector que más creció en 2025 y el que menos celebra en un solo lugar: la gente está entre el puerto, la oficina y el aeropuerto. Quieren algo que llegue resuelto.',
+  porque:'La celebración llega completa: espacio, catering y servicio en un solo despacho, a la hora que el turno permita.',
+  ancla:'Obarrio o Marbella Premium (15 a 40) · San Francisco Diamond para operadores grandes',registro:'Directo y operativo con guiño marítimo: despacho, tránsito, entrega.',visual:'Una guía de despacho navideña con origen oficina, destino The Lounge y estado Entregado.',
+  ig:{s:'Entregado',m:'Fin de año entregado puerta a puerta, <em>sin</em> escalas.',cap:'Espacio, catering y servicio en un solo despacho. Despacha tu fin de año en dos minutos.'},
+  wa:'Hola The Lounge, soy Luis, de operaciones de un freight forwarder en Costa del Este. Somos 26 y queremos la cena de fin de año el viernes 12 de diciembre.'},
+ {n:'11',nombre:'Brindis de gremio',key:'Brindis',nicho:'Gremios, cámaras y asociaciones',pilar:'Todo incluido',msg:'Un brindis a la altura del gremio, sin la <em>logística</em> del gremio.',
+  insight:'Cada gremio hace un cóctel de cierre con decenas de empresas del sector en una noche. Quien hospeda ese brindis le vende el paquete a todo el nicho de una vez.',
+  porque:'San Francisco como sede oficial del brindis del gremio con servicio completo, a cambio de presencia de marca y un beneficio de temporada para sus miembros.',
+  ancla:'San Francisco Diamond (80 a 150) · cóctel de cierre · relación directa, no pauta',registro:'Institucional y elegante. Se trabaja con juntas directivas.',visual:'Invitación oficial con el logo del gremio y el de The Lounge; el LED con el nombre de la asociación.',
+  ig:{s:'Brindis',m:'Un brindis a la altura del gremio, sin la <em>logística</em> del gremio.',cap:'San Francisco como sede del brindis de fin de año de su asociación, con servicio completo. Hospedamos su brindis.'},
+  wa:'Buenas tardes, The Lounge. Le escribo de la gerencia de una asociación gremial. Buscamos sede para nuestro cóctel de cierre, unas 120 personas, el jueves 4 de diciembre.'},
+ {n:'12',nombre:'Sin calificación',key:'Sin nota',nicho:'Colegios privados y universidades',pilar:'Privacidad',msg:'Después de un año calificando, hoy <em>nadie</em> los califica.',
+  insight:'El cuerpo docente cierra el año escolar a mediados de diciembre, agotado y observado todo el año por padres y alumnos. La celebración suele ser en el propio colegio.',
+  porque:'Un almuerzo fuera del campus, privado y sin nadie mirando, con menú clásico y precio por persona que la administración puede defender.',
+  ancla:'San Francisco Premium (80 a 150) · Marbella Premium (30 a 40) · almuerzo de cierre',registro:'Cálido y respetuoso, con guiño al aula.',visual:'Una boleta de calificaciones donde la única materia es Fin de año y la nota es Aprobado con honores.',
+  ig:{s:'Aprobado',m:'Después de un año calificando, hoy <em>nadie</em> los califica.',cap:'Un almuerzo fuera del campus, privado y sin nadie mirando. Cotiza el cierre del claustro.'},
+  wa:'Hola The Lounge, soy la administradora de un colegio privado. Somos 85 docentes y queremos el almuerzo de cierre el viernes 19 de diciembre.'}
+];
+
+/* =====================================================================
+   NAVEGACIÓN
+   ===================================================================== */
+const $=id=>document.getElementById(id);
+const slides=[...document.querySelectorAll('.slide')];
+let cur=0;
+const prog=$('prog'), menu=$('menu');
+slides.forEach((s,i)=>{
+  const b=document.createElement('button'); b.type='button'; b.dataset.name=s.dataset.name; b.setAttribute('aria-label',s.dataset.name); b.onclick=()=>go(i); prog.appendChild(b);
+  const m=document.createElement('button'); m.type='button'; m.innerHTML='<b>'+String(i+1).padStart(2,'0')+'</b><span>'+s.dataset.name+'</span>'; m.onclick=()=>{go(i); menu.classList.remove('on');}; menu.appendChild(m);
+});
+$('ctrTot').textContent=String(slides.length).padStart(2,'0');
+
+function go(i){
+  if(i<0||i>=slides.length) return;
+  const prev=slides[cur]; cur=i; const s=slides[cur];
+  slides.forEach((x,j)=>x.classList.toggle('active',j===cur));
+  [...prog.children].forEach((b,j)=>{b.classList.toggle('done',j<cur);b.classList.toggle('cur',j===cur)});
+  [...menu.children].forEach((b,j)=>b.classList.toggle('cur',j===cur));
+  $('ctrCur').textContent=String(cur+1).padStart(2,'0');
+  $('secName').textContent=s.dataset.sec;
+  $('prevBtn').disabled=cur===0; $('nextBtn').disabled=cur===slides.length-1;
+  closeWin();
+  onEnter(s.id);
+}
+function next(){ go(cur+1); }
+function prevS(){ go(cur-1); }
+$('prevBtn').onclick=prevS; $('nextBtn').onclick=next;
+$('idxBtn').onclick=()=>menu.classList.toggle('on');
+document.addEventListener('keydown',e=>{
+  if(e.target.tagName==='INPUT'||e.target.tagName==='TEXTAREA') return;
+  if(e.key==='ArrowRight'||e.key===' '||e.key==='PageDown'){e.preventDefault();next();}
+  else if(e.key==='ArrowLeft'||e.key==='PageUp'){e.preventDefault();prevS();}
+  else if(e.key==='Escape'){ if($('win').classList.contains('on')) closeWin(); else menu.classList.remove('on'); }
+  else if(e.key==='Home'){go(0);} else if(e.key==='End'){go(slides.length-1);}
+});
+document.addEventListener('click',e=>{ if(!menu.contains(e.target)&&e.target!==$('idxBtn')) menu.classList.remove('on'); });
+
+/* =====================================================================
+   ENTRADAS POR PANTALLA
+   ===================================================================== */
+const done={};
+function onEnter(id){
+  if(id==='s1') portada();
+  if(id==='s2') calendario();
+  if(id==='s3') contar();
+  if(id==='s9') startOrbit(); else stopOrbit();
+}
+
+/* 01 · lockup letra a letra */
+function portada(){
+  const l=$('l1'); if(l.childElementCount) { l.querySelectorAll('span').forEach((s,i)=>{s.style.transitionDelay=(200+i*70)+'ms';}); return; }
+  'Navideño'.split('').forEach((ch,i)=>{ const s=document.createElement('span'); s.textContent=ch; s.style.transitionDelay=(200+i*70)+'ms'; l.appendChild(s); });
+}
+portada();
+
+/* 02 · calendario 24 nov a 31 dic, enciende 27 nov a 19 dic */
+function calendario(){
+  const c=$('cal'); if(c.childElementCount){ relight(c); return; }
+  ['L','M','M','J','V','S','D'].forEach(d=>{const e=document.createElement('div');e.className='dow';e.textContent=d;c.appendChild(e);});
+  const hot=new Set(['11-27','11-28','12-1','12-2','12-3','12-4','12-5','12-8','12-9','12-10','12-11','12-12']);
+  const peak=new Set(['12-15','12-16','12-17','12-18','12-19']);
+  const days=[]; for(let d=24;d<=30;d++) days.push([11,d]); for(let d=1;d<=28;d++) days.push([12,d]);
+  days.forEach(([m,d])=>{ const e=document.createElement('div'); e.className='d'+(m===11?' nov':''); e.textContent=d; const k=m+'-'+d;
+    if(hot.has(k)) e.dataset.h='hot'; if(peak.has(k)) e.dataset.h='peak'; if(k==='12-15') e.classList.add('dec15'); c.appendChild(e); });
+  relight(c);
+}
+function relight(c){
+  const ds=[...c.querySelectorAll('.d')]; ds.forEach(d=>d.classList.remove('hot','peak'));
+  let t=500; ds.forEach(d=>{ if(d.dataset.h){ setTimeout(()=>d.classList.add(d.dataset.h),t); t+=110; } });
+}
+
+/* 03 · contadores */
+function contar(){
+  document.querySelectorAll('#s3 [data-count]').forEach(b=>{
+    const target=+b.dataset.count, small=b.querySelector('small'); const pre=small?small.outerHTML:'';
+    const t0=performance.now(), dur=1400;
+    const step=now=>{ const p=Math.min(1,(now-t0)/dur), e=1-Math.pow(1-p,3); b.innerHTML=pre+Math.round(target*e); if(p<1) requestAnimationFrame(step); };
+    setTimeout(()=>requestAnimationFrame(step),300);
+  });
+}
+
+
+/* 07 · parallax del KV */
+(function(){
+  const kv=$('kv'); const layers=kv.querySelectorAll('.layer');
+  kv.addEventListener('mousemove',e=>{ const r=kv.getBoundingClientRect(); const x=(e.clientX-r.left)/r.width-.5, y=(e.clientY-r.top)/r.height-.5;
+    layers.forEach(l=>{ const d=+l.dataset.depth; l.style.transform='translate('+(x*d)+'px,'+(y*d)+'px)'; }); });
+  kv.addEventListener('mouseleave',()=>layers.forEach(l=>l.style.transform=''));
+  $('kvTags').onclick=()=>{ kv.classList.toggle('show-tags'); $('kvTags').textContent=kv.classList.contains('show-tags')?'Ocultar anatomía':'Ver anatomía'; };
+})();
+
+/* 09 · órbita */
+const orbit=$('orbit'), chipsWrap=$('chips'); let raf=null, ang=0, paused=false, last=0;
+CAMPS.forEach((c,i)=>{ const b=document.createElement('button'); b.type='button'; b.className='chip'; b.innerHTML='<small>'+c.n+' · '+c.pilar+'</small>'+c.nombre; b.dataset.i=i;
+  b.onclick=()=>openWin(i); b.onmouseenter=()=>paused=true; b.onmouseleave=()=>{ if(!$('win').classList.contains('on')) paused=false; }; chipsWrap.appendChild(b); });
+function layout(){
+  const w=orbit.clientWidth, h=orbit.clientHeight; const cx=w/2, cy=h/2; const rx=w*0.44, ry=h*0.42;
+  [...chipsWrap.children].forEach((b,i)=>{ const a=ang+(i/CAMPS.length)*Math.PI*2-Math.PI/2; const x=cx+Math.cos(a)*rx, y=cy+Math.sin(a)*ry;
+    b.style.transform='translate(-50%,-50%) translate('+(x-cx)+'px,'+(y-cy)+'px)'; });
+  const ps=Math.min(0.78, Math.max(0.42, Math.min(w,h)/700)); orbit.querySelector('.phone').style.setProperty('--ps',ps);
+  drawNodes(cx,cy,rx,ry);
+}
+const svgNS='http://www.w3.org/2000/svg'; let nodesBuilt=false, t0=0;
+function buildNodes(){ const g=$('nodes'); g.innerHTML=''; CAMPS.forEach((c,i)=>{ const l=document.createElementNS(svgNS,'line'); l.dataset.i=i; g.appendChild(l);
+  const m=document.createElementNS(svgNS,'circle'); m.setAttribute('r',4); m.setAttribute('class','mid'); m.dataset.i=i; g.appendChild(m);
+  const pz=document.createElementNS(svgNS,'circle'); pz.setAttribute('r',3); pz.setAttribute('class','pulse'); pz.dataset.i=i; g.appendChild(pz); }); nodesBuilt=true; }
+function drawNodes(cx,cy,rx,ry){
+  if(!nodesBuilt) buildNodes(); const now=performance.now(); if(!t0) t0=now;
+  const on=[...chipsWrap.children].findIndex(b=>b.classList.contains('on'));
+  const lines=$('nodes').querySelectorAll('line'), mids=$('nodes').querySelectorAll('circle.mid'), pulses=$('nodes').querySelectorAll('circle.pulse');
+  CAMPS.forEach((c,i)=>{ const a=ang+(i/CAMPS.length)*Math.PI*2-Math.PI/2; const tx=cx+Math.cos(a)*rx, ty=cy+Math.sin(a)*ry;
+    const grow=Math.max(0,Math.min(1,(now-t0)/900-i*0.06)); const ex=cx+(tx-cx)*grow, ey=cy+(ty-cy)*grow;
+    const l=lines[i]; l.setAttribute('x1',cx); l.setAttribute('y1',cy); l.setAttribute('x2',ex); l.setAttribute('y2',ey); l.classList.toggle('hi',i===on);
+    mids[i].setAttribute('cx',cx+(ex-cx)*0.5); mids[i].setAttribute('cy',cy+(ey-cy)*0.5); mids[i].style.opacity=grow>0.5?1:0;
+    const t=((now/1800)+i/CAMPS.length)%1; pulses[i].setAttribute('cx',cx+(ex-cx)*t); pulses[i].setAttribute('cy',cy+(ey-cy)*t); pulses[i].style.opacity=grow>=1?0.9:0; });
+}
+function tick(now){ if(!last) last=now; const dt=(now-last)/1000; last=now; if(!paused && !matchMedia('(prefers-reduced-motion:reduce)').matches) ang+=dt*0.06; layout(); raf=requestAnimationFrame(tick); }
+function startOrbit(){ if(raf) return; last=0; t0=0; layout(); raf=requestAnimationFrame(tick); }
+function stopOrbit(){ if(raf){ cancelAnimationFrame(raf); raf=null; } }
+window.addEventListener('resize',()=>{ if(raf) layout(); });
+
+/* ventana de nicho */
+function openWin(i){
+  const c=CAMPS[i]; paused=true;
+  [...chipsWrap.children].forEach((b,j)=>b.classList.toggle('on',j===i));
+  $('winBody').innerHTML=
+    '<span class="num">Campaña '+c.n+' · '+c.nicho+'</span><h3>'+c.nombre+'</h3><div class="nicho"><span class="pil">Pilar: '+c.pilar+'</span></div>'
+   +'<div class="msg">'+c.msg+'</div>'
+   +'<dl><dt>Insight</dt><dd>'+c.insight+'</dd><dt>Por qué</dt><dd>'+c.porque+'</dd><dt>Ancla</dt><dd>'+c.ancla+'</dd><dt>Registro</dt><dd>'+c.registro+'</dd><dt>Idea visual</dt><dd>'+c.visual+'</dd></dl>'
+   +'<h4>Así se ve</h4><div class="mocks">'
+   +'<div class="ig"><div class="hd"><i></i>theloungepanama</div><div class="art"><div class="s">'+c.ig.s+'</div><div class="m">'+c.ig.m+'</div><div class="c">Este año, celebra arriba</div></div><div class="cap"><b>theloungepanama</b> '+c.ig.cap+'</div></div>'
+   +'<div class="wa"><div class="b me">'+c.wa+'</div><div class="b">¡Hola! Perfecto. Con el cotizador ya tenemos sede, paquete y estimado. Te confirmo disponibilidad hoy mismo. 🎄<div class="t">Ahora</div></div></div>'
+   +'</div>'
+   +'<p class="note" style="margin-top:14px">Cada nicho llega al cotizador con su sede y su banda de personas sugeridas. El mensaje de WhatsApp lo arma el cotizador.</p>';
+  $('win').classList.add('on'); $('win').setAttribute('aria-hidden','false'); $('shade').classList.add('on'); $('win').scrollTop=0;
+}
+function closeWin(){ $('win').classList.remove('on'); $('win').setAttribute('aria-hidden','true'); $('shade').classList.remove('on'); paused=false; [...chipsWrap.children].forEach(b=>b.classList.remove('on')); }
+$('winClose').onclick=closeWin; $('shade').onclick=closeWin;
+
+/* 10 · ecosistema hover sincronizado */
+document.querySelectorAll('#s10 .node, #s10 .item').forEach(el=>{
+  const k=el.dataset.k; if(!k) return;
+  const on=v=>document.querySelectorAll('#s10 [data-k="'+k+'"]').forEach(x=>x.classList.toggle('on',v));
+  el.addEventListener('mouseenter',()=>on(true)); el.addEventListener('mouseleave',()=>on(false));
+});
+
+$('goOrbit').onclick=()=>go(slides.findIndex(x=>x.id==='s9'));
+
+go(0);
+</script>
