@@ -174,26 +174,12 @@ p.note{font-size:14px;color:var(--muted);max-width:56ch;margin:10px 0 0}
 #s7 .inner{max-width:1200px}
 .kv-wrap{display:grid;grid-template-columns:1.25fr .75fr;gap:clamp(20px,4vw,56px);align-items:center}
 @media (max-width:900px){.kv-wrap{grid-template-columns:1fr}}
-.kv{position:relative;aspect-ratio:4/5;max-height:72vh;width:100%;max-width:560px;margin:0 auto;border-radius:6px;overflow:hidden;background:var(--paper);box-shadow:0 30px 80px rgba(0,0,0,.35);perspective:900px}
-.kv .layer{position:absolute;inset:0;will-change:transform;transition:transform .12s linear}
-.kv .l-bg{background:radial-gradient(ellipse at 80% 0%,rgba(200,161,91,.22),transparent 45%),var(--paper);
-  background-image:radial-gradient(ellipse at 80% 0%,rgba(200,161,91,.22),transparent 45%),repeating-linear-gradient(0deg,rgba(42,28,23,.03) 0 1px,transparent 1px 7px)}
-.kv .l-ribbon{left:8%;width:14%;background:linear-gradient(90deg,var(--pine) 0 45%,transparent 45% 55%,var(--wine) 55% 100%)}
-.kv .l-ribbon::after{content:"";position:absolute;inset:0;background:repeating-linear-gradient(180deg,rgba(255,255,255,.08) 0 4px,transparent 4px 12px)}
-.kv .l-stamp{display:flex;align-items:flex-start;justify-content:center;padding-top:9%}
-.kv .l-stamp .sello{transform:rotate(-3deg);padding:.5em 1em .7em}
-.kv .l-stamp .lockup .ey{font-size:clamp(8px,1.1vw,12px)}
-.kv .l-stamp .lockup .l1{font-size:clamp(40px,6.4vw,78px)}
-.kv .l-stamp .lockup .y{font-size:clamp(12px,1.6vw,18px)}.kv .l-stamp .lockup .fin{font-size:clamp(13px,1.8vw,22px)}.kv .l-stamp .lockup .ano{font-size:clamp(34px,5.6vw,70px)}
-.kv .l-key{display:grid;place-items:center;padding-top:22%}
-.kv .l-key svg{width:66%;height:auto;filter:drop-shadow(0 18px 30px rgba(0,0,0,.28))}
-.kv .l-text{display:flex;flex-direction:column;align-items:center;justify-content:flex-end;padding-bottom:7%;text-align:center}
-.kv .l-text .t{font-family:var(--cond);font-size:clamp(28px,4.6vw,56px);line-height:.9;color:var(--pine-deep)}
-.kv .l-text .t em{font-family:var(--script);font-style:normal;color:var(--wine);font-size:1.25em}
-.kv .l-text .s{font-size:clamp(8px,1vw,11px);letter-spacing:.26em;text-transform:uppercase;color:var(--ink);font-weight:600;margin-top:6px}
-.kv .l-text .sedes{font-family:var(--cond);font-size:clamp(11px,1.5vw,17px);letter-spacing:.12em;color:var(--wine);margin-top:8px}
+.kv{position:relative;aspect-ratio:4/5;max-height:62vh;width:100%;max-width:560px;margin:0 auto;border-radius:6px;overflow:hidden;background:var(--paper);box-shadow:0 30px 80px rgba(0,0,0,.35);perspective:900px}
+.kv-img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block;transform:scale(1.06);transition:transform .18s linear;will-change:transform}
+.kv-col{display:flex;flex-direction:column;justify-content:center}
+.kv-sig{margin-top:14px;text-align:center;font-family:var(--cond);font-size:clamp(20px,2.8vw,32px);line-height:1;letter-spacing:.02em;color:var(--pine-deep)}
+.kv-sig em{font-family:var(--script);font-style:normal;color:var(--wine);font-size:1.3em;line-height:.8}
 .kv .tagx{position:absolute;font-size:10px;letter-spacing:.16em;text-transform:uppercase;font-weight:700;background:var(--gold);color:var(--ink);padding:3px 8px;border-radius:2px;opacity:0;transition:opacity .25s;pointer-events:none;white-space:nowrap}
-.kv .layer:hover ~ .tagx[data-for]{opacity:0}
 .kv.show-tags .tagx{opacity:1}
 .kv-notes{display:grid;gap:12px}
 .kv-notes .n{border-left:3px solid var(--gold);padding:2px 0 2px 14px;font-size:14px}
@@ -449,39 +435,23 @@ p.note{font-size:14px;color:var(--muted);max-width:56ch;margin:10px 0 0}
 <!-- ============================ 07 KEY VISUAL ============================ -->
 <section class="slide light" id="s7" data-name="Key Visual" data-sec="Key Visual">
   <div class="inner"><div class="kv-wrap">
+    <div class="kv-col">
     <div class="kv" id="kv" data-a="scale" style="--i:0">
-      <div class="layer l-bg" data-depth="4"></div>
-      <div class="layer l-ribbon" data-depth="10"></div>
-      <div class="layer l-stamp" data-depth="18"><div class="sello"><div class="lockup"><span class="ey">Paquete corporativo</span><span class="l1">Navideño</span><span class="l2"><span class="y">y</span><span class="fin">Fin de</span><span class="ano">Año</span></span></div></div></div>
-      <div class="layer l-key" data-depth="30">
-        <svg viewBox="0 0 320 150" aria-label="Llave con etiqueta navideña">
-          <g fill="#C8A15B">
-            <path fill-rule="evenodd" d="M62 75a44 44 0 1 1 88 0a44 44 0 1 1-88 0zm26 0a18 18 0 1 0 36 0a18 18 0 1 0-36 0z"/>
-            <rect x="146" y="66" width="150" height="18" rx="4"/>
-            <rect x="262" y="84" width="12" height="26" rx="2"/><rect x="284" y="84" width="12" height="34" rx="2"/><rect x="240" y="84" width="10" height="18" rx="2"/>
-          </g>
-          <g transform="translate(150 20) rotate(14)">
-            <path d="M0 0h74a6 6 0 0 1 6 6v36a6 6 0 0 1-6 6H0z" fill="#F6ECD9" stroke="#6D1B1B" stroke-width="2"/>
-            <circle cx="12" cy="24" r="4" fill="none" stroke="#6D1B1B" stroke-width="2"/>
-            <text x="26" y="20" font-family="Bebas Neue, Arial Narrow, sans-serif" font-size="13" fill="#1F4A3A" letter-spacing="1">CELEBRA</text>
-            <text x="26" y="36" font-family="Bebas Neue, Arial Narrow, sans-serif" font-size="13" fill="#6D1B1B" letter-spacing="1">ARRIBA</text>
-          </g>
-          <path d="M112 44c14-18 30-24 42-24" fill="none" stroke="#6D1B1B" stroke-width="2" stroke-linecap="round"/>
-        </svg>
-      </div>
-      <div class="layer l-text" data-depth="8"><div class="t">Este año, celebra <em>arriba.</em></div><div class="s">Desayuno · Brunch · Almuerzo · Cena</div><div class="sedes">Marbella | Obarrio | San Francisco</div></div>
-      <span class="tagx" style="left:6%;top:50%">Cinta pino y vino</span>
-      <span class="tagx" style="right:6%;top:12%">Sello con lockup</span>
-      <span class="tagx" style="right:6%;top:52%">La llave: el pin de acceso</span>
-      <span class="tagx" style="left:30%;bottom:5%">Mensaje madre</span>
+      <img class="kv-img" id="kvImg" src="assets/key-visual-navideno.jpg" alt="Key Visual de la campaña: llave de latón antiguo con una etiqueta de papel kraft en blanco, apoyada sobre la placa vino del lockup Navideño y Fin de Año, entre una cinta de terciopelo verde y una de satén vino">
+      <span class="tagx" style="left:2%;top:13%">Cinta pino y vino</span>
+      <span class="tagx" style="left:13%;top:24%">Etiqueta en blanco</span>
+      <span class="tagx" style="right:4%;top:33%">La llave: el pin de acceso</span>
+      <span class="tagx" style="right:5%;bottom:6%">Lockup de temporada</span>
+    </div>
+    <div class="kv-sig" data-a style="--i:1">Este año, celebra <em>arriba.</em></div>
     </div>
     <div class="kv-notes">
       <span class="eyebrow" data-a style="--i:1">Key Visual</span>
       <h2 data-a style="--i:2" style="font-size:clamp(38px,4.8vw,64px)">La <em>llave</em></h2>
       <div class="n" data-a style="--i:3"><b>La idea</b>Todo el año, cada equipo trabaja para otros. Esta Navidad, The Lounge les entrega la llave: un espacio que es suyo por unas horas, a su manera.</div>
       <div class="n" data-a style="--i:4"><b>Por qué una llave</b>Es literal: cada reserva recibe un pin de acceso. Nadie más entra, nadie los apura. La llave es la promesa de la marca hecha objeto.</div>
-      <div class="n" data-a style="--i:5"><b>Cómo se ve</b>La llave dorada al centro, sobre el sello y la cinta que ya conocen de los paquetes. Abajo, la frase que lo resume: Este año, celebra arriba.</div>
-      <div class="n" data-a style="--i:6"><b>Cómo cambia por nicho</b>La etiqueta de la llave dice algo distinto para cada sector: Confidencial para la firma, Meta cumplida para ventas, Sin guardia para la clínica.</div>
+      <div class="n" data-a style="--i:5"><b>Cómo se ve</b>Bodegón cálido: la llave de latón con su etiqueta en blanco descansa sobre la placa del lockup, entre el terciopelo verde y el satén vino de los paquetes.</div>
+      <div class="n" data-a style="--i:6"><b>Cómo cambia por nicho</b>La etiqueta está en blanco a propósito. Se rotula según el sector: Confidencial para la firma, Meta cumplida para ventas, Sin guardia para la clínica.</div>
       <button class="toggle" id="kvTags" data-a style="--i:7">Ver anatomía</button>
     </div>
   </div></div>
@@ -747,12 +717,12 @@ function contar(){
 }
 
 
-/* 07 · parallax del KV */
+/* 07 · movimiento del Key Visual + anatomía */
 (function(){
-  const kv=$('kv'); const layers=kv.querySelectorAll('.layer');
+  const kv=$('kv'), img=$('kvImg');
   kv.addEventListener('mousemove',e=>{ const r=kv.getBoundingClientRect(); const x=(e.clientX-r.left)/r.width-.5, y=(e.clientY-r.top)/r.height-.5;
-    layers.forEach(l=>{ const d=+l.dataset.depth; l.style.transform='translate('+(x*d)+'px,'+(y*d)+'px)'; }); });
-  kv.addEventListener('mouseleave',()=>layers.forEach(l=>l.style.transform=''));
+    img.style.transform='scale(1.06) translate('+(x*-14)+'px,'+(y*-14)+'px)'; });
+  kv.addEventListener('mouseleave',()=>{ img.style.transform='scale(1.06)'; });
   $('kvTags').onclick=()=>{ kv.classList.toggle('show-tags'); $('kvTags').textContent=kv.classList.contains('show-tags')?'Ocultar anatomía':'Ver anatomía'; };
 })();
 
