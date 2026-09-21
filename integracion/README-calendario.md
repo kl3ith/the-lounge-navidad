@@ -37,9 +37,11 @@ El margen se aplica a las tres sedes. Como San Francisco reserva 5 horas de even
 
 ## Fotos de las sedes
 
-El cotizador lleva una foto por sede, embebida como data URI en el objeto `FOTOS`, y aparece en tres lugares: las opciones del paso de sede, el panel "Tu sede" al final de la cotización y las tarjetas de los demás paquetes.
+El cotizador lleva una foto por sede, embebida como data URI en el objeto `FOTOS`, y aparece en tres lugares: las opciones del paso de sede, el panel "Tu sede" al final de la cotización y las tarjetas de los demás paquetes. En la presentación las mismas fotos viven como archivos en `assets/sedes/` y aparecen en la pantalla de Objetivo y en cada ficha de nicho.
 
-Las imágenes actuales son **provisionales**: son recortes del mockup de email de temporada, de unos 200 píxeles de ancho, que es lo único etiquetado por sede que existe en la carpeta del proyecto. Para sustituirlas por las originales del cliente basta reemplazar cada cadena del objeto `FOTOS` por el nuevo data URI o por una ruta de archivo. En la presentación las mismas fotos viven como archivos en `assets/sedes/`.
+Son las fotos originales entregadas por el cliente en septiembre de 2026 y se muestran **completas, sin recorte**. Medidas de las versiones de web: Marbella 1200x532, Obarrio 1200x531, San Francisco 640x512. Los archivos originales sin procesar están en `assets/sedes/originales/`.
+
+**Atribución.** Los archivos llegaron numerados, sin el nombre de la sede, así que se asignaron por las características de cada espacio descritas en el cerebro de marca: la sala completamente azul con billar y dardos es Marbella, la sala industrial oscura con el letrero CHILL es Obarrio, y el salón con mesa de banquete montada y barra grande es San Francisco. Si alguna quedó cambiada, se corrige intercambiando las rutas en `assets/sedes/` y volviendo a generar el data URI del cotizador.
 
 ## Lógica de ocupación e incentivos
 
