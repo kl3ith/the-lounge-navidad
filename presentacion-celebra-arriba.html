@@ -131,18 +131,25 @@ p.note{font-size:14px;color:var(--muted);max-width:56ch;margin:10px 0 0}
 /* =====================================================================
    04 OBJETIVO
    ===================================================================== */
-.line3{display:grid;grid-template-columns:1fr auto 1fr auto 1fr;align-items:center;gap:14px;margin-top:30px}
+.line3{display:grid;grid-template-columns:1fr auto 1fr auto 1fr;align-items:center;gap:12px;margin-top:22px}
 @media (max-width:860px){.line3{grid-template-columns:1fr;gap:10px}.line3 .arrow{transform:rotate(90deg);justify-self:center}}
-.st{background:var(--pine-deep);color:var(--cream);border-radius:6px;padding:22px 20px;min-height:150px;display:flex;flex-direction:column;gap:6px;position:relative;overflow:hidden}
+.st{background:var(--pine-deep);color:var(--cream);border-radius:6px;padding:18px 18px;min-height:124px;display:flex;flex-direction:column;gap:6px;position:relative;overflow:hidden}
 .st::after{content:"";position:absolute;right:-30px;top:-30px;width:110px;height:110px;border-radius:50%;background:rgba(200,161,91,.14)}
 .st .k{font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:var(--gold);font-weight:700}
 .st .v{font-family:var(--cond);font-size:clamp(30px,3.4vw,44px);line-height:.95}
 .st .d{font-size:13.5px;color:var(--cream-muted)}
 .arrow{font-family:var(--cond);font-size:44px;color:var(--wine);line-height:1}
-.objs{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-top:22px}
+.objs{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-top:16px}
 @media (max-width:760px){.objs{grid-template-columns:1fr}}
 .obj{border-left:3px solid var(--gold);padding:4px 0 4px 16px;font-size:15px}
 .obj b{display:block;font-family:var(--cond);font-size:22px;letter-spacing:.04em;color:var(--pine-deep);line-height:1;margin-bottom:4px}
+
+.sedes-row{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-top:16px}
+@media (max-width:760px){.sedes-row{grid-template-columns:1fr}}
+.sedes-row figure{margin:0;background:#FBF4E7;border:1.5px solid var(--line);border-radius:6px;overflow:hidden}
+.sedes-row img{display:block;width:100%;height:102px;object-fit:cover;background:var(--paper-3)}
+.sedes-row figcaption{padding:10px 13px;font-size:12.5px;color:var(--muted);line-height:1.4}
+.sedes-row figcaption b{display:block;font-family:var(--cond);font-weight:400;font-size:21px;letter-spacing:.05em;color:var(--pine-deep);line-height:1;margin-bottom:3px}
 
 /* =====================================================================
    05 BIG IDEA
@@ -240,6 +247,11 @@ p.note{font-size:14px;color:var(--muted);max-width:56ch;margin:10px 0 0}
 .win .pil{display:inline-block;background:var(--gold);color:var(--ink);font-size:10.5px;letter-spacing:.14em;text-transform:uppercase;font-weight:700;padding:3px 9px;border-radius:2px;margin-right:6px}
 .win .tags span{display:inline-block;font-size:10.5px;letter-spacing:.1em;text-transform:uppercase;font-weight:600;padding:3px 9px;border-radius:2px;background:var(--paper-2);border:1px solid var(--line);margin:0 6px 6px 0}
 .win h4{font-family:var(--cond);font-weight:400;font-size:22px;letter-spacing:.05em;margin:24px 0 10px;color:var(--pine-deep);line-height:1}
+.win-sede{display:grid;grid-template-columns:170px 1fr;gap:15px;align-items:center;margin-top:18px;background:#FBF4E7;border:1.5px solid var(--line);border-radius:6px;padding:12px}
+@media (max-width:520px){.win-sede{grid-template-columns:1fr}}
+.win-sede img{display:block;width:100%;height:112px;object-fit:cover;border-radius:4px;background:var(--paper-3)}
+.win-sede b{display:block;font-family:var(--cond);font-weight:400;font-size:24px;letter-spacing:.05em;color:var(--pine-deep);line-height:1;margin-bottom:4px}
+.win-sede span{font-size:12.5px;color:var(--muted);line-height:1.45;display:block}
 .mocks{display:grid;grid-template-columns:1fr 1fr;gap:14px}
 @media (max-width:520px){.mocks{grid-template-columns:1fr}}
 .ig{background:#fff;border:1px solid #E6DED0;border-radius:6px;overflow:hidden;font-family:var(--sans)}
@@ -394,15 +406,20 @@ p.note{font-size:14px;color:var(--muted);max-width:56ch;margin:10px 0 0}
     <h2 data-a style="--i:1">Que cada equipo cotice <em>el suyo</em></h2>
     <p class="lead" data-a style="--i:2">Principal: generar cotizaciones y reservas de los paquetes navideños a través del cotizador y WhatsApp.</p>
     <div class="line3">
-      <div class="st" data-a style="--i:3"><span class="k">Sede</span><span class="v">Marbella · Obarrio · San Francisco</span><span class="d">Cada nicho llega a la sede que le corresponde por tamaño.</span></div>
+      <div class="st" data-a style="--i:3"><span class="k">Sede</span><span class="v">Tres sedes</span><span class="d">Cada nicho llega a la que le corresponde por tamaño de grupo.</span></div>
       <div class="arrow" data-a style="--i:4">→</div>
       <div class="st" data-a style="--i:5"><span class="k">Personas</span><span class="v">15 a 40 · 80 a 150</span><span class="d">Grupos medianos en Marbella y Obarrio; grandes en San Francisco.</span></div>
       <div class="arrow" data-a style="--i:6">→</div>
       <div class="st" data-a style="--i:7"><span class="k">Paquete</span><span class="v">Premium · Diamond</span><span class="d">La diferencia es la mesa: clásica o de gala.</span></div>
     </div>
+    <div class="sedes-row">
+      <figure data-a style="--i:8"><img src="assets/sedes/obarrio.jpg" alt="Sala de The Lounge Obarrio: barra iluminada, sofás y mesas altas"><figcaption><b>Obarrio</b>15 a 25 personas · 3 horas de reserva</figcaption></figure>
+      <figure data-a style="--i:9"><img src="assets/sedes/marbella.jpg" alt="Sala de The Lounge Marbella: luces cálidas, vegetación y mesas"><figcaption><b>Marbella</b>30 a 40 personas · 3 horas de reserva</figcaption></figure>
+      <figure data-a style="--i:10"><img src="assets/sedes/san-francisco.jpg" alt="Sala de The Lounge San Francisco: barra, lámparas colgantes y vegetación"><figcaption><b>San Francisco</b>80 a 150 personas · 5 horas · un evento por día</figcaption></figure>
+    </div>
     <div class="objs">
-      <div class="obj" data-a style="--i:8"><b>Secundario 1</b>Llenar Marbella y Obarrio con equipos de 15 a 40 personas entre semana.</div>
-      <div class="obj" data-a style="--i:9"><b>Secundario 2</b>Posicionar San Francisco como la sala de alto nivel para grupos de 80 a 150.</div>
+      <div class="obj" data-a style="--i:11"><b>Secundario 1</b>Llenar Marbella y Obarrio con equipos de 15 a 40 personas entre semana.</div>
+      <div class="obj" data-a style="--i:12"><b>Secundario 2</b>Posicionar San Francisco como la sala de alto nivel para grupos de 80 a 150.</div>
     </div>
   </div>
 </section>
@@ -559,74 +576,79 @@ p.note{font-size:14px;color:var(--muted);max-width:56ch;margin:10px 0 0}
 /* =====================================================================
    DATOS · doce campañas aprobadas
    ===================================================================== */
+const SEDES_P = {
+  obarrio:  { n:'Obarrio',        f:'assets/sedes/obarrio.jpg',       d:'Plaza Downtown, Av. Samuel Lewis con Calle 59 Este · hasta 25 personas · 3 horas de reserva' },
+  marbella: { n:'Marbella',      f:'assets/sedes/marbella.jpg',      d:'Plaza La Riviera, Calle 54 y 55 Este · hasta 40 personas · 3 horas de reserva' },
+  sf:       { n:'San Francisco', f:'assets/sedes/san-francisco.jpg', d:'Calle 66, The Tower · 80 a 150 personas · 5 horas de evento · un solo evento por día' }
+};
 const CAMPS = [
- {n:'01',nombre:'La llave es tuya',key:'Llave',nicho:'Brokers y agencias inmobiliarias',pilar:'La llave',msg:'Todo el año entregaste llaves. Esta Navidad, <em>la llave</em> es tuya.',
+ {n:'01',nombre:'La llave es tuya',key:'Llave',sede:'obarrio',nicho:'Brokers y agencias inmobiliarias',pilar:'La llave',msg:'Todo el año entregaste llaves. Esta Navidad, <em>la llave</em> es tuya.',
   insight:'El broker vive de entregar llaves a otros. Diciembre es temporada de cierres y de reconocer a los top producers, pero la fiesta suele terminar en un restaurante compartido.',
   porque:'Por una noche, la llave (el pin de acceso) es del equipo: espacio privado, LED para proyectar el ranking del año y karaoke para celebrarlo.',
   ancla:'Obarrio Premium (15 a 25) · Marbella Diamond (30 a 40) · cena',registro:'Enérgico y de resultados. Cierres, exclusivas, top producers.',visual:'Una llave de latón con etiqueta navideña colgando de la puerta del Lounge; adentro, el ranking en pantalla.',
   ig:{s:'La llave',m:'Todo el año entregaste llaves. Esta Navidad, <em>la llave</em> es tuya.',cap:'Cierra el año como cierras ventas: en privado, con tu equipo y el ranking en pantalla. Cotiza el cierre de tu oficina en dos minutos.'},
   wa:'Hola The Lounge 👋 Soy Andrea, de KW Obarrio. Somos 22 agentes y queremos el cierre de año el jueves 11 de diciembre en la noche.'},
- {n:'02',nombre:'Estrictamente confidencial',key:'Confidencial',nicho:'Firmas de abogados boutique',pilar:'Privacidad',msg:'Su cierre de año, bajo <em>estricta</em> confidencialidad.',
+ {n:'02',nombre:'Estrictamente confidencial',key:'Confidencial',sede:'marbella',nicho:'Firmas de abogados boutique',pilar:'Privacidad',msg:'Su cierre de año, bajo <em>estricta</em> confidencialidad.',
   insight:'Una firma no celebra en cualquier lado: hay socios, clientes y una reputación que cuidar. Los salones y restaurantes exponen; la firma quiere puerta cerrada.',
   porque:'Un solo acceso, sin cámaras ni micrófonos adentro, menú Diamond de gala y tres horas que le pertenecen solo a la firma.',
   ancla:'Marbella Diamond (30 a 40) · Obarrio Diamond (15 a 25) · almuerzo o cena',registro:'Elegante y sobrio, de usted. Confidencial, bajo reserva, sin terceros.',visual:'Sobre de manila con sello CONFIDENCIAL en vino que al abrirse muestra la mesa Diamond servida.',
   ig:{s:'Confidencial',m:'Su cierre de año, bajo <em>estricta</em> confidencialidad.',cap:'Una sola puerta, sin cámaras adentro, menú de gala y tres horas solo para la firma. Reserve el almuerzo de fin de año de su equipo.'},
   wa:'Buenas tardes, The Lounge. Le escribo de Arias & Asociados. Somos 32 personas y buscamos un almuerzo navideño privado el viernes 12 de diciembre.'},
- {n:'03',nombre:'A la altura de su sede',key:'Sede',nicho:'Multinacionales SEM y equipos regionales',pilar:'Todo incluido',msg:'Su equipo regional merece una sede <em>a la altura.</em>',
+ {n:'03',nombre:'A la altura de su sede',key:'Sede',sede:'sf',nicho:'Multinacionales SEM y equipos regionales',pilar:'Todo incluido',msg:'Su equipo regional merece una sede <em>a la altura.</em>',
   insight:'Las 192 sedes de empresas multinacionales celebran con presupuesto de HR y comparan contra hoteles. Lo que les pesa del hotel es el protocolo y sentirse un evento más de la noche.',
   porque:'La sala de alto nivel de Panamá para ustedes solos: LED de 15 m², terraza, dos bares, valet, host y operador AV incluidos, cinco horas sin descorche.',
   ancla:'San Francisco Diamond (80 a 150) · cena',registro:'Elevado, bilingüe donde haga falta. Juega con sede de empresa y sede San Francisco.',visual:'El LED de San Francisco con el nombre de la empresa y las banderas del equipo; el brindis en la terraza.',
   ig:{s:'Headquarters',m:'Su equipo regional merece una sede <em>a la altura.</em>',cap:'A headquarters-level celebration, for your team only: LED wall, terrace, full service. Request a quote for your year-end party.'},
   wa:'Hi The Lounge! This is Laura from People & Culture at a regional HQ in Costa del Este. We are about 110 people and want a year-end dinner on December 5.'},
- {n:'04',nombre:'Cobertura total',key:'Cobertura',nicho:'Corredores de seguros y aseguradoras',pilar:'Todo incluido',msg:'Fin de año con <em>cobertura</em> total: espacio, catering, servicio y privacidad incluidos.',
+ {n:'04',nombre:'Cobertura total',key:'Cobertura',sede:'obarrio',nicho:'Corredores de seguros y aseguradoras',pilar:'Todo incluido',msg:'Fin de año con <em>cobertura</em> total: espacio, catering, servicio y privacidad incluidos.',
   insight:'El sector vive de cubrir riesgos. Organizar una fiesta es puro riesgo logístico, y las aseguradoras ya agasajan a sus corredores en lounges de la ciudad.',
   porque:'Un paquete que cubre todo: espacio, catering, servicio y privacidad. Cero siniestros de logística.',
   ancla:'Agencias: Obarrio o Marbella Premium (15 a 40) · Aseguradoras con corredores: San Francisco Diamond (80 a 150)',registro:'Profesional con humor de gremio: póliza, cobertura, prima, siniestro.',visual:'Una póliza de celebración diagramada como documento oficial con la lista de coberturas y sello de The Lounge.',
   ig:{s:'Póliza',m:'Fin de año con <em>cobertura</em> total.',cap:'Espacio, catering, servicio y privacidad incluidos. Cero siniestros de logística. Cotiza tu póliza de fin de año.'},
   wa:'Hola The Lounge, soy Ricardo de una corredora de seguros en Calle 50. Somos 18 y queremos un after office navideño el jueves 4 de diciembre.'},
- {n:'05',nombre:'Cuadra solo',key:'Cuadra',nicho:'Firmas contables, auditoría y consultoría',pilar:'Todo incluido',msg:'El único cierre de diciembre que <em>cuadra</em> solo.',
+ {n:'05',nombre:'Cuadra solo',key:'Cuadra',sede:'marbella',nicho:'Firmas contables, auditoría y consultoría',pilar:'Todo incluido',msg:'El único cierre de diciembre que <em>cuadra</em> solo.',
   insight:'Diciembre es cierre fiscal: el equipo que cuadra los números de todos no tiene tiempo para cuadrar una fiesta. Comparan precio por persona y quieren cero sorpresas.',
   porque:'Precio por persona claro, todo adentro, tres horas privadas antes del cierre. Sin descorche ni cargos escondidos.',
   ancla:'Obarrio Premium (15 a 25) · Marbella Premium (30 a 40) · almuerzo de viernes',registro:'Profesional, preciso, con guiño numérico: cuadrar, conciliar, cerrar.',visual:'Una hoja de cálculo navideña donde cada línea es un beneficio y el total dice Cuadra.',
   ig:{s:'Cuadra',m:'El único cierre de diciembre que <em>cuadra</em> solo.',cap:'Precio por persona claro, todo incluido, tres horas privadas. Cotiza y compruébalo por persona.'},
   wa:'Hola The Lounge. Soy Patricia, de una firma de auditoría en Obarrio. Somos 24 y queremos un almuerzo navideño el viernes 5 de diciembre.'},
- {n:'06',nombre:'La de tu equipo',key:'Equipo',nicho:'Áreas y sucursales de bancos',pilar:'La llave',msg:'La fiesta del banco es de todos. <em>Esta</em> es la de tu equipo.',
+ {n:'06',nombre:'La de tu equipo',key:'Equipo',sede:'obarrio',nicho:'Áreas y sucursales de bancos',pilar:'La llave',msg:'La fiesta del banco es de todos. <em>Esta</em> es la de tu equipo.',
   insight:'El banco hace su fiesta grande en un hotel, pero cada área quiere su propio momento con su gente y lo termina pagando de bolsillo en un bar. Las sedes están a dos cuadras.',
   porque:'La celebración del equipo, privada, a pasos de la oficina, con la llave en manos del jefe de área. Un jueves después de las cinco.',
   ancla:'Obarrio Premium (15 a 25) · Marbella Premium (30 a 40) · after office de jueves',registro:'Cercano y práctico. Habla al gerente de área, no al banco.',visual:'Mapa de la zona bancaria con la distancia a pie desde cada torre hasta el Lounge: a cuatro minutos de tu escritorio.',
   ig:{s:'A 4 minutos',m:'La fiesta del banco es de todos. <em>Esta</em> es la de tu equipo.',cap:'A cuatro minutos de tu escritorio, privada y con la llave en tu mano. Cotiza la de tu equipo en dos minutos.'},
   wa:'Hola The Lounge, soy Jorge, gerente de un área de banca en Calle 50. Somos 20 y queremos un after office navideño el jueves 11 de diciembre.'},
- {n:'07',nombre:'Sin cambios',key:'Sin cambios',nicho:'Agencias creativas, tech y startups',pilar:'La llave',msg:'La única entrega de diciembre <em>sin</em> cambios.',
+ {n:'07',nombre:'Sin cambios',key:'Sin cambios',sede:'obarrio',nicho:'Agencias creativas, tech y startups',pilar:'La llave',msg:'La única entrega de diciembre <em>sin</em> cambios.',
   insight:'Agencias y equipos tech cierran el año agotados de revisiones y clientes encima. Quieren una noche donde nadie pida cambios, con música alta, billar y karaoke.',
   porque:'Un espacio privado que es de ellos toda la noche: sin cliente, sin revisiones, sin descorche. Traen su playlist y su bebida, o lo delegan todo.',
   ancla:'Obarrio Premium (15 a 25) · Marbella (30 a 40) · cena de noche',registro:'Divertido, con jerga de oficio: brief, entrega, deploy, versión final.',visual:'Un comentario de revisión tachado en vino y, debajo, el Lounge con luces y karaoke. Cierre: Aprobado sin cambios.',
   ig:{s:'Aprobado',m:'La única entrega de diciembre <em>sin</em> cambios.',cap:'Sin cliente, sin revisiones, sin descorche. Aprueba tu fiesta sin cambios.'},
   wa:'Hola The Lounge! Somos una agencia de 16 personas en San Francisco. Queremos la fiesta de fin de año el viernes 12 de diciembre en la noche, con karaoke.'},
- {n:'08',nombre:'Meta cumplida',key:'Meta',nicho:'Equipos de ventas: autos, telecom, retail, farma',pilar:'Todo incluido',msg:'Llegaron al número. Ahora, la celebración que <em>se ganaron.</em>',
+ {n:'08',nombre:'Meta cumplida',key:'Meta',sede:'marbella',nicho:'Equipos de ventas: autos, telecom, retail, farma',pilar:'Todo incluido',msg:'Llegaron al número. Ahora, la celebración que <em>se ganaron.</em>',
   insight:'Las fuerzas de ventas viven por la cuota y diciembre es cuando se cuenta. La celebración es también la premiación: quieren pantalla, escenario y un espacio a la altura.',
   porque:'La cena de premiación con LED para el ranking, micrófono para el gerente y mesa de gala, sin producir nada.',
   ancla:'Marbella Diamond (30 a 40) · San Francisco Diamond (80 a 150) · cena de reconocimiento',registro:'Motivador y competitivo, sin sonar a convención.',visual:'El LED de San Francisco mostrando Vendedor del año; el trofeo sobre la barra.',
   ig:{s:'Meta',m:'Llegaron al número. Ahora, la celebración que <em>se ganaron.</em>',cap:'La premiación de tu equipo con el ranking en pantalla y la mesa de gala servida. Cotiza la celebración que se ganaron.'},
   wa:'Hola The Lounge, soy Marcela, gerente comercial de un concesionario. Somos 38 y queremos la cena de premiación el jueves 18 de diciembre.'},
- {n:'09',nombre:'Sin guardia',key:'Sin guardia',nicho:'Clínicas, consultorios y farmacéuticas',pilar:'24/7',msg:'Por una noche, <em>nadie</em> está de guardia.',
+ {n:'09',nombre:'Sin guardia',key:'Sin guardia',sede:'marbella',nicho:'Clínicas, consultorios y farmacéuticas',pilar:'24/7',msg:'Por una noche, <em>nadie</em> está de guardia.',
   insight:'Los equipos de salud trabajan por turnos y nunca coinciden: la fiesta cae cuando la mitad está de guardia. Un salón con horario fijo no les sirve; un espacio 24/7 sí.',
   porque:'La celebración a la hora en que el equipo puede: brunch de domingo, cena a las diez o desayuno después del turno. Mismo paquete, el horario lo ponen ellos.',
   ancla:'Marbella Premium (30 a 40) · Obarrio Premium (15 a 25) · San Francisco para hospitales y farma',registro:'Cálido y agradecido, con guiño a la bata y al turno.',visual:'Un tablero de turnos de diciembre donde todos los cuadros dicen LIBRE y uno en vino dice The Lounge, 9 p.m.',
   ig:{s:'Libre',m:'Por una noche, <em>nadie</em> está de guardia.',cap:'Brunch de domingo, cena a las diez o desayuno después del turno. Cotiza a la hora que el equipo pueda.'},
   wa:'Hola The Lounge, soy la Dra. Núñez, de una clínica en Paitilla. Somos 30 y queremos celebrar el sábado 13 de diciembre a las 9 p.m., después del turno.'},
- {n:'10',nombre:'Sin escalas',key:'Sin escalas',nicho:'Logística, navieras y freight forwarders',pilar:'Todo incluido',msg:'Fin de año entregado puerta a puerta, <em>sin</em> escalas.',
+ {n:'10',nombre:'Sin escalas',key:'Sin escalas',sede:'obarrio',nicho:'Logística, navieras y freight forwarders',pilar:'Todo incluido',msg:'Fin de año entregado puerta a puerta, <em>sin</em> escalas.',
   insight:'Es el sector que más creció en 2025 y el que menos celebra en un solo lugar: la gente está entre el puerto, la oficina y el aeropuerto. Quieren algo que llegue resuelto.',
   porque:'La celebración llega completa: espacio, catering y servicio en un solo despacho, a la hora que el turno permita.',
   ancla:'Obarrio o Marbella Premium (15 a 40) · San Francisco Diamond para operadores grandes',registro:'Directo y operativo con guiño marítimo: despacho, tránsito, entrega.',visual:'Una guía de despacho navideña con origen oficina, destino The Lounge y estado Entregado.',
   ig:{s:'Entregado',m:'Fin de año entregado puerta a puerta, <em>sin</em> escalas.',cap:'Espacio, catering y servicio en un solo despacho. Despacha tu fin de año en dos minutos.'},
   wa:'Hola The Lounge, soy Luis, de operaciones de un freight forwarder en Costa del Este. Somos 26 y queremos la cena de fin de año el viernes 12 de diciembre.'},
- {n:'11',nombre:'Brindis de gremio',key:'Brindis',nicho:'Gremios, cámaras y asociaciones',pilar:'Todo incluido',msg:'Un brindis a la altura del gremio, sin la <em>logística</em> del gremio.',
+ {n:'11',nombre:'Brindis de gremio',key:'Brindis',sede:'sf',nicho:'Gremios, cámaras y asociaciones',pilar:'Todo incluido',msg:'Un brindis a la altura del gremio, sin la <em>logística</em> del gremio.',
   insight:'Cada gremio hace un cóctel de cierre con decenas de empresas del sector en una noche. Quien hospeda ese brindis le vende el paquete a todo el nicho de una vez.',
   porque:'San Francisco como sede oficial del brindis del gremio con servicio completo, a cambio de presencia de marca y un beneficio de temporada para sus miembros.',
   ancla:'San Francisco Diamond (80 a 150) · cóctel de cierre · relación directa, no pauta',registro:'Institucional y elegante. Se trabaja con juntas directivas.',visual:'Invitación oficial con el logo del gremio y el de The Lounge; el LED con el nombre de la asociación.',
   ig:{s:'Brindis',m:'Un brindis a la altura del gremio, sin la <em>logística</em> del gremio.',cap:'San Francisco como sede del brindis de fin de año de su asociación, con servicio completo. Hospedamos su brindis.'},
   wa:'Buenas tardes, The Lounge. Le escribo de la gerencia de una asociación gremial. Buscamos sede para nuestro cóctel de cierre, unas 120 personas, el jueves 4 de diciembre.'},
- {n:'12',nombre:'Sin calificación',key:'Sin nota',nicho:'Colegios privados y universidades',pilar:'Privacidad',msg:'Después de un año calificando, hoy <em>nadie</em> los califica.',
+ {n:'12',nombre:'Sin calificación',key:'Sin nota',sede:'sf',nicho:'Colegios privados y universidades',pilar:'Privacidad',msg:'Después de un año calificando, hoy <em>nadie</em> los califica.',
   insight:'El cuerpo docente cierra el año escolar a mediados de diciembre, agotado y observado todo el año por padres y alumnos. La celebración suele ser en el propio colegio.',
   porque:'Un almuerzo fuera del campus, privado y sin nadie mirando, con menú clásico y precio por persona que la administración puede defender.',
   ancla:'San Francisco Premium (80 a 150) · Marbella Premium (30 a 40) · almuerzo de cierre',registro:'Cálido y respetuoso, con guiño al aula.',visual:'Una boleta de calificaciones donde la única materia es Fin de año y la nota es Aprobado con honores.',
@@ -763,6 +785,7 @@ function openWin(i){
   $('winBody').innerHTML=
     '<span class="num">Campaña '+c.n+' · '+c.nicho+'</span><h3>'+c.nombre+'</h3><div class="nicho"><span class="pil">Pilar: '+c.pilar+'</span></div>'
    +'<div class="msg">'+c.msg+'</div>'
+   +(SEDES_P[c.sede]?'<div class="win-sede"><img src="'+SEDES_P[c.sede].f+'" alt="Sala de The Lounge '+SEDES_P[c.sede].n+'" loading="lazy"><div><b>'+SEDES_P[c.sede].n+'</b><span>'+SEDES_P[c.sede].d+'</span></div></div>':'')
    +'<dl><dt>Insight</dt><dd>'+c.insight+'</dd><dt>Por qué</dt><dd>'+c.porque+'</dd><dt>Ancla</dt><dd>'+c.ancla+'</dd><dt>Registro</dt><dd>'+c.registro+'</dd><dt>Idea visual</dt><dd>'+c.visual+'</dd></dl>'
    +'<h4>Así se ve</h4><div class="mocks">'
    +'<div class="ig"><div class="hd"><i></i>theloungepanama</div><div class="art"><div class="s">'+c.ig.s+'</div><div class="m">'+c.ig.m+'</div><div class="c">Este año, celebra arriba</div></div><div class="cap"><b>theloungepanama</b> '+c.ig.cap+'</div></div>'
