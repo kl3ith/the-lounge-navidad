@@ -74,7 +74,7 @@ Si la imagen sale con verdes o rojos fuera de esa gama, corregir con una capa de
 
 Mismo prompt, cambiando la proporción y la zona de aire:
 
-- **Slide 7 y pieza madre:** 4:5 vertical, aire en la mitad inferior.
+- **Pieza madre y slide del Key Visual:** 4:5 vertical, aire en la mitad inferior.
 - **Post de Instagram:** 1:1, aire en la franja inferior.
 - **Story y reel:** 9:16, aire en el tercio inferior y la llave más arriba en el cuadro.
 - **Encabezado de email y banner:** 16:9, la llave a la izquierda y todo el aire a la derecha.
@@ -92,6 +92,6 @@ centred, generous margins.
 
 Esa versión se colorea después: el trazo en vino sobre el papel crema.
 
-## Cómo montarla en el slide
+## Cómo está montada en el slide
 
-En `presentacion-celebra-arriba.html`, la capa `.l-key` del bloque `#kv` contiene hoy la llave en SVG. Se sustituye por `<img>` con la foto y se conserva el resto de las capas: la cinta, el sello con el lockup y el mensaje madre abajo. El parallax por capas sigue funcionando porque la imagen hereda el `data-depth` de la capa.
+En `presentacion-celebra-arriba.html`, el bloque `#kv` contiene la fotografía a pantalla completa del marco 4:5 con un desplazamiento suave al mover el cursor, cuatro etiquetas de anatomía y, debajo del marco, la línea madre de la campaña. La línea se pinta desde la constante `LINEA` del script, así que cambiarla es una sola edición.

@@ -1,4 +1,4 @@
-# Logo de campaña "Este año, celebra arriba" · Prompt de generación
+# Logo de campaña "Este año, celebra puertas adentro" · Prompt de generación
 
 ## Antes del prompt: qué se genera y qué no
 
@@ -7,7 +7,7 @@ El logo de campaña tiene dos partes y solo una se genera con inteligencia artif
 | Parte | Cómo se produce |
 |---|---|
 | **Emblema** (la llave dentro de la estampilla) | Con el prompt de abajo, luego vectorizado |
-| **Lettering** ("Navideño y Fin de Año" + "Este año, celebra arriba") | Se compone con las tipografías de la campaña: Alex Brush, Bebas Neue y Poppins |
+| **Lettering** ("Navideño y Fin de Año" + "Este año, celebra puertas adentro") | Se compone con las tipografías de la campaña: Alex Brush, Bebas Neue y Poppins |
 
 Los generadores deforman las letras, inventan acentos y no respetan la eñe. El lockup ya existe en la presentación y en los paquetes del cliente, así que el prompt pide el emblema **sin una sola letra**.
 
@@ -15,7 +15,7 @@ Los generadores deforman las letras, inventan acentos y no respetan la eñe. El 
 
 ## Concepto del emblema
 
-Una estampilla con borde perforado (el recurso que ya recorre toda la campaña) que contiene una llave **apuntando hacia arriba**, con su etiqueta colgando. La llave hacia arriba resuelve el doble sentido del mensaje: la llave del espacio privado y el "arriba" de celebrar a lo grande, que en The Lounge además es literal porque sus sedes están en pisos altos.
+Una estampilla con borde perforado (el recurso que ya recorre toda la campaña) que contiene una llave **apuntando hacia arriba**, con su etiqueta colgando. La llave vertical, apuntando hacia el ojo de la cerradura, refuerza el mensaje: es la llave del salón privado que el equipo cierra tras de sí.
 
 ---
 
@@ -86,7 +86,7 @@ Generar las tres y comparar. Cambia solo la frase del contenedor:
 
 Tres disposiciones, todas con el mismo emblema:
 
-1. **Vertical principal.** Emblema arriba, debajo "Navideño y Fin de Año" en el lockup existente, y abajo "Este año, celebra arriba." en Bebas Neue con "arriba" en Alex Brush. Es la firma de cierre de pieza.
+1. **Vertical principal.** Emblema arriba, debajo "Navideño y Fin de Año" en el lockup existente, y abajo "Este año, celebra puertas adentro." en Bebas Neue con "puertas adentro" en Alex Brush. Es la firma de cierre de pieza.
 2. **Horizontal.** Emblema a la izquierda y el lockup a la derecha, alineados por el eje óptico. Para encabezados de email y firmas de correo.
 3. **Emblema solo.** Variante D, para avatar, sticker, etiqueta física y grabado en la llave de cortesía si deciden producirla.
 
