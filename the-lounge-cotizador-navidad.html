@@ -4,7 +4,7 @@
 <meta name="description" content="Cuéntanos cuántos serán y cómo quieren celebrar: The Lounge te sugiere tu paquete corporativo navideño ideal en Marbella, Obarrio o San Francisco.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Alex+Brush&family=Bebas+Neue&family=Poppins:wght@400;500;600;700&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Alex+Brush&family=Bebas+Neue&family=Caveat:wght@600;700&family=Poppins:wght@400;500;600;700&display=swap">
 <style>
 :root{
   --paper:#F4EADA; --paper-2:#EDE0C9; --paper-3:#E4D5B8;
@@ -14,6 +14,7 @@
   --gold:#C8A15B; --cream:#F6ECD9; --cream-muted:#CFC0A6;
   --wa:#1FA855; --wa-deep:#178A45;
   --script:'Alex Brush','Brush Script MT',cursive;
+  --marker:'Caveat','Bradley Hand',cursive;
   --cond:'Bebas Neue','Oswald','Arial Narrow',Impact,sans-serif;
   --sans:'Poppins',-apple-system,BlinkMacSystemFont,'Segoe UI',Helvetica,Arial,sans-serif;
   --nav:62px; --ribbon:44px;
@@ -291,12 +292,24 @@ input.err{border-color:var(--wine)}
 .tot .row.inc span:first-child{color:var(--pine)}
 .tot .row.inc span:last-child{color:var(--pine)}
 .inc-tag{display:inline-block;font-size:10px;letter-spacing:.12em;text-transform:uppercase;font-weight:700;padding:2px 7px;border-radius:2px;background:var(--pine);color:var(--cream);margin-left:6px;vertical-align:1px}
+/* ---------- cabecera de la estampilla: datos + polaroid ---------- */
+.stamp-in .head2{display:grid;grid-template-columns:1fr auto;gap:clamp(16px,3vw,30px);align-items:center;margin-bottom:6px}
+@media (max-width:620px){.stamp-in .head2{grid-template-columns:1fr;justify-items:center;gap:18px}}
+.stamp-in .head-l{flex:1 1 auto}
+.pol{background:#FBF8F0;padding:11px 11px 48px;border-radius:2px;box-shadow:0 18px 38px rgba(0,0,0,.45);transform:rotate(2.2deg);position:relative;width:248px;max-width:100%}
+.pol img{display:block;width:100%;height:auto;border-radius:1px}
+.pol .mk{position:absolute;left:8px;right:8px;bottom:6px;text-align:center;font-family:var(--marker);font-weight:600;font-size:clamp(26px,3.4vw,33px);line-height:1.1;color:#28303A;transform:rotate(-1.4deg);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+@media (max-width:620px){.pol{width:260px}}
+
 /* ---------- fotos de las sedes ---------- */
 .choice .thumb{display:block;width:100%;height:auto;border-radius:4px;margin-bottom:10px;background:var(--paper-3)}
 .choice.off .thumb{filter:grayscale(.65) brightness(.92)}
 .pk .thumb{display:block;width:100%;height:auto;border-radius:4px;margin-bottom:6px;background:var(--paper-3)}
 .pk.na .thumb{filter:grayscale(.65)}
 .sede-panel{display:grid;gap:18px}
+.sede-info h3{margin:0 0 2px}
+.sede-info .nom{font-family:var(--marker);font-weight:700;font-size:clamp(28px,3.4vw,36px);line-height:1;color:var(--wine);margin:0 0 10px}
+.cta.ghost.small{padding:11px 18px;font-size:12.5px;justify-self:start;margin-top:4px}
 .polaroid{background:#FBF8F0;padding:11px 11px 42px;border-radius:2px;box-shadow:0 14px 32px rgba(42,28,23,.18);transform:rotate(-1deg);position:relative;width:100%}
 .polaroid img{display:block;width:100%;height:auto;border-radius:1px}
 .polaroid span{position:absolute;left:0;right:0;bottom:9px;text-align:center;font-family:var(--script);font-size:31px;line-height:1;color:var(--pine-deep)}
@@ -576,11 +589,11 @@ function pintarHoras(sede){
 
 
 const SEDES = {
-  obarrio:{ id:'obarrio', nombre:'Obarrio', lugar:'Plaza Downtown, Av. Samuel Lewis con Calle 59 Este', estilo:'Diseño industrial, energizante. Nuestra sede más accesible.', horas:3, min:15, max:25, grupo:'mo',
+  obarrio:{ id:'obarrio', nombre:'Obarrio', web:'https://theloungepanama.com/the-lounge-obarrio/', lugar:'Plaza Downtown, Av. Samuel Lewis con Calle 59 Este', estilo:'Diseño industrial, energizante. Nuestra sede más accesible.', horas:3, min:15, max:25, grupo:'mo',
     incluye:['3 horas de reserva','Waiter o bartender','Catering navideño','Espacio 100% privado','Sonido, pantallas y luces automatizadas','Sin descorche'] },
-  marbella:{ id:'marbella', nombre:'Marbella', lugar:'Plaza La Riviera, Calle 54 y 55 Este', estilo:'Carácter y diseño, todo en azul. Versátil para grupos medianos.', horas:3, min:30, max:40, grupo:'mo',
+  marbella:{ id:'marbella', nombre:'Marbella', web:'https://theloungepanama.com/the-lounge-marbella/', lugar:'Plaza La Riviera, Calle 54 y 55 Este', estilo:'Carácter y diseño, todo en azul. Versátil para grupos medianos.', horas:3, min:30, max:40, grupo:'mo',
     incluye:['3 horas de reserva','Waiter o bartender','Catering navideño','Espacio 100% privado','Sonido, pantallas y luces automatizadas','Sin descorche'] },
-  sf:{ id:'sf', nombre:'San Francisco', lugar:'Calle 66, The Tower', estilo:'La sala de alto nivel: pantalla LED de 15 m², terraza, dos bares y parking.', horas:5, min:80, max:150, grupo:'sf',
+  sf:{ id:'sf', nombre:'San Francisco', web:'https://theloungepanama.com/the-lounge-san-francisco/', lugar:'Calle 66, The Tower', estilo:'La sala de alto nivel: pantalla LED de 15 m², terraza, dos bares y parking.', horas:5, min:80, max:150, grupo:'sf',
     incluye:['5 horas de evento','Menú navideño','Mobiliario','Cristalería','2 waiters y 1 bartender','2 valet parking','1 host','1 personal de mantenimiento','1 operador de audio y video'] }
 };
 const ORDEN_SEDES = ['obarrio','marbella','sf'];
@@ -803,9 +816,12 @@ function renderResultado(){
   const momento = S.momento ? cap(S.momento) : 'Desayuno · Brunch · Almuerzo · Cena';
   $('resCard').innerHTML =
    '<div class="stamp"><div class="stamp-in">'
-   +'<div class="top"><div class="sello"><div class="lockup dark"><span class="eyebrow">Paquete corporativo</span><span class="l1">Navideño</span><span class="l2"><span class="y">y</span><span class="fin">Fin de</span><span class="ano">Año</span></span></div></div>'
-   +'<div class="sede">'+esc(s.nombre)+'</div><div class="meal">'+esc(momento)+' · '+S.ppl+' personas</div>'
+   +'<div class="head2">'
+   +'<div class="top head-l"><div class="sello"><div class="lockup dark"><span class="eyebrow">Paquete corporativo</span><span class="l1">Navideño</span><span class="l2"><span class="y">y</span><span class="fin">Fin de</span><span class="ano">Año</span></span></div></div>'
+   +'<div class="meal">'+esc(momento)+' · '+S.ppl+' personas</div>'
    +'<span class="tier '+q.tier+'">'+t.nombre+'</span></div>'
+   +'<div class="pol"><img src="'+FOTOS[q.sede]+'" alt="Sala de The Lounge '+esc(s.nombre)+'" loading="lazy"><span class="mk">'+esc(s.nombre)+'</span></div>'
+   +'</div>'
    +dispoHTML(q)
    +'<div class="price"><div><div class="big">'+money(q.b.precio)+'<small>+ ITBMS</small></div><span class="band">Banda de '+q.b.p+' personas</span></div>'
    +'<div class="pp"><b>'+money2(q.pp)+'</b>por persona<br>mínimo '+q.b.p+' personas</div></div>'
@@ -826,11 +842,11 @@ function renderResultado(){
    +'<div class="row"><span>ITBMS 7%</span><span>'+money2(q.itbms)+'</span></div>'
    +'<div class="row total"><span>Total estimado</span><span>'+money2(q.total)+'</span></div>'
    +'<p class="note">Cotización estimada según los paquetes 2026. Sujeto a disponibilidad; el equipo de The Lounge confirma fecha, menú y detalles finales.'+(q.desc>0?' El incentivo de ocupación se confirma al reservar.':'')+(q.pastel&&q.pastel.mas?' El pastel máximo es de '+q.pastel.p+' porciones; para '+S.ppl+' personas coordinamos porciones adicionales.':'')+'</p></div>';
-  panels += '<div class="panel sede-panel">'
-   +'<div class="polaroid"><img src="'+FOTOS[q.sede]+'" alt="Sala de The Lounge '+esc(s.nombre)+'" loading="lazy"><span>'+esc(s.nombre)+'</span></div>'
-   +'<div class="sede-info"><h3>Tu sede</h3><p class="dir">'+esc(s.lugar)+'</p><p class="est">'+esc(s.estilo)+'</p>'
-   +'<p class="est">'+s.horas+' horas'+(q.sede==='sf'?' de evento · un solo evento por día':' de reserva')+' · hasta '+s.max+' personas</p>'
-   +'<a class="linklike" href="'+WEB+'" target="_blank" rel="noopener">Ver más fotos del espacio →</a></div></div>';
+  panels += '<div class="panel sede-panel"><div class="sede-info">'
+   +'<h3>Tu sede</h3><p class="nom">'+esc(s.nombre)+'</p>'
+   +'<p class="dir">'+esc(s.lugar)+'</p><p class="est">'+esc(s.estilo)+'</p>'
+   +'<p class="est">'+s.horas+' horas'+(q.sede==='sf'?' de evento · un solo evento por día':' de reserva')+' · hasta '+s.max+' personas · sin descorche</p>'
+   +'<a class="cta ghost small" href="'+s.web+'" target="_blank" rel="noopener">Ver más fotos de '+esc(s.nombre)+' →</a></div></div>';
   $('resPanels').innerHTML = panels;
   const paintMenu=i=>{ $('menuList').innerHTML = menus[i].items.map(x=>'<li>'+esc(x)+'</li>').join(''); $('menuTabs').querySelectorAll('.tab').forEach((b,j)=>b.classList.toggle('sel',j===i)); };
   $('menuTabs').querySelectorAll('.tab').forEach(b=>b.onclick=()=>paintMenu(+b.dataset.i)); paintMenu(0);
@@ -875,7 +891,7 @@ function mensajeWA(q){
   L.push('• Pastel: '+(S.pastel==='none'?'sin pastel':(S.pastel==='vainilla'?'vainilla con manjar':'chocolate')+' · '+q.pastel.p+' porciones'));
   L.push('• Estimado: '+money2(q.sub)+' + ITBMS (≈ '+money2(q.total)+')');
   L.push('');
-  L.push('Fotos y detalles de la sede: '+WEB);
+  L.push('Fotos y detalles de la sede: '+s.web);
   L.push('');
   L.push('¿Me confirman disponibilidad y siguientes pasos?');
   return L.join('\n');
