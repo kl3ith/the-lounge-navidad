@@ -296,10 +296,10 @@ input.err{border-color:var(--wine)}
 .stamp-in .head2{display:grid;grid-template-columns:1fr auto;gap:clamp(16px,3vw,30px);align-items:center;margin-bottom:6px}
 @media (max-width:620px){.stamp-in .head2{grid-template-columns:1fr;justify-items:center;gap:18px}}
 .stamp-in .head-l{flex:1 1 auto}
-.pol{background:#FBF8F0;padding:11px 11px 48px;border-radius:2px;box-shadow:0 18px 38px rgba(0,0,0,.45);transform:rotate(2.2deg);position:relative;width:248px;max-width:100%}
-.pol img{display:block;width:100%;height:auto;border-radius:1px}
-.pol .mk{position:absolute;left:8px;right:8px;bottom:6px;text-align:center;font-family:var(--marker);font-weight:600;font-size:clamp(26px,3.4vw,33px);line-height:1.1;color:#28303A;transform:rotate(-1.4deg);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-@media (max-width:620px){.pol{width:260px}}
+.pol{background:#FBF8F0;padding:13px 13px 64px;border-radius:2px;box-shadow:0 18px 38px rgba(0,0,0,.45);transform:rotate(2.2deg);position:relative;width:252px;max-width:100%;flex:0 0 auto}
+.pol img{display:block;width:100%;aspect-ratio:1/1;object-fit:cover;object-position:center;border-radius:1px;background:var(--paper-3)}
+.pol .mk{position:absolute;left:10px;right:10px;bottom:15px;text-align:center;font-family:var(--marker);font-weight:600;font-size:clamp(27px,3.2vw,33px);line-height:1;color:#28303A;transform:rotate(-1.4deg);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+@media (max-width:620px){.pol{width:264px}}
 
 /* ---------- fotos de las sedes ---------- */
 .choice .thumb{display:block;width:100%;height:auto;border-radius:4px;margin-bottom:10px;background:var(--paper-3)}
@@ -467,6 +467,9 @@ const FOTOS = {
 /* =========================================================
    REGLAS DE AGENDA (confirmadas por The Lounge, sep 2026)
    ========================================================= */
+/* recorte de la polaroid: qué parte de cada sala se conserva al pasar a cuadrado */
+const FOCO = { marbella:'50% 50%', obarrio:'66% 50%', sf:'50% 50%' };
+
 const MARGEN_MIN = 90;              /* 1 h 30 min entre eventos para limpiar y montar */
 const UNO_POR_DIA = { sf: true };   /* San Francisco recibe un solo evento por día */
 
@@ -820,7 +823,7 @@ function renderResultado(){
    +'<div class="top head-l"><div class="sello"><div class="lockup dark"><span class="eyebrow">Paquete corporativo</span><span class="l1">Navideño</span><span class="l2"><span class="y">y</span><span class="fin">Fin de</span><span class="ano">Año</span></span></div></div>'
    +'<div class="meal">'+esc(momento)+' · '+S.ppl+' personas</div>'
    +'<span class="tier '+q.tier+'">'+t.nombre+'</span></div>'
-   +'<div class="pol"><img src="'+FOTOS[q.sede]+'" alt="Sala de The Lounge '+esc(s.nombre)+'" loading="lazy"><span class="mk">'+esc(s.nombre)+'</span></div>'
+   +'<div class="pol"><img src="'+FOTOS[q.sede]+'" alt="Sala de The Lounge '+esc(s.nombre)+'" style="object-position:'+FOCO[q.sede]+'" loading="lazy"><span class="mk">'+esc(s.nombre)+'</span></div>'
    +'</div>'
    +dispoHTML(q)
    +'<div class="price"><div><div class="big">'+money(q.b.precio)+'<small>+ ITBMS</small></div><span class="band">Banda de '+q.b.p+' personas</span></div>'
