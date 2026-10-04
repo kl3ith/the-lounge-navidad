@@ -592,11 +592,11 @@ function pintarHoras(sede){
 
 
 const SEDES = {
-  obarrio:{ id:'obarrio', nombre:'Obarrio', web:'https://theloungepanama.com/the-lounge-obarrio/', lugar:'Plaza Downtown, Av. Samuel Lewis con Calle 59 Este', estilo:'Diseño industrial, energizante. Nuestra sede más accesible.', horas:3, min:15, max:25, grupo:'mo',
+  obarrio:{ id:'obarrio', descorche:false, nombre:'Obarrio', web:'https://theloungepanama.com/the-lounge-obarrio/', lugar:'Plaza Downtown, Av. Samuel Lewis con Calle 59 Este', estilo:'Diseño industrial, energizante. Nuestra sede más accesible.', horas:3, min:15, max:25, grupo:'mo',
     incluye:['3 horas de reserva','Waiter o bartender','Catering navideño','Espacio 100% privado','Sonido, pantallas y luces automatizadas','Sin descorche'] },
-  marbella:{ id:'marbella', nombre:'Marbella', web:'https://theloungepanama.com/the-lounge-marbella/', lugar:'Plaza La Riviera, Calle 54 y 55 Este', estilo:'Carácter y diseño, todo en azul. Versátil para grupos medianos.', horas:3, min:30, max:40, grupo:'mo',
+  marbella:{ id:'marbella', descorche:false, nombre:'Marbella', web:'https://theloungepanama.com/the-lounge-marbella/', lugar:'Plaza La Riviera, Calle 54 y 55 Este', estilo:'Carácter y diseño, todo en azul. Versátil para grupos medianos.', horas:3, min:30, max:40, grupo:'mo',
     incluye:['3 horas de reserva','Waiter o bartender','Catering navideño','Espacio 100% privado','Sonido, pantallas y luces automatizadas','Sin descorche'] },
-  sf:{ id:'sf', nombre:'San Francisco', web:'https://theloungepanama.com/the-lounge-san-francisco/', lugar:'Calle 66, The Tower', estilo:'La sala de alto nivel: pantalla LED de 15 m², terraza, dos bares y parking.', horas:5, min:80, max:150, grupo:'sf',
+  sf:{ id:'sf', descorche:true, nombre:'San Francisco', web:'https://theloungepanama.com/the-lounge-san-francisco/', lugar:'Calle 66, The Tower', estilo:'La sala de alto nivel: pantalla LED de 15 m², terraza, dos bares y parking.', horas:5, min:80, max:150, grupo:'sf',
     incluye:['5 horas de evento','Menú navideño','Mobiliario','Cristalería','2 waiters y 1 bartender','2 valet parking','1 host','1 personal de mantenimiento','1 operador de audio y video'] }
 };
 const ORDEN_SEDES = ['obarrio','marbella','sf'];
@@ -769,7 +769,7 @@ function renderPastel(){
   const sede=sedeFinal(), pp=pastelPrecio(sede,S.ppl);
   $('pastelIntro').textContent='Los postres no vienen incluidos en el paquete. Para '+S.ppl+' personas, el pastel de '+pp.p+' porciones cuesta '+money(pp.precio)+' + ITBMS.';
   const opts=[
-    { id:'none', t:'Sin pastel', s:'Cerramos con el menú. Siempre pueden traer el suyo, sin descorche.', k:'Sin costo' },
+    { id:'none', t:'Sin pastel', s:'Cerramos con el menú. Si quieren, traen el suyo.', k:'Sin costo' },
     { id:'vainilla', t:'Pastel de vainilla con manjar', s:'El clásico de la temporada, '+pp.p+' porciones.', k:money(pp.precio)+' + ITBMS' },
     { id:'chocolate', t:'Pastel de chocolate', s:'Para los que cierran el año con chocolate, '+pp.p+' porciones.', k:money(pp.precio)+' + ITBMS' }
   ];
@@ -796,7 +796,7 @@ function porQue(q){
   else out.push(n>=15 ? 'Obarrio recibe hasta 25 personas y es la sede más accesible: la puerta de entrada perfecta para un equipo compacto.' : 'Obarrio factura desde 15 personas; con '+n+' pagarías esa banda, la más baja de todas.');
   if(q.tier==='diamond') out.push(S.menu==='gala' ? 'Pediste la mesa de gala: Diamond trae pavo asado, jamón en salsa de piña y ron o pernil, y arroz con guandú.' : 'Para una cena de fin de año sugerimos Diamond: el menú navideño completo con pavo, jamón o pernil y tamales.');
   else out.push(S.menu==='clasico' ? 'Elegiste lo clásico: Premium tiene tres menús con arroz con pollo, pernil al horno o corvina al ajillo.' : 'Premium es la celebración completa a la mejor tarifa; si quieren subir a la mesa de gala, Diamond está a un toque.');
-  out.push(s.horas+' horas'+(q.sede==='sf'?' de evento con servicio completo':' de reserva con waiter o bartender y catering')+' en un espacio 100% privado y sin descorche.');
+  out.push(s.horas+' horas'+(q.sede==='sf'?' de evento con servicio completo':' de reserva con waiter o bartender y catering')+' en un espacio 100% privado'+(s.descorche?'. En San Francisco el descorche aplica a licores.':' y sin descorche.'));
   if(b.extraN>0) out.push('Tu grupo supera la banda de 150: se suman '+b.extraN+' personas a '+money(b.extraPP)+' cada una.');
   return out;
 }
@@ -848,7 +848,7 @@ function renderResultado(){
   panels += '<div class="panel sede-panel"><div class="sede-info">'
    +'<h3>Tu sede</h3><p class="nom">'+esc(s.nombre)+'</p>'
    +'<p class="dir">'+esc(s.lugar)+'</p><p class="est">'+esc(s.estilo)+'</p>'
-   +'<p class="est">'+s.horas+' horas'+(q.sede==='sf'?' de evento · un solo evento por día':' de reserva')+' · hasta '+s.max+' personas · sin descorche</p>'
+   +'<p class="est">'+s.horas+' horas'+(q.sede==='sf'?' de evento · un solo evento por día':' de reserva')+' · hasta '+s.max+' personas'+(s.descorche?' · el descorche aplica a licores':' · sin descorche')+'</p>'
    +'<a class="cta ghost small" href="'+s.web+'" target="_blank" rel="noopener">Ver más fotos de '+esc(s.nombre)+' →</a></div></div>';
   $('resPanels').innerHTML = panels;
   const paintMenu=i=>{ $('menuList').innerHTML = menus[i].items.map(x=>'<li>'+esc(x)+'</li>').join(''); $('menuTabs').querySelectorAll('.tab').forEach((b,j)=>b.classList.toggle('sel',j===i)); };
