@@ -1,0 +1,626 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Hasta Santa celebra · The Lounge</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,500;0,600;1,500&family=Parisienne&family=La+Belle+Aurore&family=Montserrat:wght@400;500;600;700&display=swap">
+<style>
+:root{
+  --night:#140806;--night-2:#211009;--night-3:#2d1811;
+  --paper:#F3E8D3;--paper-2:#E9DBC0;--line:#D8C6A4;--ink:#2B2320;--muted:#7A6A5C;
+  --red:#9E1B1F;--red-deep:#6E1014;--gold:#E2C27E;--gold-2:#B8893F;
+  --navy:#1E2B4A;--sink:#7A1518;--wa:#1FA855;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{height:100%;overflow:hidden;background:var(--night);color:var(--paper);font-family:Montserrat,system-ui,sans-serif;-webkit-font-smoothing:antialiased}
+button,input,select{font:inherit;color:inherit}
+img{display:block;max-width:100%}
+
+/* diapositivas */
+.slide{position:fixed;inset:0;display:flex;padding:84px 64px 96px;overflow-y:auto;opacity:0;visibility:hidden;transition:opacity .6s ease,visibility .6s}
+.slide.active{opacity:1;visibility:visible}
+.slide.dark{background:var(--night)}
+.slide.light{background:var(--paper);color:var(--ink)}
+.wrap{width:100%;max-width:1180px;margin:auto}
+.bgimg{position:absolute;inset:0;background-size:cover;background-position:center;z-index:0}
+.slide>.wrap{position:relative;z-index:1}
+.eyebrow{font-size:12px;font-weight:600;letter-spacing:.32em;text-transform:uppercase;color:var(--gold);margin-bottom:22px}
+.light .eyebrow{color:var(--red)}
+h1,h2,h3{font-family:'Playfair Display',Georgia,serif;font-weight:500;line-height:1.06;letter-spacing:-.005em}
+h1{font-size:clamp(46px,7.2vw,104px)}
+h2{font-size:clamp(34px,4.6vw,64px)}
+h3{font-size:clamp(20px,1.9vw,26px);line-height:1.2}
+h1 i,h2 i,h3 i{color:var(--gold)}
+.light h1 i,.light h2 i,.light h3 i{color:var(--red)}
+.lead{font-size:clamp(16px,1.45vw,20px);line-height:1.65;max-width:620px;margin-top:26px;opacity:.88}
+.small{font-size:13px;line-height:1.6;opacity:.7}
+.script{font-family:Parisienne,cursive;color:var(--gold);font-size:clamp(30px,3.2vw,44px);line-height:1.2}
+.light .script{color:var(--sink)}
+.grid2{display:grid;grid-template-columns:1.05fr .95fr;gap:64px;align-items:center}
+.photo{border-radius:6px;box-shadow:0 30px 70px #0009;overflow:hidden}
+.light .photo{box-shadow:0 24px 50px #2b232033}
+.rule{width:64px;height:1px;background:currentColor;opacity:.35;margin:34px 0}
+
+/* navegación */
+.bar{position:fixed;top:0;left:0;height:3px;background:var(--red);z-index:20;transition:width .5s ease}
+.top{position:fixed;top:0;left:0;right:0;display:flex;justify-content:space-between;align-items:center;padding:22px 30px;z-index:15;pointer-events:none}
+.top img{width:92px;opacity:.9;pointer-events:auto;transition:filter .4s}
+body.on-light .top img{filter:brightness(0);opacity:.75}
+.top .route{font-size:11px;font-weight:600;letter-spacing:.3em;text-transform:uppercase;opacity:.7}
+.nav{position:fixed;bottom:22px;left:30px;right:30px;display:flex;justify-content:space-between;align-items:center;z-index:15;pointer-events:none}
+.nav>*{pointer-events:auto}
+.count{font-size:12px;font-weight:600;letter-spacing:.2em;opacity:.75;background:none;border:0;cursor:pointer;padding:8px 0}
+.arrows{display:flex;gap:10px}
+.arrows button{width:46px;height:46px;border-radius:50%;border:1px solid currentColor;background:transparent;cursor:pointer;opacity:.75;font-size:18px;transition:opacity .2s,background .2s}
+.arrows button:hover{opacity:1;background:#ffffff14}
+body.on-light .nav{color:var(--ink)}
+body.on-light .top{color:var(--ink)}
+.index{position:fixed;inset:0;background:#140806f2;z-index:30;display:none;align-items:center;justify-content:center;padding:40px}
+.index.open{display:flex}
+.index ol{list-style:none;columns:2;column-gap:60px}
+.index li{break-inside:avoid}
+.index button{background:none;border:0;cursor:pointer;text-align:left;padding:10px 0;font-family:'Playfair Display',serif;font-size:24px;color:var(--paper);opacity:.75;display:flex;gap:16px;align-items:baseline}
+.index button:hover,.index button.cur{opacity:1;color:var(--gold)}
+.index button span{font:600 12px Montserrat;letter-spacing:.2em;opacity:.6}
+
+/* 01 portada */
+#s1 .bgimg{background-image:linear-gradient(90deg,#140806 0%,#140806f0 34%,#14080680 60%,#14080620 100%),url(web/kv-mesa-de-santa.jpg);background-position:right center}
+#s1 .wrap{max-width:1180px}
+#s1 h1{max-width:680px}
+.meta{display:flex;gap:30px;margin-top:44px;font-size:12px;font-weight:600;letter-spacing:.22em;text-transform:uppercase;opacity:.7;flex-wrap:wrap}
+
+/* 02 punto de partida */
+.routes{display:grid;grid-template-columns:1fr 1fr;gap:28px;margin-top:48px}
+.route-card{border:1px solid var(--line);border-radius:6px;padding:34px 32px;background:#fffaf0}
+.route-card.two{background:var(--red);color:var(--paper);border-color:var(--red)}
+.route-card .tag{font-size:11px;font-weight:700;letter-spacing:.26em;text-transform:uppercase;opacity:.7;margin-bottom:14px}
+.route-card h3{margin-bottom:14px}
+.route-card.two h3 i{color:var(--gold)}
+.route-card p{font-size:15px;line-height:1.65;opacity:.85}
+.closing-line{margin-top:40px;font-family:'Playfair Display',serif;font-size:clamp(20px,2vw,26px);font-style:italic;color:var(--red)}
+
+/* 03 insight */
+#s3 .bgimg{background-image:linear-gradient(90deg,#140806 0%,#140806ee 45%,#14080699 100%),url(web/sobre.jpg);background-position:right center}
+#s3 h2{max-width:720px}
+
+/* 04 idea */
+#s4 .bgimg{background-image:linear-gradient(#140806cc,#140806aa 40%,#140806e6),url(web/kv-mesa-de-santa.jpg)}
+#s4 .wrap{text-align:center}
+#s4 .lead{margin:30px auto 0;text-align:center}
+
+/* 05 racional */
+.cards{display:grid;grid-template-columns:repeat(4,1fr);gap:22px;margin-top:50px}
+.card{background:#fffaf0;border:1px solid var(--line);border-radius:6px;padding:28px 24px}
+.card .n{font-family:'Playfair Display',serif;font-size:40px;color:var(--red);line-height:1;margin-bottom:18px}
+.card h3{font-size:19px;margin-bottom:12px}
+.card p{font-size:14px;line-height:1.65;color:var(--muted)}
+
+/* 06 key visual */
+.kv{position:relative}
+.kv .dot{position:absolute;width:34px;height:34px;margin:-17px 0 0 -17px;border-radius:50%;background:var(--red);color:var(--paper);border:2px solid var(--paper);font:700 14px Montserrat;cursor:pointer;box-shadow:0 0 0 0 #9E1B1F99;animation:pulse 2.4s infinite}
+.kv .dot.on{background:var(--gold);color:var(--night);animation:none}
+@keyframes pulse{70%{box-shadow:0 0 0 16px #9E1B1F00}100%{box-shadow:0 0 0 0 #9E1B1F00}}
+.legend{list-style:none;margin-top:34px;display:grid;gap:6px}
+.legend li{display:grid;grid-template-columns:34px 1fr;gap:14px;padding:14px 16px;border-radius:6px;cursor:pointer;transition:background .25s}
+.legend li b{font-family:'Playfair Display',serif;font-size:22px;color:var(--gold);font-weight:500}
+.legend li strong{display:block;font-weight:600;font-size:15px;margin-bottom:3px}
+.legend li span{font-size:14px;opacity:.75;line-height:1.5}
+.legend li.on{background:#ffffff12}
+
+/* 07 relato */
+.letters{position:relative;height:min(62vh,600px)}
+.letters img{position:absolute;width:62%;border-radius:4px;box-shadow:0 30px 60px #000a;transition:transform .5s ease,z-index 0s}
+.letters .a{left:0;top:0;transform:rotate(-3deg)}
+.letters .b{right:0;bottom:0;transform:rotate(3deg)}
+.letters img:hover{z-index:3;transform:rotate(0) scale(1.03)}
+.sign{margin-top:34px}
+
+/* 08 demo carta */
+.steps{list-style:none;margin-top:30px;display:grid;gap:18px;counter-reset:s}
+.steps li{display:grid;grid-template-columns:40px 1fr;gap:14px;font-size:15px;line-height:1.6;color:var(--muted)}
+.steps li:before{counter-increment:s;content:counter(s);width:34px;height:34px;border-radius:50%;background:var(--red);color:var(--paper);display:grid;place-items:center;font:700 14px Montserrat}
+.steps strong{color:var(--ink);display:block}
+.letter{background:#fbf5e8;border:1px solid var(--line);border-radius:4px;padding:40px 44px;box-shadow:0 28px 60px #2b232030;position:relative;min-height:470px}
+.letter:before{content:"";position:absolute;inset:10px;border:1px solid #e3d3b5;pointer-events:none;border-radius:2px}
+.letter .hand{font-family:'La Belle Aurore',cursive;color:var(--navy);font-size:22px;line-height:2}
+.letter .hand input,.letter .hand select{font-family:'La Belle Aurore',cursive;font-size:22px;color:var(--navy);background:transparent;border:0;border-bottom:1.5px dotted #1E2B4A88;padding:0 4px;outline:none;min-width:0}
+.letter .hand input:focus,.letter .hand select:focus{border-bottom-color:var(--red)}
+.letter .hand input[type=date]{font-size:17px}
+.seal{margin-top:26px;display:flex;align-items:center;gap:16px}
+.seal button{width:74px;height:74px;border-radius:50%;border:0;background:radial-gradient(circle at 35% 30%,#c0393a,#8a1417 60%,#5e0d10);color:#f3d8c0;cursor:pointer;box-shadow:0 8px 18px #6e101466,inset 0 -4px 8px #0004;font-size:28px;transition:transform .2s}
+.seal button:hover{transform:rotate(-8deg) scale(1.05)}
+.seal span{font-family:Montserrat,sans-serif;font-size:12px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:var(--red)}
+.reply{display:none}
+.letter.sent .ask{display:none}
+.letter.sent .reply{display:block;animation:fade .8s ease}
+@keyframes fade{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:none}}
+.reply .santa{font-family:Parisienne,cursive;color:var(--sink);font-size:26px;line-height:1.45}
+.reply .santa p{margin-bottom:10px}
+.reply .to{font:600 11px Montserrat;letter-spacing:.26em;text-transform:uppercase;color:var(--muted);margin-bottom:12px}
+.actions{display:flex;gap:10px;flex-wrap:wrap;margin-top:18px}
+.btn{display:inline-flex;align-items:center;gap:8px;border-radius:40px;padding:12px 20px;font-size:13px;font-weight:600;cursor:pointer;border:1px solid transparent;text-decoration:none}
+.btn.red{background:var(--red);color:var(--paper)}
+.btn.wa{background:var(--wa);color:#fff}
+.btn.ghost{background:transparent;border-color:var(--line);color:var(--muted)}
+.note{font-size:12px;color:var(--muted);margin-top:16px;line-height:1.5}
+
+/* 09 adviento */
+#s9 .bgimg{background-image:radial-gradient(ellipse at 70% 40%,#3a1a12 0%,#140806 70%)}
+.advent{display:grid;grid-template-columns:repeat(6,1fr);gap:10px;perspective:900px}
+.win{position:relative;aspect-ratio:1/1.1;border:0;background:transparent;cursor:pointer}
+.win .back{position:absolute;inset:0;border-radius:5px;background:var(--paper);color:var(--red);display:grid;place-items:center;font-size:24px}
+.win .door{position:absolute;inset:0;border-radius:5px;background:linear-gradient(145deg,#a82126,#7c1417);color:var(--paper);display:flex;flex-direction:column;align-items:center;justify-content:center;transform-origin:left center;transition:transform .7s cubic-bezier(.2,.7,.2,1);box-shadow:inset 0 0 0 1px #ffffff26,0 6px 14px #0006;backface-visibility:hidden}
+.win:nth-child(3n) .door{background:linear-gradient(145deg,#27503a,#1a3a2a)}
+.win:nth-child(4n+1) .door{background:linear-gradient(145deg,#c8a15b,#9c7632);color:var(--night)}
+.win .door b{font-family:'Playfair Display',serif;font-size:clamp(22px,2.4vw,34px);font-weight:500;line-height:1}
+.win .door small{font-size:10px;font-weight:600;letter-spacing:.2em;text-transform:uppercase;opacity:.75;margin-top:4px}
+.win.open .door{transform:rotateY(-105deg)}
+.win.sel .back{box-shadow:0 0 0 2px var(--gold)}
+.day{margin-top:22px;background:var(--paper);color:var(--ink);border-radius:6px;padding:22px 24px;min-height:148px}
+.day h3{margin-bottom:8px}
+.day .gift{display:inline-block;background:var(--red);color:var(--paper);border-radius:30px;padding:6px 14px;font-size:12px;font-weight:600;letter-spacing:.04em;margin-bottom:12px}
+.day ul{list-style:none;font-size:14px;line-height:1.8;color:var(--muted)}
+.day ul b{color:var(--ink);font-weight:600}
+.demo-tag{display:inline-block;font-size:10px;font-weight:700;letter-spacing:.2em;text-transform:uppercase;border:1px solid currentColor;border-radius:20px;padding:3px 10px;opacity:.6;margin-left:8px;vertical-align:middle}
+
+/* 10 amigo secreto */
+.phones{display:grid;grid-template-columns:repeat(3,1fr);gap:26px;margin-top:46px}
+.phone{background:#fffaf0;border:1px solid var(--line);border-radius:26px;padding:22px 20px 26px;box-shadow:0 20px 44px #2b232022}
+.phone .st{font:700 11px Montserrat;letter-spacing:.24em;text-transform:uppercase;color:var(--red);margin-bottom:14px}
+.phone h3{font-size:19px;margin-bottom:16px}
+.chip{display:inline-block;background:var(--paper-2);border-radius:20px;padding:6px 12px;font-size:13px;margin:0 6px 8px 0}
+.bubble{background:#dcf8c6;border-radius:12px 12px 12px 2px;padding:12px 14px;font-size:13px;line-height:1.55;color:#1d2a20;margin-bottom:10px}
+.bubble a{color:#0b7a4b;font-weight:600;text-decoration:none}
+.env{background:var(--paper-2);border-radius:6px;padding:18px;text-align:center;font-family:'La Belle Aurore',cursive;font-size:22px;color:var(--navy)}
+.env small{display:block;font:600 11px Montserrat;letter-spacing:.2em;text-transform:uppercase;color:var(--muted);margin-bottom:6px}
+.qa{font-family:'Playfair Display',serif;font-size:21px;line-height:1.3;margin-bottom:16px}
+
+/* 11 piezas */
+.pieces{display:grid;grid-template-columns:1fr .7fr 1fr;gap:26px;align-items:start;margin:34px auto 0;max-width:calc(112vh + 52px)}
+.piece figcaption{font-size:12px;font-weight:600;letter-spacing:.18em;text-transform:uppercase;opacity:.7;margin-top:12px}
+.piece img{border-radius:4px;box-shadow:0 20px 50px #000a;cursor:zoom-in;transition:transform .3s}
+.piece img:hover{transform:translateY(-4px)}
+.carousel{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.lightbox{position:fixed;inset:0;background:#0b0403f2;z-index:40;display:none;align-items:center;justify-content:center;padding:30px;cursor:zoom-out}
+.lightbox.open{display:flex}
+.lightbox img{max-height:92vh;max-width:92vw;border-radius:4px}
+.caption-box{margin:26px auto 0;max-width:calc(112vh + 52px);background:#ffffff0d;border:1px solid #ffffff1f;border-radius:6px;padding:20px 22px;font-size:14px;line-height:1.7;opacity:.9}
+.caption-box b{display:block;font-size:11px;letter-spacing:.24em;text-transform:uppercase;color:var(--gold);margin-bottom:8px}
+
+/* 12 comparación */
+table.cmp{width:100%;border-collapse:collapse;margin-top:40px;font-size:15px}
+.cmp th,.cmp td{text-align:left;padding:16px 18px;border-bottom:1px solid var(--line);vertical-align:top;line-height:1.5}
+.cmp thead th{font-family:'Playfair Display',serif;font-weight:500;font-size:22px}
+.cmp thead th:last-child{color:var(--red)}
+.cmp tbody th{font-size:11px;font-weight:700;letter-spacing:.22em;text-transform:uppercase;color:var(--muted);width:20%;padding-top:19px}
+.cmp td:last-child{background:#fffaf0}
+
+/* 13 cierre */
+#s13 .bgimg{background-image:linear-gradient(#140806d9,#140806cc 50%,#140806f2),url(web/kv-mesa-de-santa.jpg)}
+#s13 .wrap{text-align:center}
+.timeline{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;margin:54px auto 0;max-width:900px;text-align:left}
+.timeline div{border-top:1px solid #E2C27E66;padding-top:16px;font-size:14px;line-height:1.6;opacity:.9}
+.timeline b{display:block;font-size:11px;letter-spacing:.24em;text-transform:uppercase;color:var(--gold);margin-bottom:6px}
+.sig{margin-top:60px;font-size:12px;font-weight:600;letter-spacing:.3em;text-transform:uppercase;opacity:.6}
+
+@media (max-width:980px){
+  .cards{grid-template-columns:1fr 1fr}
+  .pieces{grid-template-columns:1fr 1fr}
+  .pieces .piece:last-child{grid-column:1/-1}
+}
+@media (max-width:820px){
+  .slide{padding:76px 18px 104px}
+  .grid2,.routes,.phones,.timeline{grid-template-columns:1fr;gap:28px}
+  .cards{grid-template-columns:1fr}
+  .advent{grid-template-columns:repeat(4,1fr)}
+  .letters{height:auto;display:grid;grid-template-columns:1fr 1fr;gap:12px}
+  .letters img{position:static;width:100%;transform:none}
+  .letter{padding:28px 22px}
+  .letter .hand,.letter .hand input,.letter .hand select{font-size:19px}
+  .index ol{columns:1}
+  .index button{font-size:19px;padding:7px 0}
+  .cmp thead th{font-size:17px}
+  .cmp th,.cmp td{padding:12px 8px;font-size:13px}
+  .top .route{display:none}
+  .top{padding:14px 18px;background:#140806;pointer-events:auto}
+  .nav{left:0;right:0;bottom:0;padding:10px 18px;background:#140806}
+  .arrows button{width:40px;height:40px}
+  body.on-light .top,body.on-light .nav{background:#F3E8D3}
+}
+@media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+</style>
+</head>
+<body>
+<div class="bar" id="bar"></div>
+<div class="top"><img src="web/logo.png" alt="The Lounge"><span class="route">Ruta 2 · Navidad 2026</span></div>
+
+<!-- 01 -->
+<section class="slide dark active" id="s1" data-name="Portada">
+  <div class="bgimg"></div>
+  <div class="wrap">
+    <p class="eyebrow">Navidad y Fin de Año 2026 · Segunda ruta</p>
+    <h1>Hasta Santa <i>celebra</i> con su equipo.</h1>
+    <p class="lead">Una propuesta de comunicación más cálida y más navideña para los paquetes corporativos de The Lounge.</p>
+    <div class="meta"><span>The Lounge Panamá</span><span>Lego Marketing</span></div>
+  </div>
+</section>
+
+<!-- 02 -->
+<section class="slide light" id="s2" data-name="Punto de partida">
+  <div class="wrap">
+    <p class="eyebrow">El punto de partida</p>
+    <h2>Nos pidieron una ruta más <i>cálida</i> y más navideña.</h2>
+    <div class="routes">
+      <div class="route-card">
+        <p class="tag">Ruta 1</p>
+        <h3>Celebra puertas adentro.</h3>
+        <p>Habla del espacio: una sola puerta, un pin, nadie encima. Es una ruta racional, apoyada en la privacidad, que se abre en doce mensajes por sector.</p>
+      </div>
+      <div class="route-card two">
+        <p class="tag">Ruta 2</p>
+        <h3>Hasta Santa <i>celebra</i> con su equipo.</h3>
+        <p>Habla de las personas: la gratitud de cerrar el año juntos. Es una ruta emocional, con un solo mensaje para todos, apoyada en la figura más querida de diciembre.</p>
+      </div>
+    </div>
+    <p class="closing-line">Mismos paquetes. Mismo público corporativo. Otra emoción.</p>
+  </div>
+</section>
+
+<!-- 03 -->
+<section class="slide dark" id="s3" data-name="Insight">
+  <div class="bgimg"></div>
+  <div class="wrap">
+    <p class="eyebrow">El insight</p>
+    <h2>Santa dirige la operación más exigente del año.</h2>
+    <p class="lead">Una sola noche y ni una entrega fallida. Detrás de cada una hay un equipo que trabajó todo el año sin que nadie lo viera.</p>
+    <p class="lead">Por eso, antes del 24, Santa hace lo único que no delega: sienta a su equipo a la mesa y le da las gracias.</p>
+  </div>
+</section>
+
+<!-- 04 -->
+<section class="slide dark" id="s4" data-name="La idea">
+  <div class="bgimg"></div>
+  <div class="wrap">
+    <p class="eyebrow">La idea</p>
+    <h1>Hasta Santa <i>celebra</i><br>con su equipo.</h1>
+    <p class="lead">Si el jefe más ocupado del mundo se hace tiempo para celebrar con los suyos, tu equipo también se lo ganó.</p>
+  </div>
+</section>
+
+<!-- 05 -->
+<section class="slide light" id="s5" data-name="Por qué funciona">
+  <div class="wrap">
+    <p class="eyebrow">Por qué funciona</p>
+    <h2>Una idea que se entiende en <i>un segundo</i>.</h2>
+    <div class="cards">
+      <div class="card"><div class="n">01</div><h3>Habla de personas, no del espacio.</h3><p>La ruta 1 vende la sala. Esta vende la gratitud, que es lo que se siente en una oficina en diciembre.</p></div>
+      <div class="card"><div class="n">02</div><h3>Santa no necesita explicación.</h3><p>Es la figura más querida de la temporada. Funciona igual en pauta, en stories y en un correo a Recursos Humanos.</p></div>
+      <div class="card"><div class="n">03</div><h3>Activa dos pilares nuevos.</h3><p>Cero logística: Santa no organiza su propia fiesta, y quien organiza la tuya tampoco. Horario: Santa trabaja de noche y celebra cuando puede. Desayuno, brunch, almuerzo o cena.</p></div>
+      <div class="card"><div class="n">04</div><h3>Santa nunca aparece.</h3><p>Solo sus huellas: la carta, el lacre, los lentes, el abrigo en la silla. Así la campaña se ve elegante y adulta, nunca infantil.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- 06 -->
+<section class="slide dark" id="s6" data-name="Key Visual">
+  <div class="wrap grid2">
+    <div>
+      <p class="eyebrow">Key Visual</p>
+      <h2>La mesa de <i>Santa</i>.</h2>
+      <p class="lead">No mostramos a Santa. Mostramos la noche en que celebró con su equipo. Cada detalle cuenta la historia sin una sola palabra.</p>
+      <ol class="legend" id="legend">
+        <li data-i="0"><b>1</b><div><strong>El abrigo en la cabecera</strong><span>Santa ya se sentó con los suyos.</span></div></li>
+        <li data-i="1"><b>2</b><div><strong>Los lentes sobre la mesa</strong><span>Por una noche, dejó el trabajo a un lado.</span></div></li>
+        <li data-i="2"><b>3</b><div><strong>Un gorro en cada silla</strong><span>El equipo completo, sin que falte nadie.</span></div></li>
+        <li data-i="3"><b>4</b><div><strong>Las copas a medio tomar</strong><span>El brindis ya pasó. La foto es el después.</span></div></li>
+      </ol>
+    </div>
+    <div class="kv photo">
+      <img src="web/kv-mesa-de-santa.jpg" alt="Mesa larga después de una celebración: el abrigo rojo de Santa en la silla principal, sus lentes sobre la mesa y gorros de duende en las demás sillas">
+      <button class="dot" style="left:66%;top:40%" data-i="0" aria-label="El abrigo">1</button>
+      <button class="dot" style="left:61%;top:51.5%" data-i="1" aria-label="Los lentes">2</button>
+      <button class="dot" style="left:29%;top:44%" data-i="2" aria-label="Los gorros">3</button>
+      <button class="dot" style="left:20%;top:59%" data-i="3" aria-label="Las copas">4</button>
+    </div>
+  </div>
+</section>
+
+<!-- 07 -->
+<section class="slide dark" id="s7" data-name="El relato">
+  <div class="wrap grid2">
+    <div>
+      <p class="eyebrow">El relato</p>
+      <h2>Una carta que no pide nada <i>para uno</i>.</h2>
+      <p class="lead">Cada diciembre, millones de personas le escriben a Santa para pedir algo para sí mismas. Este año invitamos a quien organiza la fiesta a escribirle para pedir algo para su equipo.</p>
+      <p class="lead">Y Santa, que sabe lo que vale un equipo, responde.</p>
+      <p class="script sign">Esta vez, tú también te sientas.<br>— S.</p>
+    </div>
+    <div class="letters">
+      <img class="a" src="web/03-carrusel-2-carta.jpg" alt="Carta a Santa escrita por quien organiza la fiesta">
+      <img class="b" src="web/03-carrusel-3-respuesta.jpg" alt="Respuesta de Santa con tinta roja">
+    </div>
+  </div>
+</section>
+
+<!-- 08 -->
+<section class="slide light" id="s8" data-name="La carta a Santa">
+  <div class="wrap grid2">
+    <div>
+      <p class="eyebrow">Mecánicas 1 y 2 · El cotizador y la invitación</p>
+      <h2>El cotizador se vuelve <i>una carta</i>.</h2>
+      <ol class="steps">
+        <li><div><strong>Quien organiza le escribe a Santa.</strong>Completa la carta con su nombre, el equipo, cuántos son, el momento del día y la fecha.</div></li>
+        <li><div><strong>Santa responde con la cotización.</strong>El paquete, la sede según el tamaño del grupo y el precio, con el botón a WhatsApp para cerrar.</div></li>
+        <li><div><strong>La invitación va firmada por Santa.</strong>Un archivo de calendario que abre en Outlook, Google o Apple. Quien organiza se lo reenvía a su equipo en un clic.</div></li>
+      </ol>
+      <p class="note">Pruébalo aquí: completa la carta y séllala con el lacre.</p>
+    </div>
+    <div class="letter" id="letter">
+      <form class="ask hand" id="ask">
+        <p>Querido Santa:</p>
+        <p>Me llamo <input id="f-name" value="Andrea" size="8" aria-label="Tu nombre" required> y este año me tocó organizar la fiesta de <input id="f-team" value="Ventas" size="9" aria-label="Tu equipo" required>. Somos <input id="f-n" type="number" min="6" max="150" value="30" style="width:2.6em" aria-label="Cuántas personas"> personas.</p>
+        <p>Fue un año largo, pero este equipo siempre respondió. No te pido nada para mí: te pido una mesa para darnos las gracias.</p>
+        <p>Si se puede, <select id="f-m" aria-label="Momento del día"><option value="desayuno">un desayuno</option><option value="brunch" selected>un brunch</option><option value="almuerzo">un almuerzo</option><option value="cena">una cena</option></select> el <input id="f-d" type="date" min="2026-11-23" max="2026-12-23" value="2026-12-11" aria-label="Fecha">.</p>
+        <div class="seal"><button type="submit" aria-label="Sellar y enviar a Santa">❦</button><span>Sellar y enviar a Santa</span></div>
+      </form>
+      <div class="reply" id="reply" aria-live="polite">
+        <p class="to" id="r-to"></p>
+        <div class="santa">
+          <p>Recibí tu carta. Pocas veces me escriben para pedir algo para otros; esas cartas las guardo aparte.</p>
+          <p>Yo también tengo un equipo que trabaja todo el año sin que nadie lo vea.</p>
+          <p id="r-plan"></p>
+          <p>Con gratitud, S.</p>
+        </div>
+        <div class="actions">
+          <button class="btn red" id="ics" type="button">⤓ Invitación firmada por Santa</button>
+          <a class="btn wa" id="wa" target="_blank" rel="noopener">WhatsApp</a>
+          <button class="btn ghost" id="again" type="button">Escribir otra</button>
+        </div>
+        <p class="note">Demo. La versión final trae el precio del paquete, como el cotizador actual. Horarios de ejemplo.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 09 -->
+<section class="slide dark" id="s9" data-name="El calendario de Santa">
+  <div class="bgimg"></div>
+  <div class="wrap grid2">
+    <div>
+      <p class="eyebrow">Mecánica 3 · Adviento</p>
+      <h2>El calendario <i>de Santa</i>.</h2>
+      <p class="lead">Veinticuatro ventanas, del 1 al 24 de diciembre. Cada una muestra los horarios libres de ese día en las tres sedes y el regalo de Santa para ese día: el incentivo en días y horarios de baja demanda.</p>
+      <p class="lead">En la web está completo desde el lanzamiento. En stories se abre una ventana cada día.</p>
+      <p class="note" style="color:inherit;opacity:.6">Abre cualquier ventana.<span class="demo-tag">Datos de ejemplo</span></p>
+    </div>
+    <div>
+      <div class="advent" id="advent"></div>
+      <div class="day" id="day"><p class="small">Toca una ventana para ver qué hay libre ese día.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- 10 -->
+<section class="slide light" id="s10" data-name="El amigo secreto">
+  <div class="wrap">
+    <p class="eyebrow">Mecánica 4 · Sorteador</p>
+    <h2>El amigo secreto <i>de Santa</i>.</h2>
+    <p class="lead">Toda oficina hace amigo secreto en diciembre, y alguien siempre busca cómo sortearlo. Le damos una herramienta gratis con la marca The Lounge, que llega directo a quien organiza.</p>
+    <div class="phones">
+      <div class="phone">
+        <p class="st">Paso 1</p>
+        <h3>Se cargan los nombres del equipo.</h3>
+        <span class="chip">Andrea</span><span class="chip">Carlos</span><span class="chip">Mariela</span><span class="chip">José</span><span class="chip">Lucía</span><span class="chip">Rafael</span><span class="chip">+ 24</span>
+      </div>
+      <div class="phone">
+        <p class="st">Paso 2</p>
+        <h3>Cada quien recibe su sobre por WhatsApp.</h3>
+        <div class="bubble">Santa tiene un sobre para ti. Solo tú puedes abrirlo: <a>theloungepanama.com/sobre</a></div>
+        <div class="env"><small>Tu amigo secreto es</small>Mariela</div>
+      </div>
+      <div class="phone">
+        <p class="st">Paso 3</p>
+        <h3>Y al final, la pregunta.</h3>
+        <p class="qa">¿Y dónde se van a dar los regalos?</p>
+        <span class="btn red">Escríbele a Santa</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 11 -->
+<section class="slide dark" id="s11" data-name="Las piezas">
+  <div class="wrap">
+    <p class="eyebrow">Las piezas</p>
+    <h2>Así se ve <i>en redes</i>.</h2>
+    <div class="pieces">
+      <figure class="piece"><img src="web/01-post-key-visual.jpg" alt="Post: Hasta Santa celebra con su equipo"><figcaption>Post 4:5 · Key visual</figcaption></figure>
+      <figure class="piece"><img src="web/02-story-respuesta.jpg" alt="Story con la respuesta de Santa"><figcaption>Story 9:16</figcaption></figure>
+      <figure class="piece">
+        <div class="carousel">
+          <img src="web/03-carrusel-1-sobre.jpg" alt="Carrusel 1: el sobre">
+          <img src="web/03-carrusel-2-carta.jpg" alt="Carrusel 2: la carta">
+          <img src="web/03-carrusel-3-respuesta.jpg" alt="Carrusel 3: la respuesta">
+          <img src="web/03-carrusel-4-cierre.jpg" alt="Carrusel 4: cierre">
+        </div>
+        <figcaption>Carrusel 4:5 · La carta</figcaption>
+      </figure>
+    </div>
+    <div class="caption-box"><b>Caption de pauta</b>Santa trabaja todo el año con un equipo que nadie ve. Y antes del 24, hace lo único que no delega: los sienta a la mesa y les da las gracias. Tu equipo también se lo ganó. Escríbele a Santa, cuéntale cuántos son y a qué hora quieren celebrar: desayuno, brunch, almuerzo o cena. Él se encarga del resto.</div>
+  </div>
+</section>
+
+<!-- 12 -->
+<section class="slide light" id="s12" data-name="Ruta 1 y ruta 2">
+  <div class="wrap">
+    <p class="eyebrow">Para decidir</p>
+    <h2>Dos rutas, <i>dos emociones</i>.</h2>
+    <table class="cmp">
+      <thead><tr><th></th><th>Celebra puertas adentro</th><th>Hasta Santa celebra con su equipo</th></tr></thead>
+      <tbody>
+        <tr><th>Habla de</th><td>El espacio</td><td>Las personas</td></tr>
+        <tr><th>Emoción</th><td>Tranquilidad y discreción</td><td>Gratitud</td></tr>
+        <tr><th>Pilar de marca</th><td>Privacidad</td><td>Cero logística y horario flexible</td></tr>
+        <tr><th>Cómo habla</th><td>Doce mensajes, uno por sector</td><td>Un solo mensaje para todas las empresas</td></tr>
+        <tr><th>Protagonista</th><td>La empresa</td><td>Quien organiza la fiesta</td></tr>
+        <tr><th>Recurso visual</th><td>La llave</td><td>La carta y las huellas de Santa</td></tr>
+        <tr><th>Mecánicas</th><td>Cotizador navideño</td><td>Carta a Santa, invitación, calendario de adviento y amigo secreto</td></tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<!-- 13 -->
+<section class="slide dark" id="s13" data-name="Cierre">
+  <div class="bgimg"></div>
+  <div class="wrap">
+    <p class="eyebrow">Hasta Santa celebra con su equipo</p>
+    <h1>Escríbele.</h1>
+    <p class="script" style="margin-top:14px">Él sabe lo que vale un equipo.</p>
+    <div class="timeline">
+      <div><b>Octubre</b>Salen juntas las cuatro mecánicas: la carta, la invitación, el calendario y el amigo secreto.</div>
+      <div><b>Noviembre</b>Pico de cotizaciones y de sorteos de amigo secreto en las oficinas.</div>
+      <div><b>27 nov – 19 dic</b>Las fiestas. El calendario empuja los días y horarios con menos demanda.</div>
+    </div>
+    <p class="sig">Lego Marketing · The Lounge Panamá</p>
+  </div>
+</section>
+
+<div class="nav">
+  <button class="count" id="count" aria-label="Ver índice">01 / 13</button>
+  <div class="arrows"><button id="prev" aria-label="Anterior">←</button><button id="next" aria-label="Siguiente">→</button></div>
+</div>
+<div class="index" id="index"><ol id="index-list"></ol></div>
+<div class="lightbox" id="lightbox"><img alt=""></div>
+
+<script>
+const slides=[...document.querySelectorAll('.slide')];
+let cur=0;
+const pad=n=>String(n).padStart(2,'0');
+function go(i){
+  i=Math.max(0,Math.min(slides.length-1,i));
+  slides[cur].classList.remove('active');
+  cur=i;
+  slides[cur].classList.add('active');
+  slides[cur].scrollTop=0;
+  document.body.classList.toggle('on-light',slides[cur].classList.contains('light'));
+  document.getElementById('bar').style.width=((cur+1)/slides.length*100)+'%';
+  document.getElementById('count').textContent=pad(cur+1)+' / '+pad(slides.length);
+  history.replaceState(null,'','#'+(cur+1));
+  document.querySelectorAll('#index-list button').forEach((b,k)=>b.classList.toggle('cur',k===cur));
+}
+document.getElementById('prev').onclick=()=>go(cur-1);
+document.getElementById('next').onclick=()=>go(cur+1);
+const typing=()=>/INPUT|SELECT|TEXTAREA/.test(document.activeElement.tagName);
+document.addEventListener('keydown',e=>{
+  if(e.key==='Escape'){index.classList.remove('open');lightbox.classList.remove('open');return}
+  if(typing())return;
+  if(['ArrowRight','PageDown',' '].includes(e.key)){e.preventDefault();go(cur+1)}
+  if(['ArrowLeft','PageUp'].includes(e.key)){e.preventDefault();go(cur-1)}
+});
+let tx=0,ty=0;
+document.addEventListener('touchstart',e=>{tx=e.touches[0].clientX;ty=e.touches[0].clientY},{passive:true});
+document.addEventListener('touchend',e=>{
+  const dx=e.changedTouches[0].clientX-tx,dy=e.changedTouches[0].clientY-ty;
+  if(Math.abs(dx)>60&&Math.abs(dx)>Math.abs(dy)*1.5&&!typing())go(cur+(dx<0?1:-1));
+});
+
+// índice
+const index=document.getElementById('index');
+document.getElementById('index-list').innerHTML=slides.map((s,k)=>`<li><button data-k="${k}"><span>${pad(k+1)}</span>${s.dataset.name}</button></li>`).join('');
+index.addEventListener('click',e=>{const b=e.target.closest('button');if(b)go(+b.dataset.k);index.classList.remove('open')});
+document.getElementById('count').onclick=()=>index.classList.add('open');
+
+// key visual
+const dots=[...document.querySelectorAll('.kv .dot')],items=[...document.querySelectorAll('#legend li')];
+function mark(i){dots.forEach((d,k)=>d.classList.toggle('on',k==i));items.forEach((l,k)=>l.classList.toggle('on',k==i))}
+dots.forEach(d=>{d.onclick=()=>mark(d.dataset.i);d.onmouseenter=()=>mark(d.dataset.i)});
+items.forEach(l=>{l.onclick=()=>mark(l.dataset.i);l.onmouseenter=()=>mark(l.dataset.i)});
+
+// piezas
+const lightbox=document.getElementById('lightbox');
+document.querySelectorAll('.piece img, .letters img').forEach(img=>img.onclick=()=>{lightbox.querySelector('img').src=img.src;lightbox.classList.add('open')});
+lightbox.onclick=()=>lightbox.classList.remove('open');
+
+// carta a Santa
+const DIAS=['domingo','lunes','martes','miércoles','jueves','viernes','sábado'];
+const SEDES={
+  o:{n:'Obarrio',dir:'Plaza Downtown, Av. Samuel Lewis con Calle 59 Este'},
+  m:{n:'Marbella',dir:'Plaza La Riviera Marbella, Calle 54 y Calle 55 Este'},
+  s:{n:'San Francisco',dir:'Calle 66, The Tower, San Francisco'}
+};
+// ponytail: horarios y duraciones de ejemplo; tomar los reales de los PDFs de paquetes al pasar a producción
+const INICIO={desayuno:8,brunch:10.5,almuerzo:12.5,cena:19};
+const DURA={o:{desayuno:2,brunch:2.5,almuerzo:3,cena:3},m:{desayuno:2,brunch:2.5,almuerzo:3,cena:3},s:{desayuno:3,brunch:4,almuerzo:5,cena:5}};
+const HORA={desayuno:'del desayuno',brunch:'del brunch',almuerzo:'del almuerzo',cena:'de la cena'};
+const UN={desayuno:'un desayuno navideño',brunch:'un brunch navideño',almuerzo:'un almuerzo navideño',cena:'una cena navideña'};
+const sedePara=n=>n<=25?'o':n<=40?'m':'s';
+let plan=null;
+document.getElementById('ask').addEventListener('submit',e=>{
+  e.preventDefault();
+  const name=document.getElementById('f-name').value.trim()||'amigo';
+  const team=document.getElementById('f-team').value.trim()||'tu equipo';
+  const n=Math.max(1,parseInt(document.getElementById('f-n').value,10)||1);
+  const m=document.getElementById('f-m').value;
+  const [y,mo,d]=document.getElementById('f-d').value.split('-').map(Number);
+  const date=new Date(y,mo-1,d);
+  const k=sedePara(n);
+  plan={name,team,n,m,date,k};
+  document.getElementById('r-to').textContent='Para '+name+', de parte de Santa';
+  document.getElementById('r-plan').textContent=`Ya está todo listo: la mesa para ${n} en The Lounge ${SEDES[k].n}, el ${DIAS[date.getDay()]} ${date.getDate()} de ${date.toLocaleDateString('es',{month:'long'})}, a la hora ${HORA[m]}. Tú no tienes que organizar nada más. Esta vez, tú también te sientas.`;
+  const msg=`Hola, le escribí a Santa. Quiero cotizar ${UN[m]} para ${n} personas (${team}) en The Lounge ${SEDES[k].n}, el ${date.getDate()}/${date.getMonth()+1}.`;
+  document.getElementById('wa').href='https://wa.me/50763158888?text='+encodeURIComponent(msg);
+  document.getElementById('letter').classList.add('sent');
+});
+document.getElementById('again').onclick=()=>document.getElementById('letter').classList.remove('sent');
+const icsEsc=s=>s.replace(/[\\;,]/g,m=>'\\'+m).replace(/\n/g,'\\n');
+document.getElementById('ics').onclick=()=>{
+  if(!plan)return;
+  const {name,team,m,date,k}=plan;
+  // Panamá es UTC-5 todo el año: se convierte la hora local a UTC
+  const utc=h=>{const t=new Date(Date.UTC(date.getFullYear(),date.getMonth(),date.getDate(),0,0)+(h+5)*3600e3);return t.toISOString().replace(/[-:]/g,'').slice(0,15)+'Z'};
+  const start=INICIO[m],end=start+DURA[k][m];
+  const lines=['BEGIN:VCALENDAR','VERSION:2.0','PRODID:-//The Lounge Panama//Hasta Santa celebra//ES','METHOD:PUBLISH','BEGIN:VEVENT',
+    'UID:santa-'+Date.now()+'@theloungepanama.com','DTSTAMP:'+new Date().toISOString().replace(/[-:]/g,'').slice(0,15)+'Z',
+    'DTSTART:'+utc(start),'DTEND:'+utc(end),
+    'SUMMARY:'+icsEsc('Cierre de año · '+team),
+    'LOCATION:'+icsEsc('The Lounge '+SEDES[k].n+', '+SEDES[k].dir),
+    'DESCRIPTION:'+icsEsc('La última reunión del año no lleva agenda. Solo a ustedes.\n— S.\n\nOrganiza '+name+', con ayuda de Santa y de The Lounge.'),
+    'END:VEVENT','END:VCALENDAR'];
+  const a=document.createElement('a');
+  a.href=URL.createObjectURL(new Blob([lines.join('\r\n')],{type:'text/calendar'}));
+  a.download='invitacion-de-santa.ics';
+  a.click();
+  setTimeout(()=>URL.revokeObjectURL(a.href),2000);
+};
+
+// calendario de Santa
+// ponytail: disponibilidad simulada; en producción se conecta al Google Calendar del cotizador (integracion/Code.gs)
+const ORDEN=[7,19,3,14,22,10,1,16,24,5,12,20,9,2,18,11,23,6,15,4,21,13,8,17];
+const advent=document.getElementById('advent'),day=document.getElementById('day');
+advent.innerHTML=ORDEN.map(d=>`<button class="win" data-d="${d}" aria-label="${d} de diciembre"><span class="back">✦</span><span class="door"><b>${d}</b><small>dic</small></span></button>`).join('');
+function info(d){
+  const wd=new Date(2026,11,d).getDay();
+  const temporada=d<=19, pico=temporada&&(wd===4||wd===5||wd===6);
+  if(!temporada)return{gift:'10% en el paquete',tip:'Pasó la temporada de fiestas: las tres sedes libres casi todo el día.',o:'desayuno, brunch, almuerzo y cena',m:'desayuno, brunch, almuerzo y cena',s:'todo el día'};
+  if(pico)return{gift:'5% en desayuno o brunch',tip:'Día de alta demanda: las noches están tomadas, el día sigue libre.',o:'desayuno y brunch',m:d%2?'desayuno':'desayuno y brunch',s:d%2?'reservado':'desayuno'};
+  if(wd===0)return{gift:'5% en desayuno o brunch',tip:'Domingo: ideal para un brunch con el equipo.',o:'brunch, almuerzo y cena',m:'desayuno, brunch y almuerzo',s:d%3?'brunch':'reservado'};
+  return{gift:'15% en el paquete',tip:'Día tranquilo: el regalo más grande de Santa.',o:'desayuno, brunch, almuerzo y cena',m:'brunch, almuerzo y cena',s:'almuerzo o cena'};
+}
+advent.addEventListener('click',e=>{
+  const w=e.target.closest('.win');if(!w)return;
+  advent.querySelectorAll('.win').forEach(x=>x.classList.remove('sel'));
+  w.classList.add('open','sel');
+  const d=+w.dataset.d,i=info(d),wd=DIAS[new Date(2026,11,d).getDay()];
+  day.innerHTML=`<span class="gift">Regalo de Santa: ${i.gift}</span><h3>${wd[0].toUpperCase()+wd.slice(1)} ${d} de diciembre</h3><ul><li>${i.tip}</li><li><b>Obarrio</b> · ${i.o}</li><li><b>Marbella</b> · ${i.m}</li><li><b>San Francisco</b> · ${i.s}</li></ul>`;
+});
+
+const fromHash=()=>go((parseInt(location.hash.slice(1),10)||1)-1);
+window.addEventListener('hashchange',fromHash);
+fromHash();
+</script>
+</body>
+</html>
